@@ -1,0 +1,37 @@
+#server
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+#database
+spring:
+  datasource:
+    username: root
+    password: 15011996
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3307/do-an-db?serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=yes\
+      &characterEncoding=UTF-8&reWriteBatchedInserts=true&createDatabaseIfNotExist=true
+#hibernate config
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB53Dialect
+        generate_statistics: true
+        session:
+          events:
+            log: false
+        enable_lazy_load_no_trans: false
+        jdbc:
+          batch_size: 5
+    batch:
+      initialize-schema: ALWAYS
+      job:
+        enabled: false
+    main:
+      allow-bean-definition-overriding: true
+
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox id="vbLogin" alignment="TOP_CENTER"
+      maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="600.0" prefWidth="400.0"
+      style="-fx-background-color: WHITE;"
+      xmlns="http://javafx.com/javafx/11.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="datn.app.layout.LoginController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/images1.jpg" />
+         </image>
+         <VBox.margin>
+            <Insets bottom="50.0" top="30.0" />
+         </VBox.margin></ImageView>
+      <Label text="Hệ Thống Quản Lý Sinh Viên">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
+      </Label>
+      <Label text="Đại Học Giao Thông Vận Tải">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="300.0">
+         <children>
+            <Label layoutX="13.0" layoutY="48.0" text="Tài khoản">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="100.0" text="Mật khẩu">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutY="172.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Button id="btnLogin" mnemonicParsing="false" onAction="#login" text="Đăng nhập">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button id="btnReset" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reset" prefHeight="25.0" prefWidth="75.0" text="Đặt lại" />
+               </children>
+            </HBox>
+            <TextField fx:id="txtUsername" layoutX="96.0" layoutY="43.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="190.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="txtPassword" layoutX="96.0" layoutY="98.0" prefHeight="31.0" prefWidth="190.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </PasswordField>
+            <CheckBox fx:id="cbRemember" layoutX="14.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Lưu thông tin" />
+         </children>
+      </Pane>
+   </children>
+</VBox>
