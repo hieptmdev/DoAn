@@ -19,7 +19,7 @@ public class ConstantData {
         public static String getGenderNameByCode(int code){
             return Arrays.stream(Gender.values())
                     .filter(g -> g.code == code)
-                    .findAny().orElse(GENDER_Other).name;
+                    .findFirst().orElse(GENDER_Other).name;
         }
     }
 
@@ -39,7 +39,7 @@ public class ConstantData {
         public static String getStatusNameByCode(int code){
             return Arrays.stream(StudentsStatus.values())
                     .filter(ss -> ss.code == code)
-                    .findAny().orElse(null).name;
+                    .findFirst().orElse(null).name;
         }
     }
 
@@ -61,7 +61,7 @@ public class ConstantData {
         public static String getQualificationsNameByCode(int code){
             return Arrays.stream(Qualifications.values())
                     .filter(q -> q.code == code)
-                    .findAny().orElse(null).name;
+                    .findFirst().orElse(null).name;
         }
     }
 }

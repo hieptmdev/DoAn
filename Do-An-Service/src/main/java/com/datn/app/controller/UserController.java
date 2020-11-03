@@ -16,12 +16,12 @@ public class UserController{
     @Autowired
     private UserService userService;
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<UserDto> save(@RequestBody UserDto dto){
         return new ResponseEntity<>(userService.save(dto), HttpStatus.OK);
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<UserDto> update(@RequestBody UserDto dto){
         return new ResponseEntity<>(userService.save(dto), HttpStatus.OK);
     }
@@ -31,7 +31,7 @@ public class UserController{
         return new ResponseEntity<>(userService.deleteById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping("/search")
     public ResponseEntity<Page<UserDto>> search(@RequestParam(required = false) String page, @RequestParam(required = false) String limit){
         Pageable pageable = AppUtil.getPageable(page, limit);
         return new ResponseEntity(userService.search(pageable), HttpStatus.OK);

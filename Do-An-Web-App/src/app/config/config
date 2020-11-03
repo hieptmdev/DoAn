@@ -1,0 +1,21 @@
+export const CONFIG: any = {
+  API_PATH: {
+    // oauth2
+    oauth_token: '/api/oauth/token',
+    // data
+    user: '/api/user',
+    category: '/api/category',
+    nation: '/api/nation',
+    province:  '/api/province',
+    district: '/api/district',
+    ward: '/api/ward'
+  },
+  STORAGE: {
+    ACCESS_TOKEN: 'access_token',
+    REFRESH_TOKEN: 'refresh_token',
+    EXPIRE_ACCESS_TOKEN: 'exp_access_token',
+    EXPIRE_REFRESH_TOKEN: 'exp_refresh_token',
+    REMEMBER_USERNAME: 'username',
+    REMEMBER_PASSWORD: 'password'
+  }
+};

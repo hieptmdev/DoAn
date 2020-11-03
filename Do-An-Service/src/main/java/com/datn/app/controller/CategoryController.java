@@ -15,12 +15,12 @@ public class CategoryController{
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<CategoryDto> save(@RequestBody CategoryDto dto){
         return null;
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<CategoryDto> update(@RequestBody CategoryDto dto){
         return null;
     }
