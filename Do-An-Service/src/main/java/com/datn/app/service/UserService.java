@@ -1,5 +1,6 @@
 package com.datn.app.service;
 
+import com.datn.app.constant.ConstantData;
 import com.datn.app.dao.idao.UserDao;
 import com.datn.app.dao.idao.UserInforDao;
 import com.datn.app.dto.UserDto;
@@ -102,7 +103,7 @@ public class UserService implements UserDetailsService {
         dto = userInfor.convertToDto();
         dto.setUsername(userInfor.getUser().getUsername());
         dto.setPassword(userInfor.getUser().getPassword());
-        dto.setGenderString(AppUtil.toGenderString(userInfor.getGender()));
+        dto.setGenderString(ConstantData.Gender.getGenderNameByCode(userInfor.getGender()));
         dto.setUnitName(userInfor.getUnit() != null ? userInfor.getUnit().getName() : null);
         dto.setRoleName(userInfor.getRole() != null ? userInfor.getRole().getName() : null);
         return dto;

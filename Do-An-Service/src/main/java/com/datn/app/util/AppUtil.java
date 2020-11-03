@@ -12,12 +12,6 @@ public class AppUtil {
         return mapper.map(source, typeClass);
     }
 
-    public static String toGenderString(int gender){
-        if (gender == 0) return ConstantData.GENDER_MALE;
-        if (gender == 1) return ConstantData.GENDER_FEMALE;
-        return ConstantData.GENDER_DIFFERENT;
-    }
-
     public static Pageable getPageable(String page, String limit) {
         if (page == null || "".equals(page)) page = "0";
         if (limit == null || "".equals(limit)) limit = "10";

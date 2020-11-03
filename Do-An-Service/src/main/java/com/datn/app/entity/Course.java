@@ -12,6 +12,8 @@ public class Course extends BaseEnt{
     private String name;
     private Date startDate;
     private Date endDate;
+    private int targets; //chỉ tiêu số lượng tuyển sinh
+    private int reality; //thực tế tuyển sinh
     private String description;
 
     public Course() { }
@@ -43,6 +45,22 @@ public class Course extends BaseEnt{
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public int getTargets() {
+        return targets;
+    }
+
+    public void setTargets(int targets) {
+        this.targets = targets;
+    }
+
+    public int getReality() {
+        return reality;
+    }
+
+    public void setReality(int reality) {
+        this.reality = reality;
     }
 
     public String getDescription() {
