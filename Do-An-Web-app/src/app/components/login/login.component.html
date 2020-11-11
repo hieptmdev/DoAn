@@ -1,0 +1,44 @@
+<div class="h-100 bg-plum-plate bg-animation">
+  <div class="d-flex h-100 justify-content-center align-items-center">
+    <div class="mx-auto app-login-box col-md-8">
+      <div class="app-logo mx-auto mb-3"></div>
+      <div class="modal-dialog w-100 mx-auto">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="h5 modal-title text-center">
+              <h4 class="mt-2">
+                <div>{{label.TITLE_LOGIN_1}}</div>
+                <span>{{label.TITLE_LOGIN_2}}</span>
+              </h4>
+            </div>
+            <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_" class="form-group">
+              <div>
+                <input id="exampleInput1" type="text" placeholder="{{label.USERNAME}}" required="required"
+                       aria-required="true" class="form-control"
+                       aria-describedby="exampleInputGroup1__BV_description_">
+              </div>
+            </div>
+            <div id="exampleInputGroup2" role="group" class="form-group">
+              <div>
+                <input id="exampleInput2" type="password" placeholder="{{label.PASSWORD}}" required="required" aria-required="true" class="form-control">
+              </div>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input id="exampleCheck" type="checkbox" name="check" autocomplete="off" class="custom-control-input" [(ngModel)]="check" (click)="remember()">
+              <label for="exampleCheck" class="custom-control-label">{{label.REMEMBER_LOGIN}}</label>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="modal-footer clearfix">
+            <div class="float-left">
+              <a routerLink="/forget-password" class="btn-lg btn btn-link">{{label.FORGET_PASSWORD}}</a>
+            </div>
+            <div class="float-right">
+              <button type="button" class="btn btn-primary btn-lg">{{label.LOGIN}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

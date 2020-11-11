@@ -33,5 +33,20 @@ spring:
         enabled: false
     main:
       allow-bean-definition-overriding: true
+  #Mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: hieptm@itsol.vn
+    password: 15011996
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
-
+#Client
+client:
+  id: Hiep-GTVT
+  secret: abc@123456

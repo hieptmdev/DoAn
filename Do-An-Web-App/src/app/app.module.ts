@@ -3,38 +3,30 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
+import { LoginComponent } from './components/login/login.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {ConfigInterceptor} from './config/guard/config.interceptor';
-import {StorageService} from './services/storage.service';
-import { BaseComponent } from './base/base/base.component';
-import { HeaderComponent } from './base/share/header/header.component';
-import { FooterComponent } from './base/share/footer/footer.component';
-import { SidebarComponent } from './base/share/sidebar/sidebar.component';
-import { LoginComponent } from './component/login/login.component';
+import {InterceptorConfigInterceptor} from './config/interceptor-config.interceptor';
+import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
+import {CheckboxModule} from 'primeng/checkbox';
+import {FormsModule} from '@angular/forms';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BaseComponent,
-    HeaderComponent,
-    FooterComponent,
-    SidebarComponent,
-    LoginComponent
+    LoginComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: new StorageService().getAccessToken
-      }
-    })
+    CheckboxModule,
+    FormsModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ConfigInterceptor,
+      useClass: InterceptorConfigInterceptor,
       multi: true
     },
     {

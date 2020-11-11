@@ -1,0 +1,20 @@
+export const LABEL = {
+  LOGIN: 'Đăng nhập',
+  USERNAME: 'Tài khoản',
+  PASSWORD: 'Mật khẩu',
+  FORGET_PASSWORD: 'Quên mật khẩu?',
+  REMEMBER_LOGIN: 'Ghi nhớ tài khoản',
+  TITLE_LOGIN_1: 'Hệ Thống Quản Lý',
+  TITLE_LOGIN_2: 'Đại Học Giao Thông Vận Tải',
+  EMAIL: 'Email',
+  SEND_CODE: 'Gửi mã xác thực',
+  NEW_PASSWORD: 'Mật khẩu mới',
+  CONFIRM_NEW_PASSWORD: 'Nhập lại mật khẩu mới',
+  RESET_PASSWORD: 'Đổi mật khẩu',
+  BACK: 'Quay lại',
+  TITLE_CHANGE_PASSWORD: 'Thay đổi mật khẩu',
+  TITLE_CHANGE_PASSWORD_PS: 'Nhập mật khẩu mới và mã xác thực để đổi mật khẩu',
+  TITLE_RECEIVE_CODE: 'Nhận mã xác thực',
+  TITLE_RECEIVE_CODE_PS: 'Nhập email của bạn để nhận mã xác thực (email phải dùng được)',
+  CODE: 'Mã xác thực'
+};

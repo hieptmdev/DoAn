@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Do-An-Web-App": {
+    "Do-An-Web-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Do-An-Web-App",
+            "outputPath": "dist/Do-An-Web-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,8 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "./node_modules/primeflex/primeflex.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -63,18 +62,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Do-An-Web-App:build"
+            "port": 4201,
+            "browserTarget": "Do-An-Web-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Do-An-Web-App:build:production"
+              "browserTarget": "Do-An-Web-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Do-An-Web-App:build"
+            "browserTarget": "Do-An-Web-app:build"
           }
         },
         "test": {
@@ -89,7 +89,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -111,19 +111,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Do-An-Web-App:serve"
+            "devServerTarget": "Do-An-Web-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Do-An-Web-App:serve:production"
+              "devServerTarget": "Do-An-Web-app:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Do-An-Web-App",
+  "defaultProject": "Do-An-Web-app",
   "cli": {
-    "analytics": false
+    "analytics": "836255e0-b789-4b82-97dd-49e8235871c8"
   }
 }

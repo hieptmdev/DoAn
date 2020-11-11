@@ -1,6 +1,7 @@
 package com.datn.app.dto;
 
 import com.datn.app.entity.BaseEnt;
+import com.datn.app.entity.Category;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -8,14 +9,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CategoryDto extends BaseDto{
     private String name;
-    private Long categoryParent;
+    private Long categoryParentId;
     private String url;
     private String description;
 
     public CategoryDto() { }
 
     @Override
-    public BaseEnt convertToEnt() {
+    public Category convertToEnt() {
         return null;
     }
 
@@ -27,12 +28,12 @@ public class CategoryDto extends BaseDto{
         this.name = name;
     }
 
-    public Long getCategoryParent() {
-        return categoryParent;
+    public Long getCategoryParentId() {
+        return categoryParentId;
     }
 
-    public void setCategoryParent(Long categoryParent) {
-        this.categoryParent = categoryParent;
+    public void setCategoryParentId(Long categoryParentId) {
+        this.categoryParentId = categoryParentId;
     }
 
     public String getUrl() {

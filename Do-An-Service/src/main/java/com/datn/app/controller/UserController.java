@@ -46,4 +46,11 @@ public class UserController{
     public ResponseEntity<UserDto> findById(@PathVariable Long id){
         return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
+
+    @PostMapping("/send-code")
+    public ResponseEntity<String> sendCode(@RequestBody UserDto dto){
+        String message = null;
+        message = "Send code success!";
+        return new ResponseEntity<>(message,HttpStatus.OK);
+    }
 }

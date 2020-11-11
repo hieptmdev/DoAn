@@ -14,13 +14,13 @@ public class CategoryService {
     @Autowired
     private CategoryDao categoryDao;
 
-    public List findAllByRole(Long roleId){
+    public List<CategoryDto> findAllByRole(Long roleId){
         List<CategoryDto> categoryDtoList = new ArrayList<>();
         List<Category> categories = categoryDao.findAllByRole(roleId);
         if (categories != null && !categories.isEmpty()){
             categories.forEach(c -> {
                 CategoryDto dto = c.convertToDto();
-                dto.setCategoryParent(c.getCategoryParent() != null ? c.getCategoryParent().getId() : null);
+                dto.setCategoryParentId(c.getCategoryParent() != null ? c.getCategoryParent().getId() : null);
                 categoryDtoList.add(dto);
             });
         }
