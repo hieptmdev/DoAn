@@ -4,12 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {InterceptorConfigInterceptor} from './config/interceptor-config.interceptor';
 import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
 import {CheckboxModule} from 'primeng/checkbox';
 import {FormsModule} from '@angular/forms';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
     BrowserModule,
     AppRoutingModule,
     CheckboxModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     {

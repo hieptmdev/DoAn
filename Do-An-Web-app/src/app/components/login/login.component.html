@@ -13,14 +13,16 @@
             </div>
             <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_" class="form-group">
               <div>
-                <input id="exampleInput1" type="text" placeholder="{{label.USERNAME}}" required="required"
+                <input id="exampleInput1" type="text" placeholder="{{label.USERNAME}}" required
                        aria-required="true" class="form-control"
-                       aria-describedby="exampleInputGroup1__BV_description_">
+                       [(ngModel)]="username">
               </div>
             </div>
             <div id="exampleInputGroup2" role="group" class="form-group">
               <div>
-                <input id="exampleInput2" type="password" placeholder="{{label.PASSWORD}}" required="required" aria-required="true" class="form-control">
+                <input id="exampleInput2" type="password" placeholder="{{label.PASSWORD}}" required
+                       aria-required="true" class="form-control"
+                       [(ngModel)]="password">
               </div>
             </div>
             <div class="custom-control custom-checkbox">
@@ -28,13 +30,12 @@
               <label for="exampleCheck" class="custom-control-label">{{label.REMEMBER_LOGIN}}</label>
             </div>
           </div>
-          <div class="divider"></div>
           <div class="modal-footer clearfix">
             <div class="float-left">
               <a routerLink="/forget-password" class="btn-lg btn btn-link">{{label.FORGET_PASSWORD}}</a>
             </div>
             <div class="float-right">
-              <button type="button" class="btn btn-primary btn-lg">{{label.LOGIN}}</button>
+              <button type="button" class="btn btn-primary btn-lg" (click)="login()">{{label.LOGIN}}</button>
             </div>
           </div>
         </div>

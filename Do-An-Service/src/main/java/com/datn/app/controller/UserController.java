@@ -1,5 +1,7 @@
 package com.datn.app.controller;
 
+import com.datn.app.dto.FormChangePassword;
+import com.datn.app.dto.MessageResponse;
 import com.datn.app.dto.UserDto;
 import com.datn.app.service.UserService;
 import com.datn.app.util.AppUtil;
@@ -10,8 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+
 @RestController
 @RequestMapping("/user")
+//@CrossOrigin(origins = "http://localhost:4201", maxAge = 3600L)
 public class UserController{
     @Autowired
     private UserService userService;
@@ -48,9 +53,33 @@ public class UserController{
     }
 
     @PostMapping("/send-code")
-    public ResponseEntity<String> sendCode(@RequestBody UserDto dto){
-        String message = null;
-        message = "Send code success!";
-        return new ResponseEntity<>(message,HttpStatus.OK);
+    public ResponseEntity<MessageResponse> sendCode(@RequestBody UserDto dto) throws ParseException {
+        MessageResponse message = new MessageResponse();
+        Boolean check = userService.sendCode(dto);
+        if (!check) {
+            message.setMessage("Send code fail!");
+            message.setCode(HttpStatus.BAD_REQUEST.value());
+        }else {
+            message.setMessage("Send code success!");
+            message.setCode(HttpStatus.OK.value());
+        }
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<MessageResponse> changePassword(@RequestBody FormChangePassword dto){
+        MessageResponse message = new MessageResponse();
+        Integer check = userService.changePassword(dto);
+        if (check == -1) {
+            message.setMessage("Change password fail!");
+            message.setCode(HttpStatus.NOT_FOUND.value());
+        }else if (check == 0){
+            message.setMessage("");
+            message.setCode(HttpStatus.BAD_REQUEST.value());
+        } else {
+            message.setMessage("Change password success!");
+            message.setCode(HttpStatus.OK.value());
+        }
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

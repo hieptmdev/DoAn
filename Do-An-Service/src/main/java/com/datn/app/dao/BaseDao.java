@@ -25,7 +25,7 @@ public class BaseDao<T extends BaseEnt> implements CrudBaseDao<T> {
 
     @Override
     public <S extends T> S save(S entity) {
-        if (entity.getId() == 0){
+        if (entity.getId() == null || entity.getId() == 0){
             entity.setCreatedDate(new Date());
             entity.setUpdatedDate(new Date());
             entityManager.persist(entity);

@@ -1,9 +1,12 @@
 package com.datn.app.service;
 
 import com.datn.app.constant.ConstantData;
+import com.datn.app.dao.idao.CodeResetPasswordDao;
 import com.datn.app.dao.idao.UserDao;
 import com.datn.app.dao.idao.UserInforDao;
+import com.datn.app.dto.FormChangePassword;
 import com.datn.app.dto.UserDto;
+import com.datn.app.entity.CodeResetPassword;
 import com.datn.app.entity.User;
 import com.datn.app.entity.UserInfor;
 import com.datn.app.util.AppUtil;
@@ -17,6 +20,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Service
 public class UserService implements UserDetailsService {
     @Autowired
@@ -25,6 +33,10 @@ public class UserService implements UserDetailsService {
     private UserDao userDao;
     @Autowired
     private UserInforDao userInforDao;
+    @Autowired
+    private SendMailService sendMailService;
+    @Autowired
+    private CodeResetPasswordDao codeResetPasswordDao;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -97,6 +109,48 @@ public class UserService implements UserDetailsService {
 
     public String deleteById(Long id) {
         return null;
+    }
+
+    @Transactional
+    public Boolean sendCode(UserDto dto) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        User user = userDao.findByUsername(dto.getUsername());
+        if (user != null){
+            String subject = "Mã xác thực thay đổi mật khẩu";
+            String code = AppUtil.generateCode();
+
+            CodeResetPassword codeResetPassword = codeResetPasswordDao.findByUser(user);
+            if (codeResetPassword != null){
+                codeResetPassword.setCode(code);
+            }else {
+                codeResetPassword = new CodeResetPassword();
+                codeResetPassword.setCode(code);
+                codeResetPassword.setUser(user);
+            }
+            codeResetPassword.setExpireDate(dateFormat.parse(dateFormat.format((new Date().getTime() + 600000))));
+            codeResetPasswordDao.saveEntity(codeResetPassword);
+            sendMailService.sendCodeMail(dto.getEmail(), subject, code);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public Integer changePassword(FormChangePassword dto){
+        CodeResetPassword codeResetPassword = codeResetPasswordDao.findByCode(dto.getCode());
+        if (codeResetPassword != null && !codeResetPassword.isUsed() && codeResetPassword.getExpireDate().before(new Date())){
+            User user = codeResetPassword.getUser();
+            if (dto.getNewPassword().equals(dto.getConfirmNewPassword())){
+                user.setPassword(passwordEncoder.encode(dto.getNewPassword()));
+                codeResetPassword.setUsed(true);
+                userDao.saveEntity(user);
+                codeResetPasswordDao.saveEntity(codeResetPassword);
+                return 1;
+            }
+            return 0;
+        }
+        return -1;
     }
 
     public UserDto setDto(UserDto dto, UserInfor userInfor){

@@ -16,13 +16,6 @@ public class CodeResetPassword extends BaseEnt{
 
     public CodeResetPassword() { }
 
-    public CodeResetPassword(Long id, String code, Date createdDate, Date updatedDate, Date expireDate, boolean used, User user) {
-        super(id, code, createdDate, updatedDate);
-        this.expireDate = expireDate;
-        this.used = used;
-        this.user = user;
-    }
-
     @Override
     public BaseDto convertToDto() {
         return null;

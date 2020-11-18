@@ -1,1 +1,65 @@
-<p>header works!</p>
+<div [class]="'app-header header-shadow '">
+  <div class="logo-src"></div>
+  <div class="app-header__content">
+    <div class="app-header-left">
+      <!------------------Search--------------------->
+      <div class="search-wrapper" [class.active]="isActive">
+        <div class="input-holder">
+          <input type="text" placeholder="Type to search" class="search-input">
+          <button class="search-icon" (click)="isActive = true"><span></span></button>
+        </div>
+        <button class="close" (click)="isActive = false"></button>
+      </div>
+    </div>
+    <div class="app-header-right">
+      <!------------------User--------------------->
+      <div class="d-flex">
+        <div class="header-btn-lg pr-0">
+          <div class="widget-content p-0">
+            <div class="widget-content-wrapper">
+              <div class="widget-content-left">
+                <div class="btn-group" ngbDropdown placement="bottom-right">
+                  <button type="button" class="btn btn-link p-0 mr-2" ngbDropdownToggle>
+                    <span>
+                      <div class="icon-wrapper icon-wrapper-alt rounded-circle">
+                        <img width="42" src="./assets/images/avatars/1.jpg" alt="" class="rounded-circle">
+                      </div>
+                    </span>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button class="dropdown-item">Menus</button>
+                    <button class="dropdown-item">Settings</button>
+                    <h6 class="dropdown-header">Header</h6>
+                    <button class="dropdown-item">Actions</button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item">Dividers</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-header__mobile-menu">
+    <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+            [ngClass]="{'is-active' : globals.toggleSidebarMobile}"
+            (click)="toggleSidebarMobile()">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+  </div>
+  <div class="app-header__menu">
+    <span>
+        <button class="btn-icon btn-icon-only btn btn-primary"
+                [ngClass]="{'is-active' : globals.toggleHeaderMobile}"
+                (click)="toggleHeaderMobile()">
+            <div class="btn-icon-wrapper">
+                <i class="ellipsis-v"></i>
+            </div>
+        </button>
+    </span>
+  </div>
+</div>

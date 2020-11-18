@@ -29,6 +29,14 @@ public class UserDto extends BaseDto{
     private Date workStartDate;
     private Date workEndDate;
     private String qualifications;
+    private Long nationId;
+    private String nationName;
+    private Long provinceId;
+    private String provinceName;
+    private Long districtId;
+    private String districtName;
+    private Long wardId;
+    private String wardName;
 
     public UserDto() { }
 
@@ -187,5 +195,69 @@ public class UserDto extends BaseDto{
 
     public void setQualifications(String qualifications) {
         this.qualifications = qualifications;
+    }
+
+    public Long getNationId() {
+        return nationId;
+    }
+
+    public void setNationId(Long nationId) {
+        this.nationId = nationId;
+    }
+
+    public String getNationName() {
+        return nationName;
+    }
+
+    public void setNationName(String nationName) {
+        this.nationName = nationName;
+    }
+
+    public Long getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Long provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+
+    public Long getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(Long districtId) {
+        this.districtId = districtId;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public Long getWardId() {
+        return wardId;
+    }
+
+    public void setWardId(Long wardId) {
+        this.wardId = wardId;
+    }
+
+    public String getWardName() {
+        return wardName;
+    }
+
+    public void setWardName(String wardName) {
+        this.wardName = wardName;
     }
 }

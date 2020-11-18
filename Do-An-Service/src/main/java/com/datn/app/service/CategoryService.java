@@ -14,9 +14,19 @@ public class CategoryService {
     @Autowired
     private CategoryDao categoryDao;
 
-    public List<CategoryDto> findAllByRole(Long roleId){
+    public List<CategoryDto> findAllParentByRole(Long roleId){
         List<CategoryDto> categoryDtoList = new ArrayList<>();
-        List<Category> categories = categoryDao.findAllByRole(roleId);
+        List<Category> categories = categoryDao.findAllParentByRole(roleId);
+        return convertCategoryDto(categoryDtoList, categories);
+    }
+
+    public List<CategoryDto> findAllChildByRoleAndParent(Long roleId, Long parentId){
+        List<CategoryDto> categoryDtoList = new ArrayList<>();
+        List<Category> categories = categoryDao.findAllChildByRoleAndParent(roleId, parentId);
+        return convertCategoryDto(categoryDtoList, categories);
+    }
+
+    private List<CategoryDto> convertCategoryDto(List<CategoryDto> categoryDtoList, List<Category> categories) {
         if (categories != null && !categories.isEmpty()){
             categories.forEach(c -> {
                 CategoryDto dto = c.convertToDto();

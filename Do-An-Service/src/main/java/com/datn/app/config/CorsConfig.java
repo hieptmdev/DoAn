@@ -26,8 +26,7 @@ public class CorsConfig extends CorsFilter {
         rep.setHeader("Access-Control-Max-Age", "3600");
         if (HttpMethod.OPTIONS.name().equalsIgnoreCase(req.getMethod())) {
             rep.setStatus(HttpServletResponse.SC_OK);
-        } else {
-            chain.doFilter(req, rep);
         }
+        chain.doFilter(req, rep);
     }
 }

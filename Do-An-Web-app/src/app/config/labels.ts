@@ -16,5 +16,9 @@ export const LABEL = {
   TITLE_CHANGE_PASSWORD_PS: 'Nhập mật khẩu mới và mã xác thực để đổi mật khẩu',
   TITLE_RECEIVE_CODE: 'Nhận mã xác thực',
   TITLE_RECEIVE_CODE_PS: 'Nhập email của bạn để nhận mã xác thực (email phải dùng được)',
-  CODE: 'Mã xác thực'
+  CODE: 'Mã xác thực',
+  ERR_CODE: 'Mã xác thực không đúng hoặc đã hết hạn!',
+  ERR_USER: 'Tài khoản không tồn tại!',
+  ERR_REQUIREDS: 'Các trường thông tin cần phải điền đầy đủ!',
+  ERR_CONFIRM_PASS: 'Mật khẩu không trùng khớp!'
 };

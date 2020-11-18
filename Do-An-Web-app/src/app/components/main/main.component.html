@@ -1,1 +1,19 @@
-<p>main works!</p>
+<div [ngClass]="{
+'closed-sidebar' : globals.toggleSidebar,
+'closed-sidebar-md' : globals.toggleSidebarMobile,
+'closed-sidebar-open': globals.sidebarHover || globals.toggleSidebarMobile,
+'header-menu-open' : globals.toggleHeaderMobile,
+'fixed-footer' : globals.toggleFixedFooter
+}" [class]="'app-container app-theme-white'">
+  <app-header [currentUser]="currentUser"></app-header>
+  <app-menu [currentUser]="currentUser"></app-menu>
+  <div class="app-main__outer">
+    <div class="app-main__inner">
+      <div>
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+  <div class="sidebar-menu-overlay" (click)="toggleSidebarMobile()"></div>
+</div>

@@ -30,8 +30,8 @@ public class CategoryController{
         return null;
     }
 
-    @GetMapping("/role/{roleId}")
-    public ResponseEntity<List<CategoryDto>> findAllByRole(@PathVariable Long roleId){
-        return new ResponseEntity<>(categoryService.findAllByRole(roleId), HttpStatus.OK);
+    @GetMapping("/{roleId}")
+    public ResponseEntity<List<CategoryDto>> findAllParentByRole(@PathVariable Long roleId){
+        return new ResponseEntity<>(categoryService.findAllParentByRole(roleId), HttpStatus.OK);
     }
 }

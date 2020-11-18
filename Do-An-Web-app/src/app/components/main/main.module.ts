@@ -6,6 +6,8 @@ import { MainComponent } from './main.component';
 import {HeaderComponent} from './share/header/header.component';
 import {FooterComponent} from './share/footer/footer.component';
 import {MenuComponent} from './share/menu/menu.component';
+import {NgbAccordionModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 
 
 @NgModule({
@@ -17,7 +19,10 @@ import {MenuComponent} from './share/menu/menu.component';
   ],
   imports: [
     CommonModule,
-    MainRoutingModule
+    MainRoutingModule,
+    NgbDropdownModule,
+    NgbAccordionModule,
+    PerfectScrollbarModule
   ]
 })
 export class MainModule { }
