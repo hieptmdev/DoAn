@@ -1,0 +1,8 @@
+.button-action{
+  background-color: white;
+  border: 5px #0f2027;
+  border-radius: 50%;
+}
+.button-action:hover{
+  background-color: #8ec5fc;
+}

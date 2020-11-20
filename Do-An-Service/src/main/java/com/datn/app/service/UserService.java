@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
         if (user != null){
             UserInfor userInfor = userInforDao.findByUser(user);
             UserDto dto = new UserDto();
-            return setDto(dto, userInfor);
+            return convertUserDto(dto, userInfor);
         }
         return null;
     }
@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService {
         if (user != null){
             UserInfor userInfor = userInforDao.findByUser(user);
             UserDto dto = new UserDto();
-            return setDto(dto, userInfor);
+            return convertUserDto(dto, userInfor);
         }
         return null;
     }
@@ -66,7 +66,10 @@ public class UserService implements UserDetailsService {
     public Page<UserDto> search(Pageable pageable) {
         Page<UserInfor> userPage = userInforDao.search(pageable);
         if (userPage != null || !userPage.isEmpty()){
-            Page<UserDto> dtoPage = userPage.map(userInfor -> userInfor.convertToDto());
+            Page<UserDto> dtoPage = userPage.map(userInfor -> {
+                UserDto dto = userInfor.convertToDto();
+                return convertUserDto(dto, userInfor);
+            });
             return dtoPage;
         }
         return null;
@@ -102,7 +105,7 @@ public class UserService implements UserDetailsService {
             user = userDao.saveEntity(user);
             userInfor.setUser(user);
             userInfor = userInforDao.saveEntity(userInfor);
-            return setDto(dto, userInfor);
+            return convertUserDto(dto, userInfor);
         }
         return null;
     }
@@ -153,13 +156,40 @@ public class UserService implements UserDetailsService {
         return -1;
     }
 
-    public UserDto setDto(UserDto dto, UserInfor userInfor){
+    @Transactional
+    public Boolean lockUser(Long id){
+        User user = userDao.findById(id).orElse(null);
+        if (user != null){
+            user.setAccountNonLocked(false);
+            userDao.saveEntity(user);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public Boolean openLockUser(Long id){
+        User user = userDao.findById(id).orElse(null);
+        if (user != null){
+            user.setAccountNonLocked(true);
+            userDao.saveEntity(user);
+            return true;
+        }
+        return false;
+    }
+
+    public UserDto convertUserDto(UserDto dto, UserInfor userInfor){
         dto = userInfor.convertToDto();
         dto.setUsername(userInfor.getUser().getUsername());
         dto.setPassword(userInfor.getUser().getPassword());
+        dto.setAccountNonLocked(userInfor.getUser().isAccountNonLocked());
         dto.setGenderString(ConstantData.Gender.getGenderNameByCode(userInfor.getGender()));
         dto.setUnitName(userInfor.getUnit() != null ? userInfor.getUnit().getName() : null);
         dto.setRoleName(userInfor.getRole() != null ? userInfor.getRole().getName() : null);
+        dto.setNationId(userInfor.getNation() != null ? userInfor.getNation().getId() : null);
+        dto.setProvinceId(userInfor.getProvince() != null ? userInfor.getProvince().getId() : null);
+        dto.setDistrictId(userInfor.getDistrict() != null ? userInfor.getDistrict().getId(): null);
+        dto.setWardId(userInfor.getWard() != null ? userInfor.getWard().getId(): null);
         return dto;
     }
 }

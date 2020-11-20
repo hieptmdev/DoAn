@@ -1,17 +1,14 @@
 package com.datn.app.dto;
 
-import com.datn.app.entity.BaseEnt;
 import com.datn.app.entity.Category;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class CategoryDto extends BaseDto{
     private String name;
     private Long categoryParentId;
     private String url;
     private String description;
+    private String icon;
+    private Boolean haveChildren;
 
     public CategoryDto() { }
 
@@ -50,5 +47,21 @@ public class CategoryDto extends BaseDto{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public Boolean getHaveChildren() {
+        return haveChildren;
+    }
+
+    public void setHaveChildren(Boolean haveChildren) {
+        this.haveChildren = haveChildren;
     }
 }

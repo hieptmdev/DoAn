@@ -14,6 +14,8 @@ public class Category extends BaseEnt{
     private Category categoryParent;
     private String url;
     private String description;
+    private String icon;
+    private Boolean haveChildren;
 
     public Category() { }
 
@@ -52,5 +54,21 @@ public class Category extends BaseEnt{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public Boolean getHaveChildren() {
+        return haveChildren;
+    }
+
+    public void setHaveChildren(Boolean haveChildren) {
+        this.haveChildren = haveChildren;
     }
 }

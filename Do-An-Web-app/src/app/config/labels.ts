@@ -20,5 +20,10 @@ export const LABEL = {
   ERR_CODE: 'Mã xác thực không đúng hoặc đã hết hạn!',
   ERR_USER: 'Tài khoản không tồn tại!',
   ERR_REQUIREDS: 'Các trường thông tin cần phải điền đầy đủ!',
-  ERR_CONFIRM_PASS: 'Mật khẩu không trùng khớp!'
+  ERR_CONFIRM_PASS: 'Mật khẩu không trùng khớp!',
+  PROFILE: 'Thông tin tài khoản',
+  PERMISSION: 'Quản lý quyền',
+  LOGOUT: 'Đăng xuất',
+  POSITION: 'Quản lý chức danh',
+  USER: 'Quản lý tài khoản'
 };

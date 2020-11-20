@@ -6,6 +6,7 @@ import {LABEL} from '../app/config/labels';
 
 export const environment = {
   production: false,
+  permission_sys: 1,
   client: {
     id: 'Hiep-GTVT',
     secret: 'abc@123456'
@@ -28,7 +29,8 @@ export const environment = {
       username: 'username',
       password: 'password'
     }
-  }
+  },
+  page_select_option: [5, 10, 15, 20]
 };
 
 /*

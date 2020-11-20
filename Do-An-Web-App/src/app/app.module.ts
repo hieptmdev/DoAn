@@ -11,6 +11,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {FormsModule} from '@angular/forms';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CheckboxModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {

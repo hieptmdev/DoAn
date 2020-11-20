@@ -3,6 +3,8 @@ import {ThemeOptions} from '../../../../theme-options';
 import {ActivatedRoute} from '@angular/router';
 import {CategoryService} from '../../../../services/category.service';
 import {User} from '../../../../model/user';
+import {UserService} from '../../../../services/user.service';
+import {StorageService} from '../../../../services/storage.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,8 +12,7 @@ import {User} from '../../../../model/user';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  @Input() currentUser: User;
-  extraParameter: any;
+  currentUser: User = new User();
   newInnerWidth: number;
   innerWidth: number;
   activeId = 'dashboardsMenu';
@@ -20,7 +21,9 @@ export class MenuComponent implements OnInit {
 
   constructor(public globals: ThemeOptions,
               private activatedRoute: ActivatedRoute,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              private userService: UserService,
+              private storageService: StorageService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -29,9 +32,8 @@ export class MenuComponent implements OnInit {
         this.globals.toggleSidebar = true;
       }
     });
-    // this.extraParameter = this.activatedRoute.snapshot.firstChild.data.extraParameter;
 
-    this.getParentCategory();
+    this.getCurrentUser();
   }
 
   getParentCategory(): void{
@@ -45,6 +47,14 @@ export class MenuComponent implements OnInit {
     this.categoryService.getChildCategory(this.currentUser.roleId, parentCategoryId)
       .subscribe(data => {
         this.categoriesChild = data.body;
+      }, error => console.log(error));
+  }
+
+  getCurrentUser(): void {
+    this.userService.getUserByUsername(this.storageService.getUsername())
+      .subscribe(data => {
+        this.currentUser = data.body;
+        this.getParentCategory();
       }, error => console.log(error));
   }
 

@@ -38,6 +38,8 @@ public class UserDto extends BaseDto{
     private Long wardId;
     private String wardName;
 
+    private boolean accountNonLocked;
+
     public UserDto() { }
 
     @Override
@@ -259,5 +261,13 @@ public class UserDto extends BaseDto{
 
     public void setWardName(String wardName) {
         this.wardName = wardName;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
     }
 }

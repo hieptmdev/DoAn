@@ -21,7 +21,7 @@ public class User extends BaseEnt implements UserDetails {
     @Column(columnDefinition = "boolean default true")
     private boolean accountNonExpired;
     @Column(columnDefinition = "boolean default true")
-    private boolean AccountNonLocked;
+    private boolean accountNonLocked;
     @Column(columnDefinition = "boolean default true")
     private boolean enabled;
 
@@ -68,7 +68,7 @@ public class User extends BaseEnt implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return AccountNonLocked;
+        return accountNonLocked;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class User extends BaseEnt implements UserDetails {
     }
 
     public void setAccountNonLocked(boolean accountNonLocked) {
-        AccountNonLocked = accountNonLocked;
+        this.accountNonLocked = accountNonLocked;
     }
 
     @Override

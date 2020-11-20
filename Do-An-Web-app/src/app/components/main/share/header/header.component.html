@@ -1,4 +1,4 @@
-<div [class]="'app-header header-shadow '">
+<div [class]="'app-header header-shadow'">
   <div class="logo-src"></div>
   <div class="app-header__content">
     <div class="app-header-left">
@@ -22,17 +22,22 @@
                   <button type="button" class="btn btn-link p-0 mr-2" ngbDropdownToggle>
                     <span>
                       <div class="icon-wrapper icon-wrapper-alt rounded-circle">
-                        <img width="42" src="./assets/images/avatars/1.jpg" alt="" class="rounded-circle">
+                        <img width="42" src="./assets/images/avatars/user-hero-blue.png" alt="" class="rounded-circle">
                       </div>
                     </span>
                   </button>
                   <div ngbDropdownMenu>
-                    <button class="dropdown-item">Menus</button>
-                    <button class="dropdown-item">Settings</button>
-                    <h6 class="dropdown-header">Header</h6>
-                    <button class="dropdown-item">Actions</button>
+                    <h6 class="dropdown-header">Xin chào, {{currentUser.firstName}} {{currentUser.lastName}}</h6>
+                    <h6 class="dropdown-header">{{currentUser.roleName}}</h6>
                     <div class="dropdown-divider"></div>
-                    <button class="dropdown-item">Dividers</button>
+                    <ng-template [ngIf]="currentUser.roleId == permission_sys">
+                      <button class="dropdown-item" (click)="profile()">{{label.PROFILE}}</button>
+                      <button class="dropdown-item" (click)="manageUser()">{{label.USER}}</button>
+                      <button class="dropdown-item">{{label.PERMISSION}}</button>
+                      <button class="dropdown-item">{{label.POSITION}}</button>
+                    </ng-template>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item" (click)="logout()">{{label.LOGOUT}}</button>
                   </div>
                 </div>
               </div>

@@ -1,0 +1,52 @@
+<div class="p-card card-body" style="margin-bottom: 10px;">
+  <form>
+
+    <div style="text-align: center;">
+      <button class="btn btn-primary">Tìm kiếm</button>
+      <button class="btn btn-primary" style="margin-left: 5px;">Thêm mới</button>
+    </div>
+  </form>
+</div>
+<div class="p-card table-responsive">
+  <table class="table" style="width: 100%;">
+    <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Mã cán bộ</th>
+        <th scope="col">Họ và tên</th>
+        <th scope="col">Ngày sinh</th>
+        <th scope="col">Email</th>
+        <th scope="col">Số điện thoại</th>
+        <th scope="col">Đơn vị</th>
+        <th scope="col">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users, index as i">
+        <td>{{i+1}}</td>
+        <td>{{u.code}}</td>
+        <td>{{u.firstName}} {{u.lastName}}</td>
+        <td>{{u.dob | date: 'dd/MM/yyyy'}}</td>
+        <td>{{u.email}}</td>
+        <td>{{u.numberPhone}}</td>
+        <td>{{u.unitName}}</td>
+        <td>
+          <button class="button-action" ngbTooltip="Chi tiết"><mat-icon>more_horiz</mat-icon></button>
+          <button class="button-action" ngbTooltip="Khóa tài khoản" *ngIf="u.accountNonLocked" (click)="lock(u.id)">
+            <mat-icon>lock</mat-icon>
+          </button>
+          <button class="button-action" ngbTooltip="Mở khóa tài khoản" *ngIf="!u.accountNonLocked" (click)="open(u.id)">
+            <mat-icon>lock_open</mat-icon>
+          </button>
+          <button class="button-action" ngbTooltip="Xóa"><mat-icon>delete</mat-icon></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="search()"></ngb-pagination>
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="search()">
+    <option *ngFor="let opt of pageOption" [ngValue]="opt">{{opt}} bản ghi</option>
+  </select>
+</div>

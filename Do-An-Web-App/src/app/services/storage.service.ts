@@ -17,6 +17,10 @@ export class StorageService {
     return localStorage.getItem(environment.prefix.storage.access_token);
   }
 
+  public setInfoLogin(data): void {
+    localStorage.setItem(environment.prefix.storage.username, data);
+  }
+
   public getUsername(): string{
     return localStorage.getItem(environment.prefix.storage.username);
   }

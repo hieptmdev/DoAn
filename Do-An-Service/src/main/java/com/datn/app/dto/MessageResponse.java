@@ -6,6 +6,11 @@ public class MessageResponse {
 
     public MessageResponse() { }
 
+    public MessageResponse(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
     public int getCode() {
         return code;
     }

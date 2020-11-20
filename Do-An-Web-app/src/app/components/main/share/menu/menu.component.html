@@ -17,26 +17,33 @@
         <div class="v-sidebar-menu vsm-default">
           <div class="vsm-list">
             <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
-              <ngb-panel id="dashboardsMenu">
+              <ngb-panel *ngFor="let ctg of categoriesParent">
                 <ng-template ngbPanelHeader>
-                  <button ngbPanelToggle class="vsm-link">
-                    <i class="vsm-icon pe-7s-rocket"></i>
-                    <span class="vsm-title">Dashboards</span>
-                    <i class="vsm-arrow"></i>
+                  <button ngbPanelToggle class="vsm-link" *ngIf="ctg.url==null" (click)="getChildCategory(ctg.id)">
+                    <i class="vsm-icon" [ngClass]="ctg.icon"></i>
+                    <span class="vsm-title">{{ctg.name}}</span>
+                    <i class="vsm-arrow" *ngIf="ctg.haveChildren"></i>
                   </button>
+                  <div class="vsm-item" *ngIf="ctg.url!=null">
+                    <a routerLink="{{ctg.url}}" routerLinkActive="active-item" class="vsm-link">
+                      <i class="vsm-icon" [ngClass]="ctg.icon"></i>
+                      <span class="vsm-title">{{ctg.name}}</span>
+                    </a>
+                  </div>
                 </ng-template>
-                <ng-template ngbPanelContent>
+                <ng-template ngbPanelContent [ngIf]="categoriesChild">
                   <div class="vsm-dropdown">
-                    <div class="vsm-list">
-                      <div class="vsm-item"><a routerLink="" routerLinkActive="active-item"
-                                               [routerLinkActiveOptions]="{exact: true}" class="vsm-link"><span
-                        class="vsm-title">Analytics</span></a>
+                    <div class="vsm-list" *ngFor="let ctgChild of categoriesChild">
+                      <div class="vsm-item">
+                        <a routerLink="{{ctgChild.url}}" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
+                          <span class="vsm-title">{{ctgChild.name}}</span>
+                        </a>
                       </div>
                     </div>
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="pagesMenu">
+              <!--<ngb-panel>
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-browser"></i>
@@ -63,7 +70,7 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="elementsMenu">
+              <ngb-panel>
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-diamond"></i>
@@ -103,7 +110,7 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="componentsMenu">
+              <ngb-panel>
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-car"></i>
@@ -147,7 +154,7 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="formElementsMenu">
+              <ngb-panel>
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-helm"></i>
@@ -170,7 +177,7 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="tablesMenu">
+              <ngb-panel>
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-safe"></i>
@@ -189,7 +196,7 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="pagesMenu3">
+              <ngb-panel>
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-graph2"></i>
@@ -208,7 +215,7 @@
                   </div>
                 </ng-template>
               </ngb-panel>
-              <ngb-panel id="chart">
+              <ngb-panel>
                 <ng-template ngbPanelHeader>
                   <div class="vsm-item">
                     <a routerLink="" routerLinkActive="active-item" class="vsm-link">
@@ -217,7 +224,7 @@
                     </a>
                   </div>
                 </ng-template>
-              </ngb-panel>
+              </ngb-panel>-->
             </ngb-accordion>
           </div>
         </div>

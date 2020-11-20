@@ -82,4 +82,22 @@ public class UserController{
         }
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+
+    @PutMapping("/lock/{id}")
+    public ResponseEntity<MessageResponse> lockUser(@PathVariable Long id){
+        MessageResponse message;
+        boolean check = userService.lockUser(id);
+        if (check) message = new MessageResponse(HttpStatus.OK.value(), "User locked!");
+        else message = new MessageResponse(HttpStatus.BAD_REQUEST.value(), "User lock fail!");
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @PutMapping("/open-lock/{id}")
+    public ResponseEntity<MessageResponse> openLockUser(@PathVariable Long id){
+        MessageResponse message;
+        boolean check = userService.openLockUser(id);
+        if (check) message = new MessageResponse(HttpStatus.OK.value(), "User opened!");
+        else message = new MessageResponse(HttpStatus.BAD_REQUEST.value(), "User open fail!");
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
 }

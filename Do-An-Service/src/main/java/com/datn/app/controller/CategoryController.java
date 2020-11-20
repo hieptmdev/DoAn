@@ -34,4 +34,9 @@ public class CategoryController{
     public ResponseEntity<List<CategoryDto>> findAllParentByRole(@PathVariable Long roleId){
         return new ResponseEntity<>(categoryService.findAllParentByRole(roleId), HttpStatus.OK);
     }
+
+    @GetMapping("/{roleId}/{parentId}")
+    public ResponseEntity<List<CategoryDto>> findAllChildByRoleAndParent(@PathVariable Long roleId, @PathVariable Long parentId){
+        return new ResponseEntity<>(categoryService.findAllChildByRoleAndParent(roleId, parentId), HttpStatus.OK);
+    }
 }

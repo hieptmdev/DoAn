@@ -1,4 +1,6 @@
 export class User{
+  id: number;
+  code: string;
   username: string;
   password: string;
   userInforId: number;
@@ -26,4 +28,5 @@ export class User{
   districtName: string;
   wardId: number;
   wardName: string;
+  accountNonLocked: boolean;
 }

@@ -10,13 +10,16 @@ import {StorageService} from '../../services/storage.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  currentUser: User;
+  currentUser: User = new User();
 
   constructor(public globals: ThemeOptions,
               private userService: UserService,
-              private storageService: StorageService) { }
+              private storageService: StorageService) {
+    this.storageService.setInfoLogin('sysadmin');
+  }
 
   ngOnInit(): void {
+    // this.storageService.setInfoLogin('sysadmin');
     this.userService.getUserByUsername(this.storageService.getUsername())
       .subscribe(data => {
         this.currentUser = data.body;
