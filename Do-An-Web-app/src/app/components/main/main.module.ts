@@ -15,7 +15,13 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import {FormsModule} from '@angular/forms';
 import {TableModule} from 'primeng/table';
 import {MatIconModule} from '@angular/material/icon';
-
+import { StudentFormComponent } from './student/student-form/student-form.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { StudyScoreComponent } from './student/study-score/study-score.component';
+import {PanelModule} from 'primeng/panel';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {CalendarModule} from 'primeng/calendar';
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [
@@ -26,7 +32,9 @@ import {MatIconModule} from '@angular/material/icon';
     UserComponent,
     StudentComponent,
     UserInfoComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    StudentFormComponent,
+    StudyScoreComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +46,12 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     NgbTooltipModule,
     TableModule,
-    MatIconModule
+    MatIconModule,
+    DropdownModule,
+    PanelModule,
+    ScrollPanelModule,
+    CalendarModule,
+    RadioButtonModule
   ]
 })
 export class MainModule { }

@@ -54,7 +54,7 @@ public class BaseDao<T extends BaseEnt> implements CrudBaseDao<T> {
         if (params!=null && params.size()>0) {
             //params.forEach(jpaQueryTotal::setParameter);
             for (Map.Entry<String, Object> entry : params.entrySet()){
-                jpaQuery.setParameter(entry.getKey(), entry.getValue());
+                jpaQueryTotal.setParameter(entry.getKey(), entry.getValue());
             }
         }
         long totalRecord = (long) jpaQueryTotal.getSingleResult();

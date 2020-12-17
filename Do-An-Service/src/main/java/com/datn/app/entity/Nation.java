@@ -1,6 +1,7 @@
 package com.datn.app.entity;
 
-import com.datn.app.dto.BaseDto;
+import com.datn.app.dto.NationDto;
+import com.datn.app.util.AppUtil;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -17,8 +18,8 @@ public class Nation extends BaseEnt{
     public Nation() { }
 
     @Override
-    public BaseDto convertToDto() {
-        return null;
+    public NationDto convertToDto() {
+        return AppUtil.mapToDtoAndEnt(this, NationDto.class);
     }
 
     public String getName() {

@@ -67,7 +67,7 @@ public class UserService implements UserDetailsService {
         Page<UserInfor> userPage = userInforDao.search(pageable);
         if (userPage != null || !userPage.isEmpty()){
             Page<UserDto> dtoPage = userPage.map(userInfor -> {
-                UserDto dto = userInfor.convertToDto();
+                UserDto dto = new UserDto();
                 return convertUserDto(dto, userInfor);
             });
             return dtoPage;
@@ -142,7 +142,7 @@ public class UserService implements UserDetailsService {
     @Transactional
     public Integer changePassword(FormChangePassword dto){
         CodeResetPassword codeResetPassword = codeResetPasswordDao.findByCode(dto.getCode());
-        if (codeResetPassword != null && !codeResetPassword.isUsed() && codeResetPassword.getExpireDate().before(new Date())){
+        if (codeResetPassword != null && !codeResetPassword.isUsed() && codeResetPassword.getExpireDate().after(new Date())){
             User user = codeResetPassword.getUser();
             if (dto.getNewPassword().equals(dto.getConfirmNewPassword())){
                 user.setPassword(passwordEncoder.encode(dto.getNewPassword()));
@@ -184,12 +184,6 @@ public class UserService implements UserDetailsService {
         dto.setPassword(userInfor.getUser().getPassword());
         dto.setAccountNonLocked(userInfor.getUser().isAccountNonLocked());
         dto.setGenderString(ConstantData.Gender.getGenderNameByCode(userInfor.getGender()));
-        dto.setUnitName(userInfor.getUnit() != null ? userInfor.getUnit().getName() : null);
-        dto.setRoleName(userInfor.getRole() != null ? userInfor.getRole().getName() : null);
-        dto.setNationId(userInfor.getNation() != null ? userInfor.getNation().getId() : null);
-        dto.setProvinceId(userInfor.getProvince() != null ? userInfor.getProvince().getId() : null);
-        dto.setDistrictId(userInfor.getDistrict() != null ? userInfor.getDistrict().getId(): null);
-        dto.setWardId(userInfor.getWard() != null ? userInfor.getWard().getId(): null);
         return dto;
     }
 }

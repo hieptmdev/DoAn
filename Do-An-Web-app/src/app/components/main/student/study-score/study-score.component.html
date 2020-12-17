@@ -1,0 +1,87 @@
+<div class="p-card card-body" style="margin-bottom: 10px;">
+    <form>
+        <div class="row">
+            <div class="col-md-4 row">
+                <label class="col-md-4 col-form-label font-label">Mã SV:</label>
+                <label class="col-md-8 col-form-label">{{student.code}}</label>
+            </div>
+            <div class="col-md-4 row">
+                <label class="col-md-4 col-form-label font-label">Họ tên:</label>
+                <label class="col-md-8 col-form-label">{{student.firstName}} {{student.lastName}}</label>
+            </div>
+            <div class="col-md-4 row">
+                <label class="col-md-4 col-form-label font-label">Trạng thái:</label>
+                <label class="col-md-8 col-form-label">{{student.statusName}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 row">
+                <label class="col-md-4 col-form-label font-label">Khóa:</label>
+                <label class="col-md-8 col-form-label">{{student.courseName}}</label>
+            </div>
+            <div class="col-md-4 row">
+                <label class="col-md-4 col-form-label font-label">Khoa:</label>
+                <label class="col-md-8 col-form-label">{{student.unitName}}</label>
+            </div>
+            <div class="col-md-4 row">
+                <label class="col-md-4 col-form-label font-label">Lớp:</label>
+                <label class="col-md-8 col-form-label">{{student.className}}</label>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 row">
+            <label class="col-md-4 col-form-label font-label">GPA:</label>
+            <label class="col-md-8 col-form-label">{{student.gpa}}</label>
+          </div>
+          <div class="col-md-4 row">
+            <label class="col-md-4 col-form-label font-label">Học kỳ:</label>
+            <p-dropdown [options]="semester" placeholder="Chọn học kỳ" name="semester" [optionLabel]="'name'"
+              [(ngModel)]="selectedSemester" [style]="{'minWidth':'100%'}" [showClear]="true">
+              <ng-template let-s>
+                  <div>{{s.name}}</div>
+              </ng-template>  
+            </p-dropdown>
+          </div>
+        </div>
+        <div style="text-align: center;margin-top: 15px;">
+          <button class="btn btn-primary btn-sm" style="margin-right: 5px;">Thông tin</button>
+          <button class="btn btn-primary btn-sm" style="margin-right: 5px;">Xuất file Excel</button>
+          <button class="btn btn-primary btn-sm" (click)="back()">Quay lại</button>
+        </div>
+    </form>
+</div>
+<div class="p-card table-responsive">
+    <table class="table" style="width: 100%;">
+      <thead>
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Mã học phần</th>
+          <th scope="col">Tên học phần</th>
+          <th scope="col">Lớp học phần</th>
+          <th scope="col">Số tính chỉ</th>
+          <th scope="col">Lần học</th>
+          <th scope="col">ĐQT</th>
+          <th scope="col">ĐT</th>
+          <th scope="col">ĐTKHP</th>
+          <th scope="col">Đánh giá</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ss of studyScores, index as i">
+          <td>{{i+1}}</td>
+          <td>{{ss.subjectCode}}</td>
+          <td>{{ss.subjectName}}</td>
+          <td>{{ss.codeClass}}</td>
+          <td>{{ss.credits}}</td>
+          <td>{{ss.studyTimes}}</td>
+          <td>{{ss.pointProcess}}</td>
+          <td>{{ss.testScore}}</td>
+          <td>{{ss.finalScore}}</td>
+          <td>{{ss.evaluate}}</td>
+        </tr>
+        <tr *ngIf="!studyScores||studyScores.length==0">
+          <td colspan="9">Không có bản ghi!</td>
+        </tr>
+      </tbody>
+    </table>
+</div>

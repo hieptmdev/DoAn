@@ -30,7 +30,6 @@ public class CategoryService {
         if (categories != null && !categories.isEmpty()){
             categories.forEach(c -> {
                 CategoryDto dto = c.convertToDto();
-                dto.setCategoryParentId(c.getCategoryParent() != null ? c.getCategoryParent().getId() : null);
                 categoryDtoList.add(dto);
             });
         }

@@ -16,7 +16,11 @@ export const environment = {
   api_path: {
     auth: '/api/oauth/token',
     user: '/api/user',
-    category: '/api/category'
+    category: '/api/category',
+    student: '/api/student',
+    course: '/api/course',
+    unit: '/api/unit',
+    place: '/api/place'
   },
   prefix: {
     auth_header_basic: 'Basic',

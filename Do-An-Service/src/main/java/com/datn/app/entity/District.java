@@ -1,6 +1,7 @@
 package com.datn.app.entity;
 
-import com.datn.app.dto.BaseDto;
+import com.datn.app.dto.DistrictDto;
+import com.datn.app.util.AppUtil;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -11,14 +12,13 @@ import javax.persistence.Table;
 public class District extends BaseEnt{
     private String name;
     private String prefix;
-    @ManyToOne
-    private Province province;
+    private Long provinceId;
 
     public District() { }
 
     @Override
-    public BaseDto convertToDto() {
-        return null;
+    public DistrictDto convertToDto() {
+        return AppUtil.mapToDtoAndEnt(this, DistrictDto.class);
     }
 
     public String getName() {
@@ -37,11 +37,11 @@ public class District extends BaseEnt{
         this.prefix = prefix;
     }
 
-    public Province getProvince() {
-        return province;
+    public Long getProvinceId() {
+        return provinceId;
     }
 
-    public void setProvince(Province province) {
-        this.province = province;
+    public void setProvinceId(Long provinceId) {
+        this.provinceId = provinceId;
     }
 }

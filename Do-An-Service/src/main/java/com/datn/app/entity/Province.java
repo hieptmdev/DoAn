@@ -1,6 +1,8 @@
 package com.datn.app.entity;
 
 import com.datn.app.dto.BaseDto;
+import com.datn.app.dto.ProvinceDto;
+import com.datn.app.util.AppUtil;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,8 +15,8 @@ public class Province extends BaseEnt{
     public Province() { }
 
     @Override
-    public BaseDto convertToDto() {
-        return null;
+    public ProvinceDto convertToDto() {
+        return AppUtil.mapToDtoAndEnt(this, ProvinceDto.class);
     }
 
     public String getName() {

@@ -1,1 +1,115 @@
-<p>student works!</p>
+<div class="p-card card-body" style="margin-bottom: 10px;">
+    <form>
+      <div class="row">
+        <div class="col-md-5 row">
+          <label class="col-md-4 col-form-label">Mã sinh viên</label>
+          <div class="col-md-8">
+            <input name="code" placeholder="Ex: 160231548" type="text" class="form-control" [(ngModel)]="code">
+          </div>
+        </div>
+        <div class="col-md-2 row"></div>
+        <div class="col-md-5 row">
+          <label class="col-md-4 col-form-label">Tên sinh viên</label>
+          <div class="col-md-8">
+            <input name="name" placeholder="Ex: Trần Văn A" type="text" class="form-control" [(ngModel)]="name">
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 5px;">
+        <div class="col-md-5 row">
+          <label class="col-md-4 col-form-label">Lớp</label>
+          <div class="col-md-8">
+            <input name="mainClass" placeholder="Ex: Công nghệ thông tin 1" type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-md-2 row"></div>
+        <div class="col-md-5 row">
+          <label class="col-md-4 col-form-label">Khóa</label>
+          <div class="col-md-8">
+            <p-dropdown [options]="courses" placeholder="Chọn khóa học" name="course" [optionLabel]="'name'"
+                [filter]="true" [showClear]="true" [(ngModel)]="selectedCourse" [style]="{'minWidth':'100%'}">
+                <ng-template let-course>
+                    <div>{{course.name}}</div>
+                </ng-template>  
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 5px;">
+        <div class="col-md-5 row">
+          <label class="col-md-4 col-form-label">Khoa</label>
+          <div class="col-md-8">
+            <p-dropdown [options]="units" placeholder="Chọn khoa" name="unit" [optionLabel]="'name'"
+                [filter]="true" [showClear]="true" [(ngModel)]="selectedUnit" [style]="{'minWidth':'100%'}"
+                [disabled]="currentUser.unitId!=1&&currentUser.unitId!=2&&currentUser.unitId!=3&&currentUser.unitId!=8">
+                <ng-template let-unit>
+                    <div>{{unit.name}}</div>
+                </ng-template>  
+            </p-dropdown>
+          </div>
+        </div>
+        <!--<div class="col-md-2 row"></div>
+        <div class="col-md-5 row">
+          <label class="col-md-4 col-form-label">Khóa</label>
+          <div class="col-md-8">
+            <input name="courseName" placeholder="with a placeholder" type="text" class="form-control">
+          </div>
+        </div>-->
+      </div>
+      <div style="text-align: center;margin-top: 15px;">
+        <button class="btn btn-primary btn-sm" (click)="search()">Tìm kiếm</button>
+        <button class="btn btn-primary btn-sm" style="margin-left: 5px;" (click)="add()">Thêm mới</button>
+      </div>
+    </form>
+</div>
+<div class="p-card table-responsive">
+    <table class="table" style="width: 100%;">
+      <thead>
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Mã sinh viên</th>
+          <th scope="col">Họ và tên</th>
+          <th scope="col">Ngày sinh</th>
+          <th scope="col">Email</th>
+          <th scope="col">Số điện thoại</th>
+          <th scope="col">Lớp</th>
+          <th scope="col">Khóa</th>
+          <th scope="col">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let st of students, index as i">
+          <td>{{i+1}}</td>
+          <td>{{st.code}}</td>
+          <td>{{st.fullName}}</td>
+          <td>{{st.dob | date: 'dd/MM/yyyy'}}</td>
+          <td>{{st.email}}</td>
+          <td>{{st.phoneNumber}}</td>
+          <td></td>
+          <td>{{st.courseName}}</td>
+          <td>
+            <div ngbDropdown container="body">
+              <button class="btn btn-primary btn-sm" ngbDropdownToggle>Thao tác</button>
+              <div ngbDropdownMenu>
+                <label ngbDropdownItem [disabled]="true">Trạng thái: {{st.statusName}}</label>
+                <div class="dropdown-divider"></div>
+                <button ngbDropdownItem (click)="studentInfo(st.code)">Thông tin sinh viên</button>
+                <button ngbDropdownItem (click)="studyScore(st.code)">Điểm học</button>
+                <button ngbDropdownItem>Buộc thôi học</button>
+                <button ngbDropdownItem>Xóa</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="!students||students.length==0">
+          <td colspan="9">Không có bản ghi!</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="search()"></ngb-pagination>
+    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="search()">
+      <option *ngFor="let opt of pageOption" [ngValue]="opt">{{opt}} bản ghi</option>
+    </select>
+</div>

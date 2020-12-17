@@ -1,0 +1,222 @@
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-8">
+        <h5>THÔNG TIN SINH VIÊN</h5>
+    </div>
+    <div class="col-md-4" style="text-align: right;">
+        <button *ngIf="!editOrAdd&&code!=null" class="btn btn-sm btn-primary" style="margin-right: 5px;" (click)="editOrAdd=!editOrAdd">Cập nhật</button>
+        <button class="btn btn-sm btn-primary" (click)="back()">Quay lại</button>
+    </div>
+</div>
+<div class="p-card card-body">
+    <div class="row">
+        <p-panel header="THÔNG TIN CÁ NHÂN" class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Mã sinh viên</label>
+                    <input class="form-control" style="width: 100%;" [(ngModel)]="student.code" disabled/>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Họ và tên <span class="required-label">(*)</span></label>
+                    <input class="form-control" style="width: 100%;" required [(ngModel)]="student.fullName" [disabled]="!editOrAdd"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Ngày sinh</label>
+                    <p-calendar [showIcon]="true" [readonlyInput]="true" [disabled]="!editOrAdd"
+                        [style]="{'width':'100%'}" [(ngModel)]="student.dob"></p-calendar>
+                </div>
+            </div>
+            <!------------------------->
+            <div class="row space">
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Khoa <span class="required-label">(*)</span></label>
+                    <p-dropdown [options]="units" placeholder="Chọn khoa" name="unit" [optionLabel]="'name'"
+                        [filter]="true" [showClear]="true" [(ngModel)]="selectedUnit" [style]="{'minWidth':'100%'}"
+                        [disabled]="!editOrAdd">
+                        <ng-template let-unit>
+                            <div>{{unit.name}}</div>
+                        </ng-template>  
+                    </p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Khóa <span class="required-label">(*)</span></label>
+                    <p-dropdown [options]="courses" placeholder="Chọn khóa học" name="course" [optionLabel]="'name'"
+                        [filter]="true" [showClear]="true" [(ngModel)]="selectedCourse" [style]="{'minWidth':'100%'}" [disabled]="!editOrAdd">
+                        <ng-template let-course>
+                            <div>{{course.name}}</div>
+                        </ng-template>  
+                    </p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Lớp</label>
+                    <input class="form-control" style="width: 100%;" [(ngModel)]="student.className" [disabled]="!editOrAdd"/>
+                </div>
+            </div>
+            <!------------------------->
+            <div class="row space">
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Email</label>
+                    <input class="form-control" style="width: 100%;" [(ngModel)]="student.email" [disabled]="!editOrAdd"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Số điện thoại <span class="required-label">(*)</span></label>
+                    <input class="form-control" style="width: 100%;" [(ngModel)]="student.phoneNumber" [disabled]="!editOrAdd"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Giới tính</label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="radio" name="gender" id="male" value="0" [(ngModel)]="student.gender" [disabled]="!editOrAdd"/>
+                            <label for="male" style="margin-left: 5px;">Nam</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="gender" id="female" value="1" [(ngModel)]="student.gender" [disabled]="!editOrAdd"/>
+                            <label for="female" style="margin-left: 5px;">Nữ</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="gender" id="other" value="2" [(ngModel)]="student.gender" [disabled]="!editOrAdd"/>
+                            <label for="other" style="margin-left: 5px;">Khác</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!------------------------->
+            <div class="row space">
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Quốc tịch <span class="required-label">(*)</span></label>
+                    <p-dropdown [options]="nations" placeholder="Chọn quốc gia" name="nation" [optionLabel]="'niceName'"
+                        [filter]="true" [showClear]="true" [(ngModel)]="selectedNation" [style]="{'minWidth':'100%'}"
+                        [disabled]="!editOrAdd" [virtualScroll]="true" itemSize="30">
+                        <ng-template let-nation>
+                            <div>{{nation.niceName}}</div>
+                        </ng-template>  
+                    </p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">CMND/CCCD/Hộ chiếu <span class="required-label">(*)</span></label>
+                    <input class="form-control" style="width: 100%;" [(ngModel)]="student.numberIdentityCard" [disabled]="!editOrAdd"/>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Ngày cấp</label>
+                    <p-calendar [showIcon]="true" [readonlyInput]="true" [disabled]="!editOrAdd"
+                        [style]="{'width':'100%'}" [(ngModel)]="student.licenseDate"></p-calendar>
+                </div>
+            </div>
+            <!------------------------->
+            <div class="row space">
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-top: 10px;">Nơi cấp (Tỉnh - Huyện/Thành phố )</label>
+                </div>
+                <div class="col-md-4">
+                    <p-dropdown [options]="provinces" placeholder="Chọn tỉnh/thành phố" name="provinceLicense" [optionLabel]="'name'"
+                        [filter]="true" [showClear]="true" [(ngModel)]="selectedProvinceLicense" [style]="{'minWidth':'100%'}"
+                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
+                        <ng-template let-provinceLicense>
+                            <div>{{provinceLicense.name}}</div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <p-dropdown [options]="districts" placeholder="Chọn quận/huyện" name="districtLicense" [optionLabel]="'name'"
+                        [filter]="true" [showClear]="true" [(ngModel)]="selectedDistrictLicense" [style]="{'minWidth':'100%'}"
+                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
+                        <ng-template let-districtLicense>
+                            <div>{{districtLicense.name}}</div>
+                        </ng-template>  
+                    </p-dropdown>
+                </div>
+            </div>
+            <!------------------------->
+            <div class="row space">
+                <div class="col-md-12">
+                    <label class="font-label" style="margin-bottom: 2px;">Địa chỉ thường trú <span class="required-label">(*)</span></label>
+                    <input class="form-control" style="width: 100%;" [(ngModel)]="student.address" [disabled]="!(editOrAdd&&selectedNation.code=='VN')"/>
+                </div>
+            </div>
+            <!------------------------->
+            <div class="row space">
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Tỉnh/Thành phố</label>
+                    <p-dropdown [options]="provinces" placeholder="Chọn tỉnh/thành phố" name="province" [optionLabel]="'name'"
+                        [filter]="true" [showClear]="true" [(ngModel)]="selectedProvince" [style]="{'minWidth':'100%'}"
+                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
+                        <ng-template let-province>
+                            <div>{{province.name}}</div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Quận/Huyện/Thành phố</label>
+                    <p-dropdown [options]="districts" placeholder="Chọn quận/huyện" name="district" [optionLabel]="'name'"
+                        [filter]="true" [showClear]="true" [(ngModel)]="selectedDistrict" [style]="{'minWidth':'100%'}"
+                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
+                        <ng-template let-district>
+                            <div>{{district.name}}</div>
+                        </ng-template>  
+                    </p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="font-label" style="margin-bottom: 2px;">Phường/Xã</label>
+                    <p-dropdown [options]="wards" placeholder="Chọn phường/xã" name="ward" [optionLabel]="'name'"
+                        [filter]="true" [showClear]="true" [(ngModel)]="selectedWard" [style]="{'minWidth':'100%'}"
+                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
+                        <ng-template let-ward>
+                            <div>{{ward.name}}</div>
+                        </ng-template>  
+                    </p-dropdown>
+                </div>
+            </div>
+            <!------------------------->
+            <div class="row space">
+                <div class="col-md-12">
+                    <label class="font-label" style="margin-bottom: 2px;">Địa chỉ hiện tại <span class="required-label">(*)</span></label>
+                    <input class="form-control" style="width: 100%;" [(ngModel)]="student.currentAddress" [disabled]="!editOrAdd"/>
+                </div>
+            </div>
+            <!------------------------->
+        </p-panel>
+    </div>
+
+    <!--Thông tin bố mẹ-->
+    <div class="row" style="margin-top: 10px;">
+        <p-panel header="THÔNG TIN BỐ" class="col-md-6">
+            <div class="row">
+                <label class="col-md-5 font-label">Họ và tên</label>
+                <input name="nameFather" type="text" class="form-control col-md-6" [(ngModel)]="student.fatherName" [disabled]="!editOrAdd"/>
+            </div>
+            <div class="row space">
+                <label class="col-md-5 font-label">Ngày sinh</label>
+                <p-calendar [(ngModel)]="student.fatherDob" [showIcon]="true" [readonlyInput]="true" [disabled]="!editOrAdd"></p-calendar>
+            </div>
+            <div class="row space">
+                <label class="col-md-5 font-label">Số điện thoại</label>
+                <input name="phoneFather" type="text" class="form-control col-md-6" [(ngModel)]="student.fatherNumberPhone" [disabled]="!editOrAdd"/>
+            </div>
+            <div class="row space">
+                <label class="col-md-5 font-label">Nghề nghiệp</label>
+                <input name="jobFather" type="text" class="form-control col-md-6" [(ngModel)]="student.fatherJob" [disabled]="!editOrAdd"/>
+            </div>
+        </p-panel>
+        <p-panel header="THÔNG TIN MẸ" class="col-md-6">
+            <div class="row">
+                <label class="col-md-5 font-label">Họ và tên</label>
+                <input name="nameMother" type="text" class="form-control col-md-6" [(ngModel)]="student.motherName" [disabled]="!editOrAdd"/>
+            </div>
+            <div class="row space">
+                <label class="col-md-5 font-label">Ngày sinh</label>
+                <p-calendar [(ngModel)]="student.motherDob" [showIcon]="true" [readonlyInput]="true" [disabled]="!editOrAdd"></p-calendar>
+            </div>
+            <div class="row space">
+                <label class="col-md-5 font-label">Số điện thoại</label>
+                <input name="phoneMother" type="text" class="form-control col-md-6" [(ngModel)]="student.motherNumberPhone" [disabled]="!editOrAdd"/>
+            </div>
+            <div class="row space">
+                <label class="col-md-5 font-label">Nghề nghiệp</label>
+                <input name="jobMother" type="text" class="form-control col-md-6" [(ngModel)]="student.motherJob" [disabled]="!editOrAdd"/>
+            </div>
+        </p-panel>
+    </div>
+    <div *ngIf="editOrAdd" style="text-align: center;margin-top: 15px;">
+        <button class="btn btn-primary btn-sm">Lưu</button>
+        <button *ngIf="code!=null" class="btn btn-primary btn-sm" style="margin-left: 5px;" (click)="editOrAdd=!editOrAdd">Hủy</button>
+    </div>
+</div>

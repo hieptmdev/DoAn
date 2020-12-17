@@ -12,11 +12,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import java.text.ParseException;
 
 @RestController
 @RequestMapping("/user")
-//@CrossOrigin(origins = "http://localhost:4201", maxAge = 3600L)
 public class UserController{
     @Autowired
     private UserService userService;
@@ -37,7 +38,8 @@ public class UserController{
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<UserDto>> search(@RequestParam(required = false) String page, @RequestParam(required = false) String limit){
+    public ResponseEntity<Page<UserDto>> search(@RequestParam(required = false) String page,
+                                                @RequestParam(required = false) String limit){
         Pageable pageable = AppUtil.getPageable(page, limit);
         return new ResponseEntity(userService.search(pageable), HttpStatus.OK);
     }
@@ -74,7 +76,7 @@ public class UserController{
             message.setMessage("Change password fail!");
             message.setCode(HttpStatus.NOT_FOUND.value());
         }else if (check == 0){
-            message.setMessage("");
+            message.setMessage("Bad request!");
             message.setCode(HttpStatus.BAD_REQUEST.value());
         } else {
             message.setMessage("Change password success!");

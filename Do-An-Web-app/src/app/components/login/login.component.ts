@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../../services/auth.service';
 
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   password: string;
 
   constructor(private router: Router,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.check = false;
@@ -27,9 +29,11 @@ export class LoginComponent implements OnInit {
       password: this.password,
       grant_type: 'password'
     };
-    this.authService.login(info)
-      .subscribe(data => console.log(data),
-        error => console.log(error));
+    // this.authService.login(info)
+    //   .subscribe(data => console.log(data),
+    //     error => console.log(error));
+    this.storageService.setInfoLogin(info);
+    this.router.navigate(['home']).then(null);
   }
 
   remember(): void {

@@ -1,24 +1,19 @@
 package com.datn.app.entity;
 
-import com.datn.app.dto.BaseDto;
 import com.datn.app.dto.StudentsDto;
 import com.datn.app.util.AppUtil;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
 public class Students extends BaseEnt{
     @Column(nullable = false)
-    private String firstName;
-    @Column(nullable = false)
-    private String lastName;
+    private String fullName;
     private Date dob;
-    private String address;
+    private String address; //hộ khẩu thường trú
     private String email;
     private String phoneNumber;
     @ManyToOne
@@ -47,6 +42,13 @@ public class Students extends BaseEnt{
     private int status; //0: nghỉ học; 1: đang học; 2: đã hoàn thành
     @Column(columnDefinition = "int default 2")
     private int gender;
+    private String currentAddress;
+    @OneToOne
+    private Course course;
+    @OneToOne
+    private Unit unit;
+    @OneToMany(mappedBy = "student")
+    private List<StudyScore> studyScores;
 
     public Students() { }
 
@@ -55,20 +57,12 @@ public class Students extends BaseEnt{
         return AppUtil.mapToDtoAndEnt(this, StudentsDto.class);
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public Date getDob() {
@@ -245,5 +239,37 @@ public class Students extends BaseEnt{
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public String getCurrentAddress() {
+        return currentAddress;
+    }
+
+    public void setCurrentAddress(String currentAddress) {
+        this.currentAddress = currentAddress;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public List<StudyScore> getStudyScores() {
+        return studyScores;
+    }
+
+    public void setStudyScores(List<StudyScore> studyScores) {
+        this.studyScores = studyScores;
     }
 }

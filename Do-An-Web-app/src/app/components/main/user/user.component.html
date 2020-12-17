@@ -1,7 +1,38 @@
 <div class="p-card card-body" style="margin-bottom: 10px;">
   <form>
-
-    <div style="text-align: center;">
+    <div class="row">
+      <div class="col-md-5 row">
+        <label class="col-md-4 col-form-label">Mã cán bộ</label>
+        <div class="col-md-8">
+          <input name="code" placeholder="with a placeholder" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-2 row"></div>
+      <div class="col-md-5 row">
+        <label class="col-md-4 col-form-label">Tài khoản</label>
+        <div class="col-md-8">
+          <input name="username" placeholder="with a placeholder" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 5px;">
+      <div class="col-md-5 row">
+        <label class="col-md-4 col-form-label">Tên cán bộ</label>
+        <div class="col-md-8">
+          <input name="name" placeholder="with a placeholder" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-2 row"></div>
+      <div class="col-md-5 row">
+        <label class="col-md-4 col-form-label">Đơn vị</label>
+        <div class="col-md-8">
+          <select name="email" placeholder="with a placeholder" class="mb-2 form-control">
+            <option>Default Select</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center;margin-top: 15px;">
       <button class="btn btn-primary">Tìm kiếm</button>
       <button class="btn btn-primary" style="margin-left: 5px;">Thêm mới</button>
     </div>
@@ -40,6 +71,9 @@
           </button>
           <button class="button-action" ngbTooltip="Xóa"><mat-icon>delete</mat-icon></button>
         </td>
+      </tr>
+      <tr *ngIf="!users||users.length==0">
+        <td colspan="8">Không có bản ghi!</td>
       </tr>
     </tbody>
   </table>

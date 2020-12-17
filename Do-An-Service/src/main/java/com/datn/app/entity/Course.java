@@ -1,6 +1,8 @@
 package com.datn.app.entity;
 
 import com.datn.app.dto.BaseDto;
+import com.datn.app.dto.CourseDto;
+import com.datn.app.util.AppUtil;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -15,12 +17,13 @@ public class Course extends BaseEnt{
     private int targets; //chỉ tiêu số lượng tuyển sinh
     private int reality; //thực tế tuyển sinh
     private String description;
+    private int number;
 
     public Course() { }
 
     @Override
-    public BaseDto convertToDto() {
-        return null;
+    public CourseDto convertToDto() {
+        return AppUtil.mapToDtoAndEnt(this, CourseDto.class);
     }
 
     public String getName() {
@@ -69,5 +72,13 @@ public class Course extends BaseEnt{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

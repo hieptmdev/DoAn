@@ -3,6 +3,11 @@ package com.datn.app.constant;
 import java.util.Arrays;
 
 public class ConstantData {
+    public static final int ROLE_SYSADMIN = 1;
+    public static final int ROLE_ADEDU = 2;
+    public static final int ROLE_ADPOLITIC = 3;
+    public static final String SERVER_LOCATION_FILE = "/file";
+
     public enum Gender{
         GENDER_Male(0, "Nam"),
         GENDER_Female(1, "Nữ"),

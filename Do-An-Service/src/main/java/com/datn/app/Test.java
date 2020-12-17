@@ -1,7 +1,11 @@
 package com.datn.app;
 
 import com.datn.app.constant.ConstantData;
+import com.datn.app.util.AppUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
@@ -11,7 +15,21 @@ public class Test {
 //        System.out.println(ConstantData.Gender.getGenderNameByCode(4));
 
 
-        System.out.println(solution("abc").toString());
+        // System.out.println(solution("abc").toString());
+
+
+        List<Object> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+//        List<Integer> list1 = new ArrayList<>();
+//        list1.add(2);
+//
+//        list.removeAll(list1);
+//        System.out.println(list.toString());
+        //System.out.println(list.get(0));
+
+        System.out.println(AppUtil.generateStudentCode());
     }
 
     public static String[] solution(String s) {

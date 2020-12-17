@@ -1,0 +1,11 @@
+.font-label{
+    font-weight: bold;   
+}
+
+.space {
+    margin-top: 5px;
+}
+
+.required-label {
+    color: red;
+}
