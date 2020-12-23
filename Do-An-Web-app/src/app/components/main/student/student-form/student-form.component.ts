@@ -118,4 +118,27 @@ export class StudentFormComponent implements OnInit {
   back() {
     this.router.navigate(['home/students']).then(null);
   }
+
+  saveOrUpdate() {
+    this.student.courseId = this.selectedCourse.id;
+    this.student.unitId = this.selectedUnit.id;
+    this.student.nationId = this.selectedNation.id;
+    this.student.provinceId = this.selectedProvince.id;
+    this.student.provinceLicensePlaceId = this.selectedProvinceLicense.id;
+    this.student.districtId = this.selectedDistrict.id;
+    this.student.districtLicensePlaceId = this.selectedDistrictLicense.id;
+    this.student.wardId = this.selectedWard.id;7
+    if(this.student.id == null)
+    {
+      this.studentService.save(this.student)
+        .subscribe(data => {
+          console.log(data);
+        }, error => console.log(error));
+    } else {
+      this.studentService.update(this.student)
+        .subscribe(data => {
+          console.log(data);
+        }, error => console.log(error));
+    }
+  }
 }

@@ -82,32 +82,35 @@ public class StudentService {
     @Transactional
     public StudentsDto saveOrUpdate(StudentsDto dto) {
         Students students;
-        if (dto.getId() == 0L){
-            students = dto.convertToEnt();
-            students.setCode(AppUtil.generateStudentCode());
-            students.setCourse(courseDao.findById(dto.getCourseId()).orElse(null));
-            students.setUnit(unitDao.findById(dto.getUnitId()).orElse(null));
-            students.setNation(nationDao.findById(dto.getNationId()).orElse(null));
-            students.setProvince(provinceDao.findById(dto.getProvinceId()).orElse(null));
-            students.setProvinceLicensePlace(provinceDao.findById(dto.getProvinceLicensePlaceId()).orElse(null));
-            students.setDistrict(districtDao.findById(dto.getDistrictId()).orElse(null));
-            students.setDistrictLicensePlace(districtDao.findById(dto.getDistrictLicensePlaceId()).orElse(null));
-            students.setWard(wardDao.findById(dto.getWardId()).orElse(null));
-        }else {
-            students = studentDao.findById(dto.getId()).orElse(null);
-            if (students == null){
-                return null;
+        if (dto != null) {
+            if (dto.getId() == null || dto.getId() == 0L) {
+                students = dto.convertToEnt();
+                students.setCode(AppUtil.generateStudentCode());
+                students.setCourse(courseDao.findById(dto.getCourseId()).orElse(null));
+                students.setUnit(unitDao.findById(dto.getUnitId()).orElse(null));
+                students.setNation(nationDao.findById(dto.getNationId()).orElse(null));
+                students.setProvince(provinceDao.findById(dto.getProvinceId()).orElse(null));
+                students.setProvinceLicensePlace(provinceDao.findById(dto.getProvinceLicensePlaceId()).orElse(null));
+                students.setDistrict(districtDao.findById(dto.getDistrictId()).orElse(null));
+                students.setDistrictLicensePlace(districtDao.findById(dto.getDistrictLicensePlaceId()).orElse(null));
+            } else {
+                students = studentDao.findById(dto.getId()).orElse(null);
+                if (students == null) {
+                    return null;
+                }
+                students = dto.convertToEnt();
+                students.setStatus(students.getStatus() == dto.getStatus() ? students.getStatus() : dto.getStatus());
+                students.setCourse(courseDao.findById(dto.getCourseId()).orElse(null));
+                students.setUnit(unitDao.findById(dto.getUnitId()).orElse(null));
+                students.setProvince(provinceDao.findById(dto.getProvinceId()).orElse(null));
+                students.setDistrict(districtDao.findById(dto.getDistrictId()).orElse(null));
             }
-            students = dto.convertToEnt();
-            students.setStatus(students.getStatus() == dto.getStatus() ? students.getStatus() : dto.getStatus());
-            students.setCourse(courseDao.findById(dto.getCourseId()).orElse(null));
-            students.setUnit(unitDao.findById(dto.getUnitId()).orElse(null));
-            students.setProvince(provinceDao.findById(dto.getProvinceId()).orElse(null));
-            students.setDistrict(districtDao.findById(dto.getDistrictId()).orElse(null));
             students.setWard(wardDao.findById(dto.getWardId()).orElse(null));
-        }
 
-        return studentDao.saveEntity(students).convertToDto();
+            return studentDao.saveEntity(students).convertToDto();
+        }
+        return null;
+
     }
 
     private StudentsDto convertStudentsDto(StudentsDto dto, Students ent){

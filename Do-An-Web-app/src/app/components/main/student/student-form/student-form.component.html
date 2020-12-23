@@ -22,7 +22,8 @@
                 <div class="col-md-4">
                     <label class="font-label" style="margin-bottom: 2px;">Ngày sinh</label>
                     <p-calendar [showIcon]="true" [readonlyInput]="true" [disabled]="!editOrAdd"
-                        [style]="{'width':'100%'}" [(ngModel)]="student.dob"></p-calendar>
+                        [style]="{'width':'100%'}" [(ngModel)]="student.dob"
+                        [monthNavigator]="true" [yearNavigator]="true" yearRange="1800:2050"></p-calendar>
                 </div>
             </div>
             <!------------------------->
@@ -98,7 +99,8 @@
                 <div class="col-md-4">
                     <label class="font-label" style="margin-bottom: 2px;">Ngày cấp</label>
                     <p-calendar [showIcon]="true" [readonlyInput]="true" [disabled]="!editOrAdd"
-                        [style]="{'width':'100%'}" [(ngModel)]="student.licenseDate"></p-calendar>
+                        [style]="{'width':'100%'}" [(ngModel)]="student.licenseDate"
+                        [monthNavigator]="true" [yearNavigator]="true" yearRange="1800:2050"></p-calendar>
                 </div>
             </div>
             <!------------------------->
@@ -185,7 +187,8 @@
             </div>
             <div class="row space">
                 <label class="col-md-5 font-label">Ngày sinh</label>
-                <p-calendar [(ngModel)]="student.fatherDob" [showIcon]="true" [readonlyInput]="true" [disabled]="!editOrAdd"></p-calendar>
+                <p-calendar [(ngModel)]="student.fatherDob" [showIcon]="true" [readonlyInput]="true" 
+                    [disabled]="!editOrAdd" [monthNavigator]="true" [yearNavigator]="true" yearRange="1800:2050"></p-calendar>
             </div>
             <div class="row space">
                 <label class="col-md-5 font-label">Số điện thoại</label>
@@ -203,7 +206,8 @@
             </div>
             <div class="row space">
                 <label class="col-md-5 font-label">Ngày sinh</label>
-                <p-calendar [(ngModel)]="student.motherDob" [showIcon]="true" [readonlyInput]="true" [disabled]="!editOrAdd"></p-calendar>
+                <p-calendar [(ngModel)]="student.motherDob" [showIcon]="true" [readonlyInput]="true" 
+                    [disabled]="!editOrAdd" [monthNavigator]="true" [yearNavigator]="true" yearRange="1800:2050"></p-calendar>
             </div>
             <div class="row space">
                 <label class="col-md-5 font-label">Số điện thoại</label>
@@ -216,7 +220,7 @@
         </p-panel>
     </div>
     <div *ngIf="editOrAdd" style="text-align: center;margin-top: 15px;">
-        <button class="btn btn-primary btn-sm">Lưu</button>
+        <button class="btn btn-primary btn-sm" (click)="saveOrUpdate()">Lưu</button>
         <button *ngIf="code!=null" class="btn btn-primary btn-sm" style="margin-left: 5px;" (click)="editOrAdd=!editOrAdd">Hủy</button>
     </div>
 </div>

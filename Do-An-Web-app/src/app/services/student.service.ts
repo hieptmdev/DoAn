@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Student } from '../model/student';
 import { BaseService } from './base.service';
 
 @Injectable({
@@ -33,5 +34,15 @@ export class StudentService extends BaseService {
   findAllScoreByStudentCode(code): Observable<any> {
     return this.http.get(`${this.url}/score/${code}`, {observe: 'response'})
       .pipe(catchError(err => throwError(err)));
+  }
+
+  save(student: Student): Observable<any> {
+    return this.http.post(`${this.url}/add`, student, {observe: 'response'})
+    .pipe(catchError(err => throwError(err)));
+  }
+
+  update(student: Student): Observable<any> {
+    return this.http.post(`${this.url}/update`, student, {observe: 'response'})
+    .pipe(catchError(err => throwError(err)));
   }
 }
