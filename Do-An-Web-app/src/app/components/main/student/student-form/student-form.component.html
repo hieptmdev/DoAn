@@ -35,7 +35,7 @@
                         [disabled]="!editOrAdd">
                         <ng-template let-unit>
                             <div>{{unit.name}}</div>
-                        </ng-template>  
+                        </ng-template>
                     </p-dropdown>
                 </div>
                 <div class="col-md-4">
@@ -44,7 +44,7 @@
                         [filter]="true" [showClear]="true" [(ngModel)]="selectedCourse" [style]="{'minWidth':'100%'}" [disabled]="!editOrAdd">
                         <ng-template let-course>
                             <div>{{course.name}}</div>
-                        </ng-template>  
+                        </ng-template>
                     </p-dropdown>
                 </div>
                 <div class="col-md-4">
@@ -89,7 +89,7 @@
                         [disabled]="!editOrAdd" [virtualScroll]="true" itemSize="30">
                         <ng-template let-nation>
                             <div>{{nation.niceName}}</div>
-                        </ng-template>  
+                        </ng-template>
                     </p-dropdown>
                 </div>
                 <div class="col-md-4">
@@ -109,21 +109,21 @@
                     <label class="font-label" style="margin-top: 10px;">Nơi cấp (Tỉnh - Huyện/Thành phố )</label>
                 </div>
                 <div class="col-md-4">
-                    <p-dropdown [options]="provinces" placeholder="Chọn tỉnh/thành phố" name="provinceLicense" [optionLabel]="'name'"
+                    <p-dropdown [options]="provincesLicense" placeholder="Chọn tỉnh/thành phố" name="provinceLicense" [optionLabel]="'name'"
                         [filter]="true" [showClear]="true" [(ngModel)]="selectedProvinceLicense" [style]="{'minWidth':'100%'}"
-                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
+                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30" (ngModelChange)="getDistrictLicenseByProvinceLicense()">
                         <ng-template let-provinceLicense>
                             <div>{{provinceLicense.name}}</div>
                         </ng-template>
                     </p-dropdown>
                 </div>
                 <div class="col-md-4">
-                    <p-dropdown [options]="districts" placeholder="Chọn quận/huyện" name="districtLicense" [optionLabel]="'name'"
+                    <p-dropdown [options]="districtsLicense" placeholder="Chọn quận/huyện" name="districtLicense" [optionLabel]="'name'"
                         [filter]="true" [showClear]="true" [(ngModel)]="selectedDistrictLicense" [style]="{'minWidth':'100%'}"
                         [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
                         <ng-template let-districtLicense>
                             <div>{{districtLicense.name}}</div>
-                        </ng-template>  
+                        </ng-template>
                     </p-dropdown>
                 </div>
             </div>
@@ -140,7 +140,7 @@
                     <label class="font-label" style="margin-bottom: 2px;">Tỉnh/Thành phố</label>
                     <p-dropdown [options]="provinces" placeholder="Chọn tỉnh/thành phố" name="province" [optionLabel]="'name'"
                         [filter]="true" [showClear]="true" [(ngModel)]="selectedProvince" [style]="{'minWidth':'100%'}"
-                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
+                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30" (ngModelChange)="getDistrictByProvince()">
                         <ng-template let-province>
                             <div>{{province.name}}</div>
                         </ng-template>
@@ -150,10 +150,10 @@
                     <label class="font-label" style="margin-bottom: 2px;">Quận/Huyện/Thành phố</label>
                     <p-dropdown [options]="districts" placeholder="Chọn quận/huyện" name="district" [optionLabel]="'name'"
                         [filter]="true" [showClear]="true" [(ngModel)]="selectedDistrict" [style]="{'minWidth':'100%'}"
-                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
+                        [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30" (ngModelChange)="getWardByProvinceAndDistrict()">
                         <ng-template let-district>
                             <div>{{district.name}}</div>
-                        </ng-template>  
+                        </ng-template>
                     </p-dropdown>
                 </div>
                 <div class="col-md-4">
@@ -163,7 +163,7 @@
                         [disabled]="!(editOrAdd&&selectedNation.code=='VN')" [virtualScroll]="true" itemSize="30">
                         <ng-template let-ward>
                             <div>{{ward.name}}</div>
-                        </ng-template>  
+                        </ng-template>
                     </p-dropdown>
                 </div>
             </div>
@@ -187,7 +187,7 @@
             </div>
             <div class="row space">
                 <label class="col-md-5 font-label">Ngày sinh</label>
-                <p-calendar [(ngModel)]="student.fatherDob" [showIcon]="true" [readonlyInput]="true" 
+                <p-calendar [(ngModel)]="student.fatherDob" [showIcon]="true" [readonlyInput]="true"
                     [disabled]="!editOrAdd" [monthNavigator]="true" [yearNavigator]="true" yearRange="1800:2050"></p-calendar>
             </div>
             <div class="row space">
@@ -206,7 +206,7 @@
             </div>
             <div class="row space">
                 <label class="col-md-5 font-label">Ngày sinh</label>
-                <p-calendar [(ngModel)]="student.motherDob" [showIcon]="true" [readonlyInput]="true" 
+                <p-calendar [(ngModel)]="student.motherDob" [showIcon]="true" [readonlyInput]="true"
                     [disabled]="!editOrAdd" [monthNavigator]="true" [yearNavigator]="true" yearRange="1800:2050"></p-calendar>
             </div>
             <div class="row space">

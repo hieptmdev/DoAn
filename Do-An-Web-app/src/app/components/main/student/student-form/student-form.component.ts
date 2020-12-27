@@ -30,9 +30,11 @@ export class StudentFormComponent implements OnInit {
   selectedNation: Nation = new Nation();
   provinces: Province[];
   selectedProvince: Province;
+  provincesLicense: Province[];
   selectedProvinceLicense: Province;
   districts: District[];
   selectedDistrict: District;
+  districtsLicense: District[];
   selectedDistrictLicense: District;
   wards: Ward[];
   selectedWard: Ward;
@@ -59,7 +61,7 @@ export class StudentFormComponent implements OnInit {
     }
   }
 
-  loadData(code){
+  loadData(code): void{
     this.studentService.findByCode(code).subscribe(
       data => {
         this.student = data.body;
@@ -72,22 +74,22 @@ export class StudentFormComponent implements OnInit {
         this.selectedCourse = this.courses.filter((c: Course ) => c.id === this.student.courseId)[0];
         this.selectedUnit = this.units.filter((u: Unit) => u.id === this.student.unitId)[0];
         this.selectedNation = this.nations.filter((n: Nation) => n.id === this.student.nationId)[0];
-        if (this.selectedNation.code == 'VN'){
+        if (this.selectedNation.code === 'VN'){
           this.selectedProvince = this.provinces.filter((p: Province) => p.id === this.student.provinceId)[0];
-          this.selectedProvinceLicense = this.provinces.filter((p: Province) => p.id === this.student.provinceLicensePlaceId)[0];
+          this.selectedProvinceLicense = this.provincesLicense.filter((p: Province) => p.id === this.student.provinceLicensePlaceId)[0];
           this.selectedDistrict = this.districts.filter((d: District) => d.id === this.student.districtId)[0];
-          this.selectedDistrictLicense = this.districts.filter((d: District) => d.id === this.student.districtLicensePlaceId)[0];
+          this.selectedDistrictLicense = this.districtsLicense.filter((d: District) => d.id === this.student.districtLicensePlaceId)[0];
           this.selectedWard = this.wards.filter((w: Ward) => w.id === this.student.wardId)[0];
         }
       }, error => console.log(error));
   }
 
-  importDataSelectBox(){
+  importDataSelectBox(): void{
     this.courseService.getAll()
       .subscribe(data => {
         this.courses = data.body;
       }, error => console.log(error));
-    
+
     this.unitService.findAllForStudent(Number(this.storageService.getUnit()))
       .subscribe(data => {
         this.units = data.body;
@@ -101,25 +103,26 @@ export class StudentFormComponent implements OnInit {
     this.placeService.getAllProvince()
       .subscribe(data => {
         this.provinces = data.body;
+        this.provincesLicense = data.body;
       }, error => console.log(error));
 
     this.placeService.getAllDistrict()
       .subscribe(data => {
         this.districts = data.body;
+        this.districtsLicense = data.body;
       }, error => console.log(error));
 
     this.placeService.getAllWard()
-      .subscribe(data => {
-        this.wards = data.body;
+      .subscribe(dataWard => {
+        this.wards = dataWard.body;
       }, error => console.log(error));
-    
   }
 
-  back() {
+  back(): void{
     this.router.navigate(['home/students']).then(null);
   }
 
-  saveOrUpdate() {
+  saveOrUpdate(): void{
     this.student.courseId = this.selectedCourse.id;
     this.student.unitId = this.selectedUnit.id;
     this.student.nationId = this.selectedNation.id;
@@ -127,8 +130,8 @@ export class StudentFormComponent implements OnInit {
     this.student.provinceLicensePlaceId = this.selectedProvinceLicense.id;
     this.student.districtId = this.selectedDistrict.id;
     this.student.districtLicensePlaceId = this.selectedDistrictLicense.id;
-    this.student.wardId = this.selectedWard.id;7
-    if(this.student.id == null)
+    this.student.wardId = this.selectedWard.id;
+    if (this.student.id == null)
     {
       this.studentService.save(this.student)
         .subscribe(data => {
@@ -140,5 +143,17 @@ export class StudentFormComponent implements OnInit {
           console.log(data);
         }, error => console.log(error));
     }
+  }
+
+  getDistrictByProvince(): void {
+
+  }
+
+  getDistrictLicenseByProvinceLicense(): void {
+
+  }
+
+  getWardByProvinceAndDistrict(): void{
+
   }
 }
