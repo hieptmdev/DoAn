@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-//        String s = new BCryptPasswordEncoder().encode("abc@123456");
-//        System.out.println(s);
+        String s = new BCryptPasswordEncoder().encode("abc@123456");
+        System.out.println(s);
 //
 //        System.out.println(ConstantData.Gender.getGenderNameByCode(4));
 
