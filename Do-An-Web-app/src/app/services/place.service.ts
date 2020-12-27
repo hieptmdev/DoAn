@@ -9,7 +9,7 @@ import { BaseService } from './base.service';
 })
 export class PlaceService extends BaseService {
 
-  constructor(public http: HttpClient) { 
+  constructor(public http: HttpClient) {
     super('place', http);
   }
 
@@ -22,11 +22,13 @@ export class PlaceService extends BaseService {
     return this.http.get(`${this.url}/provinces`, {observe: 'response'})
       .pipe(catchError(err => throwError(err)));
   }
+
   public getAllDistrict(): Observable<any> {
     return this.http.get(`${this.url}/districts`, {observe: 'response'})
       .pipe(catchError(err => throwError(err)));
   }
-  public getAllWard(): Observable<any> {
+
+  public getAllWard() : Observable<any> {
     return this.http.get(`${this.url}/wards`, {observe: 'response'})
       .pipe(catchError(err => throwError(err)));
   }

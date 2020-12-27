@@ -40,13 +40,23 @@ public class PlaceService {
                 .stream().map(Province::convertToDto).collect(Collectors.toList());
     }
 
-    public List<DistrictDto> findAllDistrict() {
+    public List<DistrictDto> findAllDistrict(){
         return districtDao.findAll(Sort.by(Sort.Direction.ASC, "name"))
                 .stream().map(District::convertToDto).collect(Collectors.toList());
     }
 
-    public List<WardDto> findAllWard() {
+    public List<DistrictDto> findAllDistrictByProvinceId(Long provinceId) {
+        return districtDao.findAllByProvinceId(provinceId, Sort.by(Sort.Direction.ASC, "name"))
+                .stream().map(District::convertToDto).collect(Collectors.toList());
+    }
+
+    public List<WardDto> findAllWard(){
         return wardDao.findAll(Sort.by(Sort.Direction.ASC, "name"))
+                .stream().map(Ward::convertToDto).collect(Collectors.toList());
+    }
+
+    public List<WardDto> findAllWardByProvinceIdAndDistrictId(Long provinceId, Long districtId) {
+        return wardDao.findAllByProvinceIdAndAndDistrictId(provinceId, districtId, Sort.by(Sort.Direction.ASC, "name"))
                 .stream().map(Ward::convertToDto).collect(Collectors.toList());
     }
 }
