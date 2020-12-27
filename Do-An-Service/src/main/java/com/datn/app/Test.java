@@ -18,10 +18,10 @@ public class Test {
         // System.out.println(solution("abc").toString());
 
 
-        List<Object> list = new ArrayList<>();
+        /*List<Object> list = new ArrayList<>();
         list.add(1);
         list.add(2);
-        list.add(3);
+        list.add(3);*/
 //        List<Integer> list1 = new ArrayList<>();
 //        list1.add(2);
 //
