@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -21,5 +22,10 @@ public class UnitController {
     @GetMapping("/all-for-student/{unitId}")
     public ResponseEntity<List<UnitDto>> findAllForStudent(@PathVariable Long unitId){
         return new ResponseEntity(unitService.getAllForStudent(unitId), HttpStatus.OK);
+    }
+
+    @GetMapping("/all-for-student")
+    public ResponseEntity<List<UnitDto>> findAllForStudent(HttpServletRequest request){
+        return new ResponseEntity(unitService.getAllForStudent(request), HttpStatus.OK);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -30,13 +31,13 @@ public class CategoryController{
         return null;
     }
 
-    @GetMapping("/{roleId}")
-    public ResponseEntity<List<CategoryDto>> findAllParentByRole(@PathVariable Long roleId){
-        return new ResponseEntity<>(categoryService.findAllParentByRole(roleId), HttpStatus.OK);
+    @GetMapping("/parent")
+    public ResponseEntity<List<CategoryDto>> findAllParentByRole(HttpServletRequest request){
+        return new ResponseEntity<>(categoryService.findAllParentByRole(request), HttpStatus.OK);
     }
 
-    @GetMapping("/{roleId}/{parentId}")
-    public ResponseEntity<List<CategoryDto>> findAllChildByRoleAndParent(@PathVariable Long roleId, @PathVariable Long parentId){
-        return new ResponseEntity<>(categoryService.findAllChildByRoleAndParent(roleId, parentId), HttpStatus.OK);
+    @GetMapping("/child/{parentId}")
+    public ResponseEntity<List<CategoryDto>> findAllChildByRoleAndParent(@PathVariable Long parentId, HttpServletRequest request){
+        return new ResponseEntity<>(categoryService.findAllChildByRoleAndParent(parentId, request), HttpStatus.OK);
     }
 }

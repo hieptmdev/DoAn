@@ -13,13 +13,13 @@ export class CategoryService extends BaseService{
     super('category', http);
   }
 
-  getParentCategory(roleId): Observable<any>{
-    return this.http.get(`${this.url}/${roleId}`, {observe: 'response'})
+  getParentCategory(): Observable<any>{
+    return this.http.get(`${this.url}/parent`, {observe: 'response'})
       .pipe(catchError(err => throwError(err)));
   }
 
-  getChildCategory(roleId, parentCategoryId): Observable<any>{
-    return this.http.get(`${this.url}/${roleId}/${parentCategoryId}`, {observe: 'response'})
+  getChildCategory(parentCategoryId): Observable<any>{
+    return this.http.get(`${this.url}/child/${parentCategoryId}`, {observe: 'response'})
       .pipe(catchError(err => throwError(err)));
   }
 }

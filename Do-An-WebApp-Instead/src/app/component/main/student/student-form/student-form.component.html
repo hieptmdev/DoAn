@@ -1,1 +1,407 @@
-<p>student-form works!</p>
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-description">{{'label.form.student_info'|transloco}}</h4>
+          <form class="form-sample">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.student.code'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="code"
+                           [disabled]="true" [(ngModel)]="student.code"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.full_name'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="fullName"
+                           [(ngModel)]="student.fullName" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.dob'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="date" name="dob"
+                           [(ngModel)]="student.dob" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.form.course'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="courses" data-size="10"
+                            [(ngModel)]="student.courseId" [disabled]="!isSaveOrUpdate">
+                      <option [value]="0">{{'label.choose.course'|transloco}}</option>
+                      <option *ngFor="let c of courses" [value]="c.id">{{c.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.form.unit'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="units" data-size="10"
+                            [(ngModel)]="student.unitId" [disabled]="!isSaveOrUpdate">
+                      <option [value]="0">{{'label.choose.unit'|transloco}}</option>
+                      <option *ngFor="let u of units" [value]="u.id">{{u.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.form.class'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <input class="form-control"[disabled]="true"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.status'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="status"
+                            [(ngModel)]="student.status" [disabled]="!isSaveOrUpdate">
+                      <option [value]="0">{{'label.status.out'|transloco}}</option>
+                      <option [value]="1">{{'label.status.studying'|transloco}}</option>
+                      <option [value]="2">{{'label.status.complete'|transloco}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.gender'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="gender"
+                            [(ngModel)]="student.gender" [disabled]="!isSaveOrUpdate">
+                      <option [value]="0">{{'label.gender.male'|transloco}}</option>
+                      <option [value]="1">{{'label.gender.female'|transloco}}</option>
+                      <option [value]="2">{{'label.gender.other'|transloco}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.email'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="email" name="email"
+                           [(ngModel)]="student.email" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.nation'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="nations" data-size="10"
+                            [(ngModel)]="student.nationId" [disabled]="!isSaveOrUpdate"
+                            (ngModelChange)="changeNation()">
+                      <option [value]="0">{{'label.choose.nation'|transloco}}</option>
+                      <option *ngFor="let nation of nations" [value]="nation.id">{{nation.niceName}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.religion'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" [disabled]="true"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.id'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="idCard"
+                           [(ngModel)]="student.numberIdentityCard" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.dol'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="date" name="dol"
+                           [(ngModel)]="student.licenseDate" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.province.license'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="provincesLicense" data-size="10"
+                            [disabled]="!isSaveOrUpdate||student.nationId!=232" [(ngModel)]="student.provinceLicensePlaceId"
+                            (ngModelChange)="changeProvinceLicense()">
+                      <option [value]="0">{{'label.choose.province'|transloco}}</option>
+                      <option *ngFor="let pl of provincesLicense" [value]="pl.id">{{pl.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.district.license'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="districtsLicense" data-size="10"
+                            [disabled]="!isSaveOrUpdate||student.nationId!=232" [(ngModel)]="student.districtLicensePlaceId">
+                      <option [value]="0">{{'label.choose.district'|transloco}}</option>
+                      <option *ngFor="let dl of districtsLicense" [value]="dl.id">{{dl.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label font-label">
+                    {{'label.address'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="address"
+                           [(ngModel)]="student.address" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.province'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="provinces" data-size="10"
+                            [disabled]="!isSaveOrUpdate||student.nationId!=232" [(ngModel)]="student.provinceId"
+                            (ngModelChange)="changeProvince()">
+                      <option [value]="0">{{'label.choose.province'|transloco}}</option>
+                      <option *ngFor="let p of provinces" [value]="p.id">{{p.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.district'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="districts" data-size="10"
+                            [disabled]="!isSaveOrUpdate||student.nationId!=232" [(ngModel)]="student.districtId"
+                            (ngModelChange)="changeDistrict()">
+                      <option [value]="0">{{'label.choose.district'|transloco}}</option>
+                      <option *ngFor="let d of districts" [value]="d.id">{{d.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.ward'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="wards" data-size="10"
+                            [disabled]="!isSaveOrUpdate||student.nationId!=232" [(ngModel)]="student.wardId">
+                      <option [value]="0">{{'label.choose.ward'|transloco}}</option>
+                      <option *ngFor="let w of wards" [value]="w.id">{{w.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label font-label">{{'label.current_address'|transloco}}</label>
+                  <div class="col-sm-9">
+                    <input class="form-control" type="text" name="currentAddress"
+                           [(ngModel)]="student.currentAddress" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.phone'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="text" name="phone"
+                           [(ngModel)]="student.phoneNumber" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-description">{{'label.student.father'|transloco}}</h4>
+          <form class="form-sample">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.full_name'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="fatherName"
+                           [(ngModel)]="student.fatherName" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.dob'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="date" name="fatherDob"
+                           [(ngModel)]="student.fatherDob" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.job'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="text" name="fatherJob"
+                           [(ngModel)]="student.fatherJob" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.phone'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="text" name="fatherNumberPhone"
+                           [(ngModel)]="student.fatherNumberPhone" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-description">{{'label.student.mother'|transloco}}</h4>
+          <form class="form-sample">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.full_name'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="motherName"
+                           [(ngModel)]="student.motherName" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.dob'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="date" name="motherDob"
+                           [(ngModel)]="student.motherDob" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.job'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="text" name="motherJob"
+                           [(ngModel)]="student.motherJob" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.phone'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="text" name="motherNumberPhone"
+                           [(ngModel)]="student.motherNumberPhone" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-12" style="text-align: center;">
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="isSaveOrUpdate&&!studentCode" (click)="openModalSave(saveModal)">{{'button.save'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="!isSaveOrUpdate&&studentCode" (click)="isSaveOrUpdate=!isSaveOrUpdate">{{'button.update'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="isSaveOrUpdate&&studentCode" (click)="openModalSave(saveModal)">{{'button.edit'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="isSaveOrUpdate" (click)="cancel()">{{'button.cancel'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="!isSaveOrUpdate&&studentCode" (click)="score()">{{'button.student.score'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" (click)="back()">{{'button.back'|transloco}}</button>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #saveModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{'label.notification'|transloco}}</h4>
+  </div>
+  <div class="modal-body">
+    {{'message.save'|transloco}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-secondary" (click)="modal.dismiss()">{{'button.cancel'|transloco}}</button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="saveOrUpdate()">{{'button.ok'|transloco}}</button>
+  </div>
+</ng-template>

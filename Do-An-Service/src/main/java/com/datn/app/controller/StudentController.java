@@ -1,5 +1,6 @@
 package com.datn.app.controller;
 
+import com.datn.app.dto.MessageResponse;
 import com.datn.app.dto.StudentsDto;
 import com.datn.app.dto.StudyScoreDto;
 import com.datn.app.dto.UserDto;
@@ -47,13 +48,14 @@ public class StudentController {
         return null;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<StudentsDto> addStudent(@RequestBody StudentsDto dto, HttpServletRequest req){
-        return new ResponseEntity(studentService.saveOrUpdate(dto), HttpStatus.OK);
+    @DeleteMapping("/{studentId}")
+    public ResponseEntity<MessageResponse> deleteById(@PathVariable Long studentId, HttpServletRequest request){
+        MessageResponse msg = studentService.deleteById(studentId);
+        return new ResponseEntity(msg, HttpStatus.OK);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<StudentsDto> updateStudent(@RequestBody StudentsDto dto, HttpServletRequest req){
+    @PostMapping
+    public ResponseEntity<StudentsDto> saveOrUpdate(@RequestBody StudentsDto dto, HttpServletRequest req){
         return new ResponseEntity(studentService.saveOrUpdate(dto), HttpStatus.OK);
     }
 }

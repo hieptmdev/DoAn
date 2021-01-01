@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import java.security.Principal;
 import java.text.ParseException;
 
 @RestController
@@ -39,13 +40,17 @@ public class UserController{
 
     @GetMapping("/search")
     public ResponseEntity<Page<UserDto>> search(@RequestParam(required = false) String page,
-                                                @RequestParam(required = false) String limit){
+                                                @RequestParam(required = false) String limit,
+                                                @RequestParam(required = false) String code,
+                                                @RequestParam(required = false) String name,
+                                                @RequestParam(required = false) String username,
+                                                @RequestParam(value = "unit", required = false) String unitId){
         Pageable pageable = AppUtil.getPageable(page, limit);
         return new ResponseEntity(userService.search(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<UserDto> findByUsername(@PathVariable String username) throws Exception{
+    public ResponseEntity<UserDto> findByUsername(@PathVariable String username, HttpServletRequest request) throws Exception{
         return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.OK);
     }
 

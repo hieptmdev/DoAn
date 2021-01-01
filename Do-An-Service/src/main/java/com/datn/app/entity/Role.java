@@ -14,8 +14,6 @@ public class Role extends BaseEnt {
     @Column(nullable = false)
     private String name;
     private String description;
-    @OneToMany(mappedBy = "role")
-    private List<UserInfor> userInforList;
 
     public Role() { }
 
@@ -38,13 +36,5 @@ public class Role extends BaseEnt {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<UserInfor> getUserInforList() {
-        return userInforList;
-    }
-
-    public void setUserInforList(List<UserInfor> userInforList) {
-        this.userInforList = userInforList;
     }
 }

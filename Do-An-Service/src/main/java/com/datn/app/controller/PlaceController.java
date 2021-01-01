@@ -21,12 +21,12 @@ public class PlaceController {
     @Autowired
     private PlaceService placeService;
 
-    @GetMapping("nations")
+    @GetMapping("/nations")
     public ResponseEntity<List<NationDto>> findAllNation() {
         return new ResponseEntity(placeService.findAllNation(), HttpStatus.OK);
     }
 
-    @GetMapping("provinces")
+    @GetMapping("/provinces")
     public ResponseEntity<List<ProvinceDto>> findAllProvince() {
         return new ResponseEntity(placeService.findAllProvince(), HttpStatus.OK);
     }
@@ -36,7 +36,7 @@ public class PlaceController {
         return new ResponseEntity(placeService.findAllDistrict(), HttpStatus.OK);
     }
 
-    @GetMapping("districts/{provinceId}")
+    @GetMapping("/districts/{provinceId}")
     public ResponseEntity<List<DistrictDto>> findAllDistrictByProvinceId(@PathVariable Long provinceId) {
         return new ResponseEntity(placeService.findAllDistrictByProvinceId(provinceId), HttpStatus.OK);
     }
@@ -46,7 +46,7 @@ public class PlaceController {
         return new ResponseEntity(placeService.findAllWard(), HttpStatus.OK);
     }
 
-    @GetMapping("wards/{provinceId}/{districtId}")
+    @GetMapping("/wards/{provinceId}/{districtId}")
     public ResponseEntity<List<WardDto>> findAllWard(@PathVariable Long provinceId, @PathVariable Long districtId) {
         return new ResponseEntity(placeService.findAllWardByProvinceIdAndDistrictId(provinceId, districtId), HttpStatus.OK);
     }

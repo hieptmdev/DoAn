@@ -19,9 +19,7 @@ public class UserInfor extends BaseEnt {
     private int gender; //0: nam, 1: nữ, 2: khác
     private Date dob;
     private String address;
-    @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
     private String numberPhone;
     @ManyToOne
     private Role role;

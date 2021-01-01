@@ -6,10 +6,18 @@ export const CONFIG: any = {
     storage: {
       access_token: 'access_token',
       refresh_token: 'refresh_token',
-      expire_access_token: 'EXP-AT',
-      expire_refresh_token: 'EXP-RT',
+      expires_in: 'expires_in',
+      jti: 'jti',
       username: 'username',
       password: 'password'
     }
+  },
+  auth: {
+    client_id: 'Hiep-GTVT',
+    client_secret: 'abc@123456',
+    auth_basic: 'Basic',
+    auth_bearer: 'Bearer',
+    header: 'Authorization',
+    grant_type_password: 'password'
   }
 };

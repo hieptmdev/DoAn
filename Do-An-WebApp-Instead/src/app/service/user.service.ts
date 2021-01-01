@@ -13,10 +13,21 @@ export class UserService extends BaseService{
     super('user', http);
   }
 
-  search(page, limit): Observable<any> {
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('limit', limit.toString());
+  search(data, page, limit): Observable<any> {
+    let params;
+    if (data){
+      params = new HttpParams()
+        .set('page', page.toString())
+        .set('limit', limit.toString())
+        .set('empCode', data.studentCode.toString())
+        .set('empName', data.studentName.toString())
+        .set('username', data.studentCourse.toString())
+        .set('empUnit', data.studentUnit.toString());
+    }else {
+      params = new HttpParams()
+        .set('page', page.toString())
+        .set('limit', limit.toString());
+    }
     return this.http.get(`${this.url}/search`, {observe: 'response', params})
       .pipe(catchError(err => throwError(err)));
   }

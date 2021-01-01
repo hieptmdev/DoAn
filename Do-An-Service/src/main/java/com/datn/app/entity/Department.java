@@ -16,8 +16,6 @@ public class Department extends BaseEnt{
     @OneToOne
     private User userManager;
     private String description;
-    @OneToMany(mappedBy = "department")
-    private List<Subjects> subjectsList;
 
     public Department() { }
 
@@ -64,13 +62,5 @@ public class Department extends BaseEnt{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Subjects> getSubjectsList() {
-        return subjectsList;
-    }
-
-    public void setSubjectsList(List<Subjects> subjectsList) {
-        this.subjectsList = subjectsList;
     }
 }

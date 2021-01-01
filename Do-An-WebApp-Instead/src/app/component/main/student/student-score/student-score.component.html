@@ -1,0 +1,134 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <form class="form-sample" autocomplete="off">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-5 col-form-label font-label">{{'label.student.code'|transloco}}</label>
+                  <div class="col-sm-7">
+                    <label class="col-form-label">{{student.code}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.full_name'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <label class="col-form-label">{{student.fullName}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.status'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <label class="col-form-label">{{student.statusName}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-5 col-form-label font-label">{{'label.form.class'|transloco}}</label>
+                  <div class="col-sm-7">
+                    <label class="col-form-label">{{student.className}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.form.course'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <label class="col-form-label">{{student.courseName}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.form.unit'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <label class="col-form-label">{{student.unitName}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-5 col-form-label font-label">{{'label.student.gpa'|transloco}}</label>
+                  <div class="col-sm-7">
+                    <label class="col-form-label">{{student.gpa}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.semester'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" [disabled]="true" name="semester">
+                      <option>{{'label.choose.semester'|transloco}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <button class="btn btn-sm btn-primary" (click)="studentInfo()">{{'button.info'|transloco}}</button>
+              <button class="btn btn-primary btn-sm" style="margin-left: 5px;">{{'button.export'|transloco}}</button>
+              <button class="btn btn-sm btn-success" style="margin-left: 5px;" (click)="back()">{{'button.back'|transloco}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">{{'table.title.student.score'|transloco}}</h3>
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th style="width: 10px;">{{'table.number'|transloco}}</th>
+              <th>{{'table.student.score.subject_code'|transloco}}</th>
+              <th>{{'table.student.score.subject_name'|transloco}}</th>
+              <th>{{'table.student.score.class_subject'|transloco}}</th>
+              <th>{{'table.student.score.credits'|transloco}}</th>
+              <th>{{'table.student.score.study_times'|transloco}}</th>
+              <th>{{'table.student.score.point_process'|transloco}}</th>
+              <th>{{'table.student.score.test_score'|transloco}}</th>
+              <th>{{'table.student.score.final_score'|transloco}}</th>
+              <th>{{'table.student.score.evaluate'|transloco}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ss of studentScore|slice:(page-1)*pageSize:(page-1)*pageSize+pageSize, index as i">
+              <td>{{i+1}}</td>
+              <td>{{ss.subjectCode}}</td>
+              <td>{{ss.subjectName}}</td>
+              <td>{{ss.codeClass}}</td>
+              <td>{{ss.credits}}</td>
+              <td>{{ss.studyTimes}}</td>
+              <td>{{ss.pointProcess}}</td>
+              <td>{{ss.testScore}}</td>
+              <td>{{ss.finalScore}}</td>
+              <td>{{ss.evaluate}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div *ngIf="studentScore==null||studentScore.length==0">
+            <h6 style="color: red;">{{'error.empty_list_data'|transloco}}</h6>
+          </div>
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="maxSize"
+                          [rotate]="true" [ellipses]="false" [boundaryLinks]="true"
+                          [pageSize]="pageSize"></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

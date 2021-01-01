@@ -20,8 +20,6 @@ public class Unit extends BaseEnt{
     private User userDeputyManager;
     private String description;
     @OneToMany(mappedBy = "unit")
-    private List<UserInfor> userInforList;
-    @OneToMany(mappedBy = "unit")
     private List<Department> departments;
 
     public Unit() { }
@@ -69,22 +67,6 @@ public class Unit extends BaseEnt{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<UserInfor> getUsers() {
-        return userInforList;
-    }
-
-    public void setUsers(List<UserInfor> userInforList) {
-        this.userInforList = userInforList;
-    }
-
-    public List<UserInfor> getUserInforList() {
-        return userInforList;
-    }
-
-    public void setUserInforList(List<UserInfor> userInforList) {
-        this.userInforList = userInforList;
     }
 
     public List<Department> getDepartments() {

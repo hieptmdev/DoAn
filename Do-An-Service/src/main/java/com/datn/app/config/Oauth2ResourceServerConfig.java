@@ -36,7 +36,7 @@ public class Oauth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/user/send-code").permitAll();
-                //.anyRequest().authenticated();
+                .antMatchers("/user/send-code").permitAll()
+                .anyRequest().authenticated();
     }
 }

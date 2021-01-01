@@ -30,10 +30,11 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService.login(this.loginForm).subscribe(
       data => {
-        console.log(data);
+        this.storageService.saveToken(data);
         if (this.keepLogin === true) {
           this.storageService.rememberLoginInfo(this.loginForm);
         }
+        this.router.navigate(['home']).then(null)
       },
       error => console.log(error)
     );

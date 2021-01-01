@@ -1,1 +1,53 @@
-<p>user-search works!</p>
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-sample" #formSearchUser="ngForm" autocomplete="off">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.emp.code'|transloco}}</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="empCode" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.full_name'|transloco}}</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="empName" ngModel/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.username'|transloco}}</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="username" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.emp.unit'|transloco}}</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="empUnit" ngModel>
+                    <option>{{'label.choose.unit'|transloco}}</option>
+                    <option *ngFor="let u of units" [value]="u.id">{{u.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: center;">
+            <button class="btn btn-sm btn-primary" (click)="search(formSearchUser)">{{'button.search'|transloco}}</button>
+            <button class="btn btn-sm btn-success" style="margin-left: 5px;" (click)="addUser()">{{'button.add'|transloco}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-4 row">
                 <label class="col-md-4 col-form-label font-label">Họ tên:</label>
-                <label class="col-md-8 col-form-label">{{student.firstName}} {{student.lastName}}</label>
+                <label class="col-md-8 col-form-label">{{student.fullName}}</label>
             </div>
             <div class="col-md-4 row">
                 <label class="col-md-4 col-form-label font-label">Trạng thái:</label>
@@ -39,7 +39,7 @@
               [(ngModel)]="selectedSemester" [style]="{'minWidth':'100%'}" [showClear]="true">
               <ng-template let-s>
                   <div>{{s.name}}</div>
-              </ng-template>  
+              </ng-template>
             </p-dropdown>
           </div>
         </div>

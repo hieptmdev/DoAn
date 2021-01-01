@@ -2,6 +2,7 @@ package com.datn.app.service;
 
 import com.datn.app.constant.ConstantData;
 import com.datn.app.dao.idao.*;
+import com.datn.app.dto.MessageResponse;
 import com.datn.app.dto.StudentsDto;
 import com.datn.app.dto.StudyScoreDto;
 import com.datn.app.entity.Students;
@@ -35,10 +36,10 @@ public class StudentService {
     private WardDao wardDao;
 
     public Page<StudentsDto> search(Pageable pageable, String code, String name, String courseId, String unitId){
-        if (code.equals("undefined") || code.equals("")) code = "";
-        if (name.equals("undefined") || name.equals("")) name = "";
-        if (courseId.equals("undefined") || courseId.equals("")) courseId = "0";
-        if (unitId.equals("undefined") || courseId.equals("")) unitId = "0";
+        if (code == null || code.equals("undefined") || code.equals("")) code = "";
+        if (name == null || name.equals("undefined") || name.equals("")) name = "";
+        if (courseId == null || courseId.equals("undefined") || courseId.equals("")) courseId = "0";
+        if (unitId == null || unitId.equals("undefined") || courseId.equals("")) unitId = "0";
         Page<Students> studentsPage = studentDao.search(pageable, code, name.toLowerCase(), Long.parseLong(courseId), Long.parseLong(unitId));
         if (studentsPage != null && !studentsPage.isEmpty()){
             Page<StudentsDto> dtoPage = studentsPage.map(ent -> {
@@ -86,13 +87,6 @@ public class StudentService {
             if (dto.getId() == null || dto.getId() == 0L) {
                 students = dto.convertToEnt();
                 students.setCode(AppUtil.generateStudentCode());
-                students.setCourse(courseDao.findById(dto.getCourseId()).orElse(null));
-                students.setUnit(unitDao.findById(dto.getUnitId()).orElse(null));
-                students.setNation(nationDao.findById(dto.getNationId()).orElse(null));
-                students.setProvince(provinceDao.findById(dto.getProvinceId()).orElse(null));
-                students.setProvinceLicensePlace(provinceDao.findById(dto.getProvinceLicensePlaceId()).orElse(null));
-                students.setDistrict(districtDao.findById(dto.getDistrictId()).orElse(null));
-                students.setDistrictLicensePlace(districtDao.findById(dto.getDistrictLicensePlaceId()).orElse(null));
             } else {
                 students = studentDao.findById(dto.getId()).orElse(null);
                 if (students == null) {
@@ -100,11 +94,14 @@ public class StudentService {
                 }
                 students = dto.convertToEnt();
                 students.setStatus(students.getStatus() == dto.getStatus() ? students.getStatus() : dto.getStatus());
-                students.setCourse(courseDao.findById(dto.getCourseId()).orElse(null));
-                students.setUnit(unitDao.findById(dto.getUnitId()).orElse(null));
-                students.setProvince(provinceDao.findById(dto.getProvinceId()).orElse(null));
-                students.setDistrict(districtDao.findById(dto.getDistrictId()).orElse(null));
             }
+            students.setCourse(courseDao.findById(dto.getCourseId()).orElse(null));
+            students.setUnit(unitDao.findById(dto.getUnitId()).orElse(null));
+            students.setNation(nationDao.findById(dto.getNationId()).orElse(null));
+            students.setProvince(provinceDao.findById(dto.getProvinceId()).orElse(null));
+            students.setProvinceLicensePlace(provinceDao.findById(dto.getProvinceLicensePlaceId()).orElse(null));
+            students.setDistrict(districtDao.findById(dto.getDistrictId()).orElse(null));
+            students.setDistrictLicensePlace(districtDao.findById(dto.getDistrictLicensePlaceId()).orElse(null));
             students.setWard(wardDao.findById(dto.getWardId()).orElse(null));
 
             return studentDao.saveEntity(students).convertToDto();
@@ -140,5 +137,17 @@ public class StudentService {
             dto.setGpa(Math.round((totalScore / totalCredits) * 100) / 100);
         }
         return dto;
+    }
+
+    public MessageResponse deleteById(Long studentId) {
+        MessageResponse messageResponse;
+        Students students = studentDao.findById(studentId).orElse(null);
+        if (students == null){
+            messageResponse = new MessageResponse(400, "error.fail");
+        }else {
+            studentDao.deleteById(studentId);
+            messageResponse = new MessageResponse(200, "success.delete");
+        }
+        return messageResponse;
     }
 }

@@ -1,10 +1,10 @@
 <div class="container-scroller">
-  <app-navbar (eventEmitter)="receiveCurrentUser($event)"></app-navbar>
-  <div class="container-fluid page-body-wrapper" style="padding-top: 63px;">
+  <app-navbar [currentUser]="currentUser"></app-navbar>
+  <div class="container-fluid page-body-wrapper" style="padding-top: 63px;padding-left: 0px">
     <app-sidebar></app-sidebar>
     <div class="main-panel">
-      <router-outlet></router-outlet>
-      <!--<app-footer></app-footer>-->
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+      <app-footer></app-footer>
     </div>
   </div>
 </div>

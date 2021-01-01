@@ -12,23 +12,28 @@ import { NavbarComponent } from './partials/navbar/navbar.component';
 import { SidebarComponent } from './partials/sidebar/sidebar.component';
 import { FooterComponent } from './partials/footer/footer.component';
 import {MainComponent} from './main.component';
+import {TranslocoModule} from '@ngneat/transloco';
+import { DeleteModalComponent } from './modal/delete-modal/delete-modal.component';
 
 @NgModule({
-  declarations: [
-    MainComponent,
-    StudentComponent,
-    UserProfileComponent,
-    UserComponent,
-    ClassSubjectComponent,
-    DashboardComponent,
-    SubjectComponent,
-    NavbarComponent,
-    SidebarComponent,
-    FooterComponent
-  ],
-  imports: [
-    CommonModule,
-    MainRoutingModule
-  ]
+    declarations: [
+      MainComponent,
+      StudentComponent,
+      UserProfileComponent,
+      UserComponent,
+      ClassSubjectComponent,
+      DashboardComponent,
+      SubjectComponent,
+      NavbarComponent,
+      SidebarComponent,
+      FooterComponent,
+      DeleteModalComponent
+    ],
+    exports: [],
+    imports: [
+      CommonModule,
+      MainRoutingModule,
+      TranslocoModule,
+    ]
 })
 export class MainModule { }
