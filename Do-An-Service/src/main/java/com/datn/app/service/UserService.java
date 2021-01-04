@@ -1,14 +1,11 @@
 package com.datn.app.service;
 
 import com.datn.app.constant.ConstantData;
-import com.datn.app.dao.idao.CodeResetPasswordDao;
-import com.datn.app.dao.idao.UserDao;
-import com.datn.app.dao.idao.UserInforDao;
+import com.datn.app.dao.idao.*;
 import com.datn.app.dto.FormChangePassword;
+import com.datn.app.dto.MessageResponse;
 import com.datn.app.dto.UserDto;
-import com.datn.app.entity.CodeResetPassword;
-import com.datn.app.entity.User;
-import com.datn.app.entity.UserInfor;
+import com.datn.app.entity.*;
 import com.datn.app.util.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +21,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -37,6 +36,14 @@ public class UserService implements UserDetailsService {
     private SendMailService sendMailService;
     @Autowired
     private CodeResetPasswordDao codeResetPasswordDao;
+    @Autowired
+    private UnitDao unitDao;
+    @Autowired
+    private RoleDao roleDao;
+    @Autowired
+    private NationDao nationDao;
+    @Autowired
+    private DepartmentDao departmentDao;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -63,8 +70,28 @@ public class UserService implements UserDetailsService {
         return null;
     }
 
-    public Page<UserDto> search(Pageable pageable) {
-        Page<UserInfor> userPage = userInforDao.search(pageable);
+    public Page<UserDto> search(Pageable pageable, String code, String name, String username, String unitId) {
+        if (code == null || code.equals("undefined") || code.equals("")) code = "";
+        if (name == null || name.equals("undefined") || name.equals("")) name = "";
+        if (username == null || username.equals("undefined") || username.equals("")) username = "";
+        if (unitId == null || unitId.equals("undefined") || unitId.equals("")) unitId = "0";
+        Page<UserInfor> userPage = userInforDao.search(pageable, code.toLowerCase(), name.toLowerCase(), username.toLowerCase(), Long.parseLong(unitId));
+        if (userPage != null || !userPage.isEmpty()){
+            Page<UserDto> dtoPage = userPage.map(userInfor -> {
+                UserDto dto = new UserDto();
+                return convertUserDto(dto, userInfor);
+            });
+            return dtoPage;
+        }
+        return null;
+    }
+
+    public Page<UserDto> searchTeacher(Pageable pageable, String code, String name, String departmentId, String unitId) {
+        if (code == null || code.equals("undefined") || code.equals("")) code = "";
+        if (name == null || name.equals("undefined") || name.equals("")) name = "";
+        if (departmentId == null || departmentId.equals("undefined") || departmentId.equals("")) departmentId = "0";
+        if (unitId == null || unitId.equals("undefined") || unitId.equals("")) unitId = "0";
+        Page<UserInfor> userPage = userInforDao.searchTeacher(pageable, code.toLowerCase(), name.toLowerCase(), Long.parseLong(departmentId), Long.parseLong(unitId));
         if (userPage != null || !userPage.isEmpty()){
             Page<UserDto> dtoPage = userPage.map(userInfor -> {
                 UserDto dto = new UserDto();
@@ -76,14 +103,16 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDto save(UserDto dto) {
-        User user = new User();
-        UserInfor userInfor;
+    public UserDto saveOrUpdate(UserDto dto) {
         if (dto != null){
-            if (dto.getId() == 0L){
+            User user = new User();
+            UserInfor userInfor;
+            if (dto.getId() == null || dto.getId() == 0L){
                 userInfor = dto.convertToEnt();
+                userInfor.setNation(nationDao.findById(232L).orElse(null));
+                user.setCode(AppUtil.generateEmpCode());
                 user.setUsername(dto.getUsername());
-                user.setPassword(dto.getPassword());
+                user.setPassword(passwordEncoder.encode(dto.getPassword()));
             }else {
                 userInfor = userInforDao.findById(dto.getId()).orElse(null);
                 if (userInfor != null){
@@ -92,26 +121,39 @@ public class UserService implements UserDetailsService {
                     userInfor.setAddress(dto.getAddress());
                     userInfor.setDob(dto.getDob());
                     userInfor.setEmail(dto.getEmail());
-                    userInfor.setNumberPhone(dto.getNumberPhone());
                     userInfor.setGender(dto.getGender());
                     user = userInfor.getUser();
                     if (!passwordEncoder.matches(dto.getPassword(), user.getPassword()))
                         user.setPassword(passwordEncoder.encode(dto.getPassword()));
                 }
             }
-            if (dto.getRoleId() != 0L) userInfor.setRole(null);
-            if (dto.getUnitId() != 0L) userInfor.setUnit(null);
+            userInfor.setNumberPhone(dto.getNumberPhone());
+            if (dto.getRoleId() != null || dto.getRoleId() != 0L)
+                userInfor.setRole(roleDao.findById(dto.getRoleId()).orElse(null));
+            if (dto.getUnitId() != null || dto.getUnitId() != 0L)
+                userInfor.setUnit(unitDao.findById(dto.getUnitId()).orElse(null));
 
             user = userDao.saveEntity(user);
             userInfor.setUser(user);
+            userInfor.setCode(user.getCode());
             userInfor = userInforDao.saveEntity(userInfor);
             return convertUserDto(dto, userInfor);
         }
         return null;
     }
 
-    public String deleteById(Long id) {
-        return null;
+    @Transactional
+    public MessageResponse deleteById(Long id) {
+        MessageResponse messageResponse;
+        User user = userDao.findById(id).orElse(null);
+        if (user == null){
+            messageResponse = new MessageResponse(400, "error.fail");
+        }else {
+            userInforDao.deleteByUser_Id(id);
+            userDao.deleteById(id);
+            messageResponse = new MessageResponse(200, "success.delete");
+        }
+        return messageResponse;
     }
 
     @Transactional
@@ -185,5 +227,36 @@ public class UserService implements UserDetailsService {
         dto.setAccountNonLocked(userInfor.getUser().isAccountNonLocked());
         dto.setGenderString(ConstantData.Gender.getGenderNameByCode(userInfor.getGender()));
         return dto;
+    }
+
+    public List<UserDto> findAllTeacherByDepartment(Long departmentId) {
+        Department department = departmentDao.findById(departmentId).orElse(null);
+        if (department != null){
+            List<UserInfor> userInforList = userInforDao.findAllTeacherByDepartment(departmentId);
+            if(userInforList != null || !userInforList.isEmpty()){
+                List<UserDto> userDtoList = userInforList.stream()
+                        .map(ent -> {
+                            UserDto dto = new UserDto();
+                            return convertUserDto(dto, ent);
+                        }).collect(Collectors.toList());
+                return userDtoList;
+            }
+            return null;
+        }
+        return null;
+    }
+
+    public List<UserDto> findAllTeacher() {
+        List<UserInfor> userInforList = userInforDao.findAllByRole_Id(6L);
+
+        if(userInforList != null || !userInforList.isEmpty()){
+            List<UserDto> userDtoList = userInforList.stream()
+                    .map(ent -> {
+                        UserDto dto = new UserDto();
+                        return convertUserDto(dto, ent);
+                    }).collect(Collectors.toList());
+            return userDtoList;
+        }
+        return null;
     }
 }

@@ -39,8 +39,8 @@ public class StudentService {
         if (code == null || code.equals("undefined") || code.equals("")) code = "";
         if (name == null || name.equals("undefined") || name.equals("")) name = "";
         if (courseId == null || courseId.equals("undefined") || courseId.equals("")) courseId = "0";
-        if (unitId == null || unitId.equals("undefined") || courseId.equals("")) unitId = "0";
-        Page<Students> studentsPage = studentDao.search(pageable, code, name.toLowerCase(), Long.parseLong(courseId), Long.parseLong(unitId));
+        if (unitId == null || unitId.equals("undefined") || unitId.equals("")) unitId = "0";
+        Page<Students> studentsPage = studentDao.search(pageable, code.toLowerCase(), name.toLowerCase(), Long.parseLong(courseId), Long.parseLong(unitId));
         if (studentsPage != null && !studentsPage.isEmpty()){
             Page<StudentsDto> dtoPage = studentsPage.map(ent -> {
                 StudentsDto dto = new StudentsDto();

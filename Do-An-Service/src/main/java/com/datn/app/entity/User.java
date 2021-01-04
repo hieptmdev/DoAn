@@ -1,6 +1,5 @@
 package com.datn.app.entity;
 
-import com.datn.app.dto.BaseDto;
 import com.datn.app.dto.UserDto;
 import com.datn.app.util.AppUtil;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,11 +18,11 @@ public class User extends BaseEnt implements UserDetails {
     @Column(nullable = false)
     private String password;
     @Column(columnDefinition = "boolean default true")
-    private boolean accountNonExpired;
+    private boolean accountNonExpired = true;
     @Column(columnDefinition = "boolean default true")
-    private boolean accountNonLocked;
+    private boolean accountNonLocked = true;
     @Column(columnDefinition = "boolean default true")
-    private boolean enabled;
+    private boolean enabled = true;
 
     public User() { }
 

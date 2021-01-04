@@ -4,7 +4,6 @@ import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../../service/user.service';
 import {User} from '../../../../model/user';
-import {AppUtil} from '../../../../config/app-util';
 
 @Component({
   selector: 'app-user-index',
@@ -33,11 +32,11 @@ export class UserIndexComponent implements OnInit {
 
   search($event: any): void {
     this.dataSearch = $event;
-    this.userService.search(this.dataSearch, this.page, this.pageSize)
+    this.userService.search(this.dataSearch, this.page - 1, this.pageSize)
       .subscribe(data => {
         this.users = data.body.content;
         this.collectionSize = data.body.totalElements;
-      }, error => AppUtil.errorHandle(error));
+      }, error => this.errorHandle(error));
   }
 
   openModal(modal: TemplateRef<any>, user: User): void {
@@ -48,7 +47,20 @@ export class UserIndexComponent implements OnInit {
     this.actionData = user;
   }
 
-  deleteById(): void {}
+  deleteById(): void {
+    this.userService.deleteById(this.actionData.id)
+      .subscribe(data => {
+        if (data.body.code === 400) {
+          this.toastr.error('Có lỗi xảy ra! Xóa thất bạ!', 'Notification', {timeOut: 3000});
+        }
+        if (data.body.code === 200) {
+          this.toastr.success('Thực hiện xóa thành công', 'Notification', {timeOut: 3000});
+          this.search(this.dataSearch);
+        }
+        this.actionData = null;
+        this.modalService.dismissAll();
+      }, error => this.errorHandle(error));
+  }
 
   openLock(): void {
     this.userService.openLock(this.actionData.id)
@@ -62,7 +74,7 @@ export class UserIndexComponent implements OnInit {
         }
         this.actionData = null;
         this.modalService.dismissAll();
-    }, error => AppUtil.errorHandle(error));
+    }, error => this.errorHandle(error));
   }
 
   lock(): void{
@@ -77,6 +89,16 @@ export class UserIndexComponent implements OnInit {
         }
         this.actionData = null;
         this.modalService.dismissAll();
-      }, error => AppUtil.errorHandle(error));
+      }, error => this.errorHandle(error));
+  }
+
+  public errorHandle(error): void{
+    if (error.status === 401){
+      this.router.navigate(['login']).then(null);
+    }else if (error.status === 500){
+      this.router.navigate(['error/500']).then(null);
+    } else {
+      this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
+    }
   }
 }

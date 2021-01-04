@@ -41,7 +41,7 @@ export class StudentIndexComponent implements OnInit {
         this.students = data.body.content;
         this.collectionSize = data.body.totalElements;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -58,7 +58,7 @@ export class StudentIndexComponent implements OnInit {
         this.deleteData = null;
         this.modalService.dismissAll();
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
         this.deleteData = null;
         this.modalService.dismissAll();
       });
@@ -78,5 +78,15 @@ export class StudentIndexComponent implements OnInit {
 
   score(student: Student): void {
     this.router.navigate([`detail/${student.code}/score`], {relativeTo: this.route}).then(null);
+  }
+
+  public errorHandle(error): void{
+    if (error.status === 401){
+      this.router.navigate(['login']).then(null);
+    }else if (error.status === 500){
+      this.router.navigate(['error/500']).then(null);
+    } else {
+      this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
+    }
   }
 }

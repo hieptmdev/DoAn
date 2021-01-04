@@ -1,6 +1,8 @@
 package com.datn.app.entity;
 
 import com.datn.app.dto.BaseDto;
+import com.datn.app.dto.ClassDto;
+import com.datn.app.util.AppUtil;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -25,8 +27,8 @@ public class Class extends BaseEnt {
     public Class() { }
 
     @Override
-    public BaseDto convertToDto() {
-        return null;
+    public ClassDto convertToDto() {
+        return AppUtil.mapToDtoAndEnt(this, ClassDto.class);
     }
 
     public String getName() {
@@ -83,5 +85,13 @@ public class Class extends BaseEnt {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

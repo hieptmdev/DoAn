@@ -3,7 +3,6 @@ import {Student} from '../../../../model/student';
 import {StudentService} from '../../../../service/student.service';
 import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AppUtil} from '../../../../config/app-util';
 
 @Component({
   selector: 'app-student-score',
@@ -15,7 +14,6 @@ export class StudentScoreComponent implements OnInit {
   studentScore: any;
 
   studentCode: any;
-  urlBack: any;
 
   collectionSize: any;
   page = 1;
@@ -43,7 +41,7 @@ export class StudentScoreComponent implements OnInit {
       .subscribe(data => {
         this.student = data.body;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -53,7 +51,7 @@ export class StudentScoreComponent implements OnInit {
         this.studentScore = data.body;
         this.collectionSize = this.studentScore.length;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -63,5 +61,15 @@ export class StudentScoreComponent implements OnInit {
 
   studentInfo(): void {
     this.router.navigate([`home/students/detail/${this.studentCode}`]).then(null);
+  }
+
+  public errorHandle(error): void{
+    if (error.status === 401){
+      this.router.navigate(['login']).then(null);
+    }else if (error.status === 500){
+      this.router.navigate(['error/500']).then(null);
+    } else {
+      this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
+    }
   }
 }

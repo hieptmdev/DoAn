@@ -28,11 +28,11 @@ public class StudentDaoImpl extends BaseDao<Students> implements CrudStudentDao 
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT st FROM Students st WHERE 1=1");
         if (code != null && !code.equals("")){
-            sql.append(" AND lower(st.code) like concat('%',:code,'%')");
+            sql.append(" AND LOWER(st.code) LIKE CONCAT('%',:code,'%')");
             params.put("code", code);
         }
         if (name != null && !name.equals("")) {
-            sql.append(" AND LOWER(st.fullName) like concat('%',:name,'%')");
+            sql.append(" AND LOWER(st.fullName) LIKE CONCAT('%',:name,'%')");
             params.put("name", name);
         }
         if (courseId != null && courseId != 0) {

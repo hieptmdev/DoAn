@@ -69,4 +69,24 @@ public class ConstantData {
                     .findFirst().orElse(null).name;
         }
     }
+
+    public enum ClassSubjectStatus{
+        PREPARE(0, "Chuẩn bị"),
+        STUDYING(1, "Đang học"),
+        FINISHED(2, "Kết thúc");
+
+        int code;
+        String name;
+
+        ClassSubjectStatus(int code, String name) {
+            this.code = code;
+            this.name = name;
+        }
+
+        public static String getStatusNameByCode(int code){
+            return Arrays.stream(ClassSubjectStatus.values())
+                    .filter(cs -> cs.code == code)
+                    .findFirst().orElse(null).name;
+        }
+    }
 }

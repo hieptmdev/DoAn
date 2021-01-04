@@ -36,6 +36,8 @@ public class UserInfor extends BaseEnt {
     private District district; //quận/thành phố/huyện
     @ManyToOne
     private Ward ward; //phường/xã
+    @ManyToOne
+    private Department department;
 
     public UserInfor() { }
 
@@ -178,5 +180,13 @@ public class UserInfor extends BaseEnt {
 
     public void setWard(Ward ward) {
         this.ward = ward;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

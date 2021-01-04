@@ -5,5 +5,9 @@ export const API: any = {
   student: '/api/student',
   course: '/api/course',
   unit: '/api/unit',
-  place: '/api/place'
+  place: '/api/place',
+  role: '/api/role',
+  subject: '/api/subject',
+  department: '/api/department',
+  classSubject: '/api/class-subject'
 };

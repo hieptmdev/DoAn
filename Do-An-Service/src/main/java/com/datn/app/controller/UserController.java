@@ -24,18 +24,13 @@ public class UserController{
     private UserService userService;
 
     @PostMapping("")
-    public ResponseEntity<UserDto> save(@RequestBody UserDto dto){
-        return new ResponseEntity<>(userService.save(dto), HttpStatus.OK);
+    public ResponseEntity<UserDto> saveOrUpdate(@RequestBody UserDto dto, HttpServletRequest request){
+        return new ResponseEntity<>(userService.saveOrUpdate(dto), HttpStatus.OK);
     }
 
-    @PutMapping("")
-    public ResponseEntity<UserDto> update(@RequestBody UserDto dto){
-        return new ResponseEntity<>(userService.save(dto), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/id/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Long id){
-        return new ResponseEntity<>(userService.deleteById(id), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<MessageResponse> deleteById(@PathVariable Long id, HttpServletRequest request){
+        return new ResponseEntity(userService.deleteById(id), HttpStatus.OK);
     }
 
     @GetMapping("/search")
@@ -46,7 +41,18 @@ public class UserController{
                                                 @RequestParam(required = false) String username,
                                                 @RequestParam(value = "unit", required = false) String unitId){
         Pageable pageable = AppUtil.getPageable(page, limit);
-        return new ResponseEntity(userService.search(pageable), HttpStatus.OK);
+        return new ResponseEntity(userService.search(pageable, code, name, username, unitId), HttpStatus.OK);
+    }
+
+    @GetMapping("/search-teacher")
+    public ResponseEntity<Page<UserDto>> searchTeacher(@RequestParam(required = false) String page,
+                                                @RequestParam(required = false) String limit,
+                                                @RequestParam(required = false) String code,
+                                                @RequestParam(required = false) String name,
+                                                @RequestParam(value = "department", required = false) String departmentId,
+                                                @RequestParam(value = "unit", required = false) String unitId){
+        Pageable pageable = AppUtil.getPageable(page, limit);
+        return new ResponseEntity(userService.searchTeacher(pageable, code, name, departmentId, unitId), HttpStatus.OK);
     }
 
     @GetMapping("/{username}")
@@ -106,5 +112,27 @@ public class UserController{
         if (check) message = new MessageResponse(HttpStatus.OK.value(), "User opened!");
         else message = new MessageResponse(HttpStatus.BAD_REQUEST.value(), "User open fail!");
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @GetMapping("/check-permission-sys")
+    public ResponseEntity checkPermissionSys(HttpServletRequest request){
+        UserDto dto = userService.findByUsername(request.getUserPrincipal().getName());
+        if (dto == null){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        if (!dto.getRoleCode().equals("SYSADMIN")){
+            return new ResponseEntity(HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/all-teacher-by-department/{departmentId}")
+    public ResponseEntity findAllTeacherByDepartment(@PathVariable Long departmentId){
+        return new ResponseEntity(userService.findAllTeacherByDepartment(departmentId), HttpStatus.OK);
+    }
+
+    @GetMapping("/teachers")
+    public ResponseEntity findAllTeacher(HttpServletRequest request){
+        return new ResponseEntity(userService.findAllTeacher(), HttpStatus.OK);
     }
 }

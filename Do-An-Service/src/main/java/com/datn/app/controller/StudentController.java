@@ -27,8 +27,8 @@ public class StudentController {
                                                 @RequestParam(required = false) String limit,
                                                 @RequestParam(required = false) String code,
                                                 @RequestParam(required = false) String name,
-                                                @RequestParam(name = "course", required = false) String courseId,
-                                                @RequestParam(name = "unit", required = false) String unitId){
+                                                @RequestParam(value = "course", required = false) String courseId,
+                                                @RequestParam(value = "unit", required = false) String unitId){
         Pageable pageable = AppUtil.getPageable(page, limit);
         return new ResponseEntity(studentService.search(pageable, code, name, courseId, unitId), HttpStatus.OK);
     }

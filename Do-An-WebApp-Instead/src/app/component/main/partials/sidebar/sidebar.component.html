@@ -33,7 +33,7 @@
       <div class="collapse" *ngIf="ctg.haveChildren" [id]="'sub'+ctg.id">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item" *ngFor="let ctgSub of categoryChild">
-            <a class="nav-link" href="{{ctgSub.url}}">{{ctgSub.code|transloco}}</a>
+            <a class="nav-link" href="#" routerLink="{{ctgSub.url}}">{{ctgSub.code|transloco}}</a>
           </li>
         </ul>
       </div>

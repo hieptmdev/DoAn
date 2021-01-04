@@ -1,6 +1,7 @@
 package com.datn.app.entity;
 
-import com.datn.app.dto.BaseDto;
+import com.datn.app.dto.SubjectsDto;
+import com.datn.app.util.AppUtil;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -17,8 +18,8 @@ public class Subjects extends BaseEnt{
     public Subjects() { }
 
     @Override
-    public BaseDto convertToDto() {
-        return null;
+    public SubjectsDto convertToDto() {
+        return AppUtil.mapToDtoAndEnt(this, SubjectsDto.class);
     }
 
     public String getName() {

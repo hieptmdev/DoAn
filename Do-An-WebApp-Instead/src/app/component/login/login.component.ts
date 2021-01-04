@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: LoginForm;
   keepLogin: boolean;
+  errMsg: any;
 
   constructor(private router: Router,
               private authService: AuthService,
@@ -30,15 +31,17 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService.login(this.loginForm).subscribe(
       data => {
+        this.errMsg = null;
         this.storageService.saveToken(data);
         if (this.keepLogin === true) {
           this.storageService.rememberLoginInfo(this.loginForm);
         }
-        this.router.navigate(['home']).then(null)
-      },
-      error => console.log(error)
-    );
-    /*this.storageService.rememberLoginInfo(this.loginForm);
-    this.router.navigate(['home']).then(null);*/
+        this.router.navigate(['home']).then(null);
+      }, error => {
+        if (error.status === 500){
+          this.router.navigate(['error/500']).then(null);
+        }
+        this.errMsg = error.error.error_description;
+      });
   }
 }

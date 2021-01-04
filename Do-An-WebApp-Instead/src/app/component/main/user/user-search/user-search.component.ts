@@ -4,6 +4,7 @@ import {UnitService} from '../../../../service/unit.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {AppUtil} from '../../../../config/app-util';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-search',
@@ -18,7 +19,8 @@ export class UserSearchComponent implements OnInit {
   constructor(private userService: UserService,
               private untService: UnitService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.importUnit();
@@ -33,9 +35,19 @@ export class UserSearchComponent implements OnInit {
   }
 
   importUnit(): void{
-    this.untService.findAllUnit()
+    this.untService.findAllUnitForUser()
       .subscribe(data => {
         this.units = data.body;
-      }, error => AppUtil.errorHandle(error));
+      }, error => this.errorHandle(error));
+  }
+
+  public errorHandle(error): void{
+    if (error.status === 401){
+      this.router.navigate(['login']).then(null);
+    }else if (error.status === 500){
+      this.router.navigate(['error/500']).then(null);
+    } else {
+      this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
+    }
   }
 }

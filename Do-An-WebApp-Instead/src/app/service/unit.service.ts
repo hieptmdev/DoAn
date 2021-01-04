@@ -17,4 +17,9 @@ export class UnitService extends BaseService{
     return this.http.get(`${this.url}/all-for-student`, {observe: 'response'})
       .pipe(catchError(err => throwError(err)));
   }
+
+  public findAllUnitForUser(): Observable<any>{
+    return this.http.get(`${this.url}`, {observe: 'response'})
+      .pipe(catchError(err => throwError(err)));
+  }
 }

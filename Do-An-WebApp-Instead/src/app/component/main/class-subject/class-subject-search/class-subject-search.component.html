@@ -1,1 +1,80 @@
-<p>class-subject-search works!</p>
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-sample" #formSearchCS="ngForm" autocomplete="off">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'table.class.code'|transloco}}</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="csCode" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'table.class.name'|transloco}}</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="csName" ngModel/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.department'|transloco}}</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="csDepartment" ngModel data-size="10">
+                    <option>{{'label.choose.department'|transloco}}</option>
+                    <option *ngFor="let d of departments" [value]="d.id">{{d.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.emp.unit'|transloco}}</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="csUnit" ngModel data-size="10">
+                    <option>{{'label.choose.org'|transloco}}</option>
+                    <option *ngFor="let u of units" [value]="u.id">{{u.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.subject'|transloco}}</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="csSubject" ngModel data-size="10">
+                    <option>{{'label.choose.subject'|transloco}}</option>
+                    <option *ngFor="let s of subjects" [value]="s.id">{{s.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.form.course'|transloco}}</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="csCourse" ngModel data-size="10">
+                    <option>{{'label.choose.course'|transloco}}</option>
+                    <option *ngFor="let c of courses" [value]="c.id">{{c.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: center;">
+            <button class="btn btn-sm btn-primary" (click)="search(formSearchCS)">{{'button.search'|transloco}}</button>
+            <button class="btn btn-sm btn-success" style="margin-left: 5px;" (click)="addCS()">{{'button.add'|transloco}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

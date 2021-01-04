@@ -1,35 +1,41 @@
 package com.datn.app.dto;
 
-import com.datn.app.entity.BaseEnt;
+import com.datn.app.entity.ClassDetail;
+import com.datn.app.util.AppUtil;
+
+import java.util.Date;
 
 public class ClassDetailDto extends BaseDto{
-    private Long studentId;
-    private String studentCode;
+    private Long studentsId;
+    private String studentsCode;
+    private String studentsFullName;
+    private Date StudentsDob;
     private Long classSubjectId;
     private Double scoreProcess;
     private Double scoreExam;
+    private Double finalScore;
 
     public ClassDetailDto() { }
 
     @Override
-    public BaseEnt convertToEnt() {
-        return null;
+    public ClassDetail convertToEnt() {
+        return AppUtil.mapToDtoAndEnt(this, ClassDetail.class);
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public Long getStudentsId() {
+        return studentsId;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setStudentsId(Long studentsId) {
+        this.studentsId = studentsId;
     }
 
-    public String getStudentCode() {
-        return studentCode;
+    public String getStudentsCode() {
+        return studentsCode;
     }
 
-    public void setStudentCode(String studentCode) {
-        this.studentCode = studentCode;
+    public void setStudentsCode(String studentsCode) {
+        this.studentsCode = studentsCode;
     }
 
     public Long getClassSubjectId() {
@@ -54,5 +60,29 @@ public class ClassDetailDto extends BaseDto{
 
     public void setScoreExam(Double scoreExam) {
         this.scoreExam = scoreExam;
+    }
+
+    public String getStudentsFullName() {
+        return studentsFullName;
+    }
+
+    public void setStudentsFullName(String studentsFullName) {
+        this.studentsFullName = studentsFullName;
+    }
+
+    public Date getStudentsDob() {
+        return StudentsDob;
+    }
+
+    public void setStudentsDob(Date studentsDob) {
+        StudentsDob = studentsDob;
+    }
+
+    public Double getFinalScore() {
+        return finalScore;
+    }
+
+    public void setFinalScore(Double finalScore) {
+        this.finalScore = finalScore;
     }
 }

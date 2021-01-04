@@ -26,7 +26,7 @@ public class UnitDaoImpl extends BaseDao<Unit> implements CrudUnitDao {
     public List<Unit> findAllForStudent(Long unitId) {
         Query query;
         StringBuilder sql = new StringBuilder();
-        sql.append("select u from Unit u where 1=1 and u.id not in (1, 2, 3, 8) ");
+        sql.append("select u from Unit u where 1=1 and u.id not in (1, 2, 8) ");
         if (unitId != 1 && unitId != 2 && unitId != 3 && unitId != 8){
             sql.append("and u.id=:unitId ");
             sql.append("order by u.name");

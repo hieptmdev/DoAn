@@ -1,12 +1,11 @@
 package com.datn.app.entity;
 
-import com.datn.app.dto.BaseDto;
+import com.datn.app.dto.RoleDto;
+import com.datn.app.util.AppUtil;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table
@@ -18,8 +17,8 @@ public class Role extends BaseEnt {
     public Role() { }
 
     @Override
-    public BaseDto convertToDto() {
-        return null;
+    public RoleDto convertToDto() {
+        return AppUtil.mapToDtoAndEnt(this, RoleDto.class);
     }
 
     public String getName() {

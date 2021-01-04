@@ -6,6 +6,7 @@ import {UnitService} from '../../../../service/unit.service';
 import {Course} from '../../../../model/course';
 import {Unit} from '../../../../model/unit';
 import {AppUtil} from '../../../../config/app-util';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-student-search',
@@ -23,7 +24,8 @@ export class StudentSearchComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private courseService: CourseService,
-              private unitService: UnitService) { }
+              private unitService: UnitService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.importUnit();
@@ -43,7 +45,7 @@ export class StudentSearchComponent implements OnInit {
       .subscribe(data => {
         this.courses = data.body;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -52,7 +54,17 @@ export class StudentSearchComponent implements OnInit {
       .subscribe(data => {
         this.units = data.body;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
+  }
+
+  public errorHandle(error): void{
+    if (error.status === 401){
+      this.router.navigate(['login']).then(null);
+    }else if (error.status === 500){
+      this.router.navigate(['error/500']).then(null);
+    } else {
+      this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
+    }
   }
 }

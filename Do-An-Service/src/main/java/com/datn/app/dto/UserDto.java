@@ -37,6 +37,9 @@ public class UserDto extends BaseDto{
     private String districtName;
     private Long wardId;
     private String wardName;
+    private String roleCode;
+    private Long departmentId;
+    private String departmentName;
 
     private boolean accountNonLocked;
 
@@ -269,5 +272,29 @@ public class UserDto extends BaseDto{
 
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }

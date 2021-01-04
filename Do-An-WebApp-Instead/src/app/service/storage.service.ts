@@ -24,8 +24,8 @@ export class StorageService {
   public saveToken(data: any): void {
     localStorage.setItem(environment.config.prefix.storage.access_token, data.body.access_token);
     localStorage.setItem(environment.config.prefix.storage.refresh_token, data.body.refresh_token);
-    localStorage.setItem(environment.config.prefix.storage.expires_in, data.body.expires_in);
-    localStorage.setItem(environment.config.prefix.storage.jti, data.body.jti);
+    // localStorage.setItem(environment.config.prefix.storage.expires_in, data.body.expires_in);
+    // localStorage.setItem(environment.config.prefix.storage.jti, data.body.jti);
   }
 
   public getAccessToken(): string {

@@ -19,10 +19,10 @@ export class UserService extends BaseService{
       params = new HttpParams()
         .set('page', page.toString())
         .set('limit', limit.toString())
-        .set('empCode', data.studentCode.toString())
-        .set('empName', data.studentName.toString())
-        .set('username', data.studentCourse.toString())
-        .set('empUnit', data.studentUnit.toString());
+        .set('code', data.empCode.toString())
+        .set('name', data.empName.toString())
+        .set('username', data.username.toString())
+        .set('unit', data.empUnit.toString());
     }else {
       params = new HttpParams()
         .set('page', page.toString())
@@ -54,6 +54,31 @@ export class UserService extends BaseService{
 
   openLock(id): Observable<any> {
     return this.http.put(`${this.url}/open-lock/${id}`, null, {observe: 'response'})
+      .pipe(catchError(err => throwError(err)));
+  }
+
+  saveOrUpdate(user): Observable<any>{
+    return this.http.post(`${this.url}`, user, {observe: 'response'})
+      .pipe(catchError(err => throwError(err)));
+  }
+
+  deleteById(id): Observable<any> {
+    return this.http.delete(`${this.url}/${id}`, {observe: 'response'})
+      .pipe(catchError(err => throwError(err)));
+  }
+
+  checkPermissionSys(): Observable<any>{
+    return this.http.get(`${this.url}/check-permission-sys`, {observe: 'response'})
+      .pipe(catchError(err => throwError(err)));
+  }
+
+  findAllTeacherByDepartment(departmentId: any): Observable<any> {
+    return this.http.get(`${this.url}/all-teacher-by-department/${departmentId}`, {observe: 'response'})
+      .pipe(catchError(err => throwError(err)));
+  }
+
+  findAllTeacher(): Observable<any>{
+    return this.http.get(`${this.url}/teachers`, {observe: 'response'})
       .pipe(catchError(err => throwError(err)));
   }
 }

@@ -5,6 +5,7 @@ import {UserService} from '../../../../service/user.service';
 import {HttpLoader} from '../../../../transloco.loader';
 import {TranslocoService} from '@ngneat/transloco';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,8 @@ export class NavbarComponent implements OnInit {
               private userService: UserService,
               private httpLoader: HttpLoader,
               private translocoService: TranslocoService,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -45,6 +47,25 @@ export class NavbarComponent implements OnInit {
   }
 
   goToManageUser(): void {
-    this.router.navigate(['home/users']).then(null);
+    this.userService.checkPermissionSys()
+      .subscribe(data => {
+        if (data.status === 404){
+          this.toastr.error('Tài khoản không tòn tại', 'Notification', {timeOut: 3000});
+        }
+        if (data.status === 403){
+          this.toastr.error('Tài khoản không có quyền truy cập', 'Notification', {timeOut: 3000});
+        }
+        if (data.status === 200) {
+          this.router.navigate(['home/users']).then(null);
+        }
+    }, error => {
+        if (error.status === 404){
+          this.toastr.error('Tài khoản không tòn tại', 'Notification', {timeOut: 3000});
+        } else if (error.status === 403){
+          this.toastr.error('Tài khoản không có quyền truy cập', 'Notification', {timeOut: 3000});
+        }else {
+          this.toastr.error('Có lỗi xảy ra', 'Notification', {timeOut: 3000});
+        }
+    });
   }
 }

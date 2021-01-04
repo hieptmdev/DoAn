@@ -28,4 +28,9 @@ public class UnitController {
     public ResponseEntity<List<UnitDto>> findAllForStudent(HttpServletRequest request){
         return new ResponseEntity(unitService.getAllForStudent(request), HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity<List<UnitDto>> findAll(HttpServletRequest request){
+        return new ResponseEntity(unitService.findAll(), HttpStatus.OK);
+    }
 }

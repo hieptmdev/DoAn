@@ -44,6 +44,20 @@ public class AppUtil {
         return sb.toString();
     }
 
+    public static String generateEmpCode(){
+        Random rand = new Random();
+        int code = rand.nextInt(999);
+
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("UTC");
+        sb.append(simpleDateFormat.format(date));
+        sb.append(String.format("%03d",code));
+        return sb.toString();
+    }
+
     public static double convertScore(double score){
         double a = 0;
         if (score < 4)  a = 0;

@@ -20,6 +20,7 @@ import { translocoLoader } from './transloco.loader';
 import { TranslocoModule, TRANSLOCO_CONFIG, TranslocoConfig } from '@ngneat/transloco';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 registerLocaleData(localeVi, 'vi');
 registerLocaleData(localeEn, 'en');
@@ -40,7 +41,8 @@ registerLocaleData(localeEn, 'en');
     MainModule,
     TranslocoModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     {

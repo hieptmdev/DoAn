@@ -57,11 +57,12 @@ export class StudentFormComponent implements OnInit {
   saveOrUpdate(): void{
     this.studentService.saveOrUpdate(this.student)
       .subscribe(data => {
+        this.modalService.dismissAll();
         this.router.navigate(['home/students']).then(() => {
             this.toastr.success('Thực hiện thêm/sửa thành công!', 'Notification', {timeOut: 3000});
           });
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -74,7 +75,7 @@ export class StudentFormComponent implements OnInit {
         this.student.fatherDob = formatDate(this.student.fatherDob, 'yyyy-MM-dd', 'vi');
         this.student.motherDob = formatDate(this.student.motherDob, 'yyyy-MM-dd', 'vi');
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -93,7 +94,7 @@ export class StudentFormComponent implements OnInit {
       .subscribe(data => {
         this.districts = data.body;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -102,7 +103,7 @@ export class StudentFormComponent implements OnInit {
       .subscribe(data => {
         this.districtsLicense = data.body;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -111,7 +112,7 @@ export class StudentFormComponent implements OnInit {
       .subscribe(data => {
         this.wards = data.body;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -131,7 +132,7 @@ export class StudentFormComponent implements OnInit {
       .subscribe(data => {
         this.courses = data.body;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -140,7 +141,7 @@ export class StudentFormComponent implements OnInit {
       .subscribe(data => {
         this.units = data.body;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
   }
 
@@ -149,7 +150,7 @@ export class StudentFormComponent implements OnInit {
       .subscribe(data => {
         this.nations = data.body;
       }, error => {
-        AppUtil.errorHandle(error);
+        this.errorHandle(error);
       });
 
     this.placeService.findAllProvince()
@@ -157,7 +158,7 @@ export class StudentFormComponent implements OnInit {
         this.provinces = data.body;
         this.provincesLicense = data.body;
       }, error => {
-        this.toastr.error('Có lỗi xay ra!', 'Notification', {timeOut: 3000});
+        this.errorHandle(error);
       });
 
     this.placeService.findAllDistrict()
@@ -165,14 +166,14 @@ export class StudentFormComponent implements OnInit {
         this.districts = data.body;
         this.districtsLicense = data.body;
       }, error => {
-        this.toastr.error('Có lỗi xay ra!', 'Notification', {timeOut: 3000});
+        this.errorHandle(error);
       });
 
     this.placeService.findAllWard()
       .subscribe(data => {
         this.wards = data.body;
       }, error => {
-        this.toastr.error('Có lỗi xay ra!', 'Notification', {timeOut: 3000});
+        this.errorHandle(error);
       });
   }
 
@@ -185,5 +186,15 @@ export class StudentFormComponent implements OnInit {
       centered: true,
       backdrop: 'static'
     });
+  }
+
+  public errorHandle(error): void{
+    if (error.status === 401){
+      this.router.navigate(['login']).then(null);
+    }else if (error.status === 500){
+      this.router.navigate(['error/500']).then(null);
+    } else {
+      this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
+    }
   }
 }

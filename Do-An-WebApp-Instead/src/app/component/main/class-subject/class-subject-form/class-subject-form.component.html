@@ -1,1 +1,220 @@
-<p>class-subject-form works!</p>
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <form class="form-sample">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'table.class.code'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="code"
+                           [disabled]="true" [(ngModel)]="classSubject.code"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'table.class.name'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="name"
+                           [(ngModel)]="classSubject.name" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="isSaveOrUpdate||!classSubjectCode">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.form.unit'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="unit" data-size="10"
+                            [(ngModel)]="selectedUnit" (ngModelChange)="unitChange()">
+                      <option>{{'label.choose.unit'|transloco}}</option>
+                      <option *ngFor="let unit of units" [value]="unit.id">{{unit.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.department'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="department" data-size="10" [disabled]="!selectedUnit"
+                            [(ngModel)]="selectedDepartment" (ngModelChange)="departmentChange()">
+                      <option>{{'label.choose.department'|transloco}}</option>
+                      <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.subject'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="subject" data-size="10"
+                            [(ngModel)]="classSubject.subjectsId" [disabled]="!(isSaveOrUpdate&&selectedDepartment)">
+                      <option [value]="0">{{'label.choose.subject'|transloco}}</option>
+                      <option *ngFor="let s of subjects" [value]="s.id">{{s.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">
+                    {{'label.form.course'|transloco}} <span style="color: red;">(*)</span>
+                  </label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="course" data-size="10"
+                            [(ngModel)]="classSubject.courseId" [disabled]="!isSaveOrUpdate">
+                      <option [value]="0">{{'label.choose.course'|transloco}}</option>
+                      <option *ngFor="let c of courses" [value]="c.id">{{c.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'table.date.begin'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="date" name="dateBegin" [(ngModel)]="classSubject.startDate" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'table.date.end'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="date" name="dateEnd" [(ngModel)]="classSubject.endDate" [disabled]="!isSaveOrUpdate"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'table.class.teach'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="teacher" data-size="10"
+                            [disabled]="!(isSaveOrUpdate&&selectedDepartment)" [(ngModel)]="classSubject.userId">
+                      <option>{{'label.choose.teacher'|transloco}}</option>
+                      <option *ngFor="let t of teachers" [value]="t.id">{{t.firstName + ' ' + t.lastName}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label font-label">{{'label.status'|transloco}}</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="status" data-size="10"
+                            [disabled]="!isSaveOrUpdate" [(ngModel)]="classSubject.status">
+                      <option [value]="0">{{'label.status.prepare'|transloco}}</option>
+                      <option [value]="1">{{'label.status.studying'|transloco}}</option>
+                      <option [value]="2">{{'label.status.finish'|transloco}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="text-align: center">
+    <div class="col-12">
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="isSaveOrUpdate&&!classSubjectCode" (click)="openModalSave(saveModal)">{{'button.save'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="!isSaveOrUpdate&&classSubjectCode" (click)="isSaveOrUpdate=!isSaveOrUpdate">{{'button.update'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="isSaveOrUpdate&&classSubjectCode" (click)="openModalSave(saveModal)">{{'button.edit'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="isSaveOrUpdate&&classSubjectCode" (click)="cancel()">{{'button.cancel'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" (click)="back()">{{'button.back'|transloco}}</button>
+    </div>
+  </div>
+  <!--<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">{{'table.title.student'|transloco}}</h3>
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th style="width: 10px;"></th>
+              <th style="width: 10px;">{{'table.number'|transloco}}</th>
+              <th>{{'table.student.code'|transloco}}</th>
+              <th>{{'table.name'|transloco}}</th>
+              <th>{{'table.dob'|transloco}}</th>
+              <th>{{'table.student.course'|transloco}}</th>
+              <th>{{'table.student.score.point_process'|transloco}}</th>
+              <th>{{'table.student.score.test_score'|transloco}}</th>
+              <th>{{'table.student.score.final_score'|transloco}}</th>
+              <th style="width: 15px;">{{'table.action'|transloco}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let cs of classSubjects, index as i">
+              <td></td>
+              <td>{{i+1}}</td>
+              <td>{{cs.code}}</td>
+              <td>{{cs.name}}</td>
+              <td>{{cs.subjectsCode}}</td>
+              <td>{{cs.courseName}}</td>
+              <td>{{cs.teacherName}}</td>
+              <td>{{cs.startDate|date: 'dd/MM/yyyy'}}</td>
+              <td>{{cs.statusName}}</td>
+              <td ngbDropdown container="body">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-primary dropdown-toggle" type="button" [id]="'ddBtn'+cs.id"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{'button.action'|transloco}}</button>
+                  <div class="dropdown-menu" aria-labelledby="{{'ddBtn'+cs.id}}">
+                    <a class="dropdown-item btn btn-sm">{{'button.detail'|transloco}}</a>
+                    <a class="dropdown-item btn btn-sm" (click)="openModal(deleteModal, cs)" *ngIf="cs.status==2">{{'button.delete'|transloco}}</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div *ngIf="classSubjects==null||classSubjects.length==0">
+            <h6 style="color: red;">{{'error.empty_list_data'|transloco}}</h6>
+          </div>
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="maxSize"
+                          [rotate]="true" [ellipses]="false" [boundaryLinks]="true"
+                          [pageSize]="pageSize"></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>-->
+</div>
+
+
+<ng-template #saveModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{'label.notification'|transloco}}</h4>
+  </div>
+  <div class="modal-body">
+    {{'message.save'|transloco}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-secondary" (click)="modal.dismiss()">{{'button.cancel'|transloco}}</button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="saveOrUpdate()">{{'button.ok'|transloco}}</button>
+  </div>
+</ng-template>

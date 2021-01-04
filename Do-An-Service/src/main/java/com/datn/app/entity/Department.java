@@ -1,6 +1,7 @@
 package com.datn.app.entity;
 
-import com.datn.app.dto.BaseDto;
+import com.datn.app.dto.DepartmentDto;
+import com.datn.app.util.AppUtil;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,8 +21,8 @@ public class Department extends BaseEnt{
     public Department() { }
 
     @Override
-    public BaseDto convertToDto() {
-        return null;
+    public DepartmentDto convertToDto() {
+        return AppUtil.mapToDtoAndEnt(this, DepartmentDto.class);
     }
 
     public String getName() {

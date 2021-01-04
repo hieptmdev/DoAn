@@ -5,6 +5,7 @@ import com.datn.app.dto.UnitDto;
 import com.datn.app.dto.UserDto;
 import com.datn.app.entity.Unit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,15 @@ public class UnitService {
                         .stream().map(Unit::convertToDto).collect(Collectors.toList());
             }
             return null;
+        }
+        return null;
+    }
+
+    public List<UnitDto> findAll() {
+        List<Unit> units = unitDao.findAll();
+        if (units != null){
+            List<UnitDto> unitDtos = units.stream().map(Unit::convertToDto).collect(Collectors.toList());
+            return unitDtos;
         }
         return null;
     }
