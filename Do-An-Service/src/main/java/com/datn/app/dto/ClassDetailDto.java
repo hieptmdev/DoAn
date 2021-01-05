@@ -9,11 +9,12 @@ public class ClassDetailDto extends BaseDto{
     private Long studentsId;
     private String studentsCode;
     private String studentsFullName;
-    private Date StudentsDob;
+    private Date studentsDob;
     private Long classSubjectId;
     private Double scoreProcess;
     private Double scoreExam;
     private Double finalScore;
+    private String studentsCourseName;
 
     public ClassDetailDto() { }
 
@@ -71,11 +72,11 @@ public class ClassDetailDto extends BaseDto{
     }
 
     public Date getStudentsDob() {
-        return StudentsDob;
+        return studentsDob;
     }
 
     public void setStudentsDob(Date studentsDob) {
-        StudentsDob = studentsDob;
+        this.studentsDob = studentsDob;
     }
 
     public Double getFinalScore() {
@@ -84,5 +85,13 @@ public class ClassDetailDto extends BaseDto{
 
     public void setFinalScore(Double finalScore) {
         this.finalScore = finalScore;
+    }
+
+    public String getStudentsCourseName() {
+        return studentsCourseName;
+    }
+
+    public void setStudentsCourseName(String studentsCourseName) {
+        this.studentsCourseName = studentsCourseName;
     }
 }

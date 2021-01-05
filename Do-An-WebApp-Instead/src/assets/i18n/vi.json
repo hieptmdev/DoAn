@@ -76,6 +76,7 @@
   "label.status.prepare": "Chuẩn bị",
   "label.status.finish": "Kết thúc",
   "label.choose.teacher": "Chọn giảng viên",
+  "label.calendar": "Lịch học",
 
   "button.add": "Thêm mới",
   "button.edit": "Sửa",
@@ -96,6 +97,8 @@
   "button.detail": "Chi tiết",
   "button.lock": "Khóa",
   "button.open": "Mở khóa",
+  "button.transfer_class": "Chuyển lớp",
+  "button.add_student": "Thêm SV",
 
   "table.number": "STT",
   "table.action": "Thao tác",

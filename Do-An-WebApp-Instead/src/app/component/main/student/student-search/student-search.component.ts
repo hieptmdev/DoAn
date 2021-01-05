@@ -33,7 +33,7 @@ export class StudentSearchComponent implements OnInit {
   }
 
   search(formSearchSt: NgForm): void {
-    this.eventSearch.emit(formSearchSt.value);
+    this.eventSearch.emit([formSearchSt.value, true]);
   }
 
   addStudent(): void {

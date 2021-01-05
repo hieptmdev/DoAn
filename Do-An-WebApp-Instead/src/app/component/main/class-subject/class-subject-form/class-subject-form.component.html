@@ -131,6 +131,17 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label font-label">{{'label.calendar'|transloco}}</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="1" name="calendar" [disabled]="!isSaveOrUpdate"
+                              [(ngModel)]="classSubject.calendar"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
           </form>
         </div>
       </div>
@@ -149,7 +160,7 @@
       <button class="btn btn-sm btn-primary" (click)="back()">{{'button.back'|transloco}}</button>
     </div>
   </div>
-  <!--<div class="row">
+  <div class="row" style="margin-top: 5px;" *ngIf="classSubjectCode">
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
@@ -170,30 +181,30 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let cs of classSubjects, index as i">
+            <tr *ngFor="let cd of classSubject.classDetails|slice:(page-1)*pageSize:(page-1)*pageSize+pageSize, index as i">
               <td></td>
               <td>{{i+1}}</td>
-              <td>{{cs.code}}</td>
-              <td>{{cs.name}}</td>
-              <td>{{cs.subjectsCode}}</td>
-              <td>{{cs.courseName}}</td>
-              <td>{{cs.teacherName}}</td>
-              <td>{{cs.startDate|date: 'dd/MM/yyyy'}}</td>
-              <td>{{cs.statusName}}</td>
+              <td>{{cd.studentsCode}}</td>
+              <td>{{cd.studentsFullName}}</td>
+              <td>{{cd.studentsDob|date: 'dd-MM-yyyy'}}</td>
+              <td>{{cd.studentsCourseName}}</td>
+              <td>{{cd.scoreProcess}}</td>
+              <td>{{cd.scoreExam}}</td>
+              <td>{{cd.finalScore}}</td>
               <td ngbDropdown container="body">
                 <div class="dropdown">
-                  <button class="btn btn-sm btn-primary dropdown-toggle" type="button" [id]="'ddBtn'+cs.id"
+                  <button class="btn btn-sm btn-primary dropdown-toggle" type="button" [id]="'ddBtn'+cd.id"
                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{'button.action'|transloco}}</button>
-                  <div class="dropdown-menu" aria-labelledby="{{'ddBtn'+cs.id}}">
-                    <a class="dropdown-item btn btn-sm">{{'button.detail'|transloco}}</a>
-                    <a class="dropdown-item btn btn-sm" (click)="openModal(deleteModal, cs)" *ngIf="cs.status==2">{{'button.delete'|transloco}}</a>
+                  <div class="dropdown-menu" aria-labelledby="{{'ddBtn'+cd.id}}">
+                    <a class="dropdown-item btn btn-sm">{{'button.transfer_class'|transloco}}</a>
+                    <a class="dropdown-item btn btn-sm" (click)="openModal(deleteModal, cd)">{{'button.delete'|transloco}}</a>
                   </div>
                 </div>
               </td>
             </tr>
             </tbody>
           </table>
-          <div *ngIf="classSubjects==null||classSubjects.length==0">
+          <div *ngIf="classSubject.classDetails==null||classSubject.classDetails.length==0">
             <h6 style="color: red;">{{'error.empty_list_data'|transloco}}</h6>
           </div>
           <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="maxSize"
@@ -202,11 +213,46 @@
         </div>
       </div>
     </div>
-  </div>-->
+  </div>
+  <div class="row" style="text-align: center">
+    <div class="col-12">
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="classSubjectCode" (click)="openModalSave(saveModal)">{{'button.add_student'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="classSubjectCode" (click)="isSaveOrUpdate=!isSaveOrUpdate">{{'button.transfer_class'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" style="margin-right: 5px;"
+              *ngIf="classSubjectCode" (click)="openModalSave(deleteModal)">{{'button.delete'|transloco}}</button>
+      <button class="btn btn-sm btn-primary" (click)="back()">{{'button.back'|transloco}}</button>
+    </div>
+  </div>
 </div>
 
 
 <ng-template #saveModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{'label.notification'|transloco}}</h4>
+  </div>
+  <div class="modal-body">
+    {{'message.save'|transloco}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-secondary" (click)="modal.dismiss()">{{'button.cancel'|transloco}}</button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="saveOrUpdate()">{{'button.ok'|transloco}}</button>
+  </div>
+</ng-template>
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{'label.notification'|transloco}}</h4>
+  </div>
+  <div class="modal-body">
+    {{'message.delete'|transloco}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-secondary" (click)="modal.dismiss()">{{'button.cancel'|transloco}}</button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="saveOrUpdate()">{{'button.ok'|transloco}}</button>
+  </div>
+</ng-template>
+<ng-template #addStModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{'label.notification'|transloco}}</h4>
   </div>

@@ -31,11 +31,16 @@ export class StudentIndexComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.search(this.dataSearch);
+    this.search();
   }
 
-  search($event: any): void {
-    this.dataSearch = $event;
+  search($event?: any): void {
+    if ($event) {
+      this.dataSearch = $event[0];
+      if ($event[1]) {
+        this.page = 1;
+      }
+    }
     this.studentService.search(this.dataSearch, this.page - 1, this.pageSize)
       .subscribe(data => {
         this.students = data.body.content;

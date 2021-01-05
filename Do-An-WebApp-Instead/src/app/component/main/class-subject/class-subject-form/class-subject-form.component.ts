@@ -28,6 +28,10 @@ export class ClassSubjectFormComponent implements OnInit {
   departments: any;
   selectedUnit: any;
   units: any;
+  page = 1;
+  maxSize = 5;
+  pageSize = 10;
+  collectionSize: any;
 
   constructor(private modalService: NgbModal,
               private subjectService: SubjectService,
@@ -65,9 +69,10 @@ export class ClassSubjectFormComponent implements OnInit {
     this.classSubjectService.findById(id)
       .subscribe(data => {
         this.classSubject = data.body;
-        this.classDetails = data.body.classDetails;
+        // this.classDetails = data.body.classDetails;
         this.classSubject.startDate = formatDate(this.classSubject.startDate, 'yyyy-MM-dd', 'vi');
         this.classSubject.endDate = formatDate(this.classSubject.endDate, 'yyyy-MM-dd', 'vi');
+        this.collectionSize = this.classSubject.classDetails.length;
       }, error => this.errorHandle(error));
   }
 
@@ -148,5 +153,12 @@ export class ClassSubjectFormComponent implements OnInit {
 
   cancel(): void {
 
+  }
+
+  openModal(modal, cd?: any): void {
+    this.modalService.open(modal, {
+      centered: true,
+      backdrop: 'static'
+    });
   }
 }

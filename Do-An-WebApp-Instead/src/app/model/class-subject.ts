@@ -13,4 +13,5 @@ export class ClassSubject{
   calendar: string; // lịch học
   status = 0; // 0: chuẩn bị, 1: đang học, 2: kết thúc
   statusName: string;
+  classDetails: any;
 }
