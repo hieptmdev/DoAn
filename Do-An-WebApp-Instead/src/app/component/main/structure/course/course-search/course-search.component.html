@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-sample" #formSearchCourse="ngForm" autocomplete="off">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.course.code'|transloco}}</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="courseCode" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.course.name'|transloco}}</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="courseName" ngModel/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: center;">
+            <button class="btn btn-sm btn-primary" (click)="search(formSearchCourse)">{{'button.search'|transloco}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

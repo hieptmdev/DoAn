@@ -17,7 +17,7 @@ public class CategoryDaoImpl extends BaseDao<Category> implements CrudCategoryDa
 
     @Override
     public List<Category> findAllParentByRole(Long roleId) {
-        String sql = "select c from Category c join Permission p on c.id=p.category.id where p.role.id=:roleId and c.categoryParent is null";
+        String sql = "select c from Category c join Permission p on c.id=p.category.id where p.role.id=:roleId and c.categoryParentId is null";
         Query query = entityManager.createQuery(sql);
         query.setParameter("roleId", roleId);
         return query.getResultList();
@@ -27,7 +27,7 @@ public class CategoryDaoImpl extends BaseDao<Category> implements CrudCategoryDa
     public List<Category> findAllChildByRoleAndParent(Long roleId, Long parentId) {
         String sql = "select c from Category c join Permission p on c.id = p.category.id" +
                 " where p.role.id=:roleId" +
-                " and c.categoryParent.id=:parentId";
+                " and c.categoryParentId=:parentId";
         Query query = entityManager.createQuery(sql);
         query.setParameter("roleId", roleId);
         query.setParameter("parentId", parentId);

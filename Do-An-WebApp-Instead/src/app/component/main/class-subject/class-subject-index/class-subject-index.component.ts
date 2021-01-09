@@ -25,7 +25,7 @@ export class ClassSubjectIndexComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.search(null);
+    this.search(this.dataSearch);
   }
 
   search($event: any): void {
@@ -60,5 +60,9 @@ export class ClassSubjectIndexComponent implements OnInit {
 
   detail(id): void {
     this.router.navigate(['detail', id], {relativeTo: this.route}).then(null);
+  }
+
+  pageChange(): void {
+    this.search(this.dataSearch);
   }
 }

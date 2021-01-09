@@ -1,35 +1,5 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               10.5.5-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win64
--- HeidiSQL Version:             11.0.0.5919
--- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
--- Dumping structure for table do-an-db.nation
-DROP TABLE IF EXISTS `nation`;
-CREATE TABLE IF NOT EXISTS `nation` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code` varchar(255) DEFAULT NULL,
-  `created_date` datetime(6) DEFAULT NULL,
-  `updated_date` datetime(6) DEFAULT NULL,
-  `code3` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `nice_name` varchar(255) DEFAULT NULL,
-  `num_code` bigint(20) DEFAULT NULL,
-  `phone_code` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_jbfwyw846knq6qsouarpk8bua` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table các quốc gia';
-
--- Dumping data for table do-an-db.nation: ~239 rows (approximately)
 DELETE FROM `nation`;
-/*!40000 ALTER TABLE `nation` DISABLE KEYS */;
+
 INSERT INTO `nation` (`id`, `code`, `created_date`, `updated_date`, `code3`, `name`, `nice_name`, `num_code`, `phone_code`) VALUES
 	(1, 'AF', NULL, NULL, 'AFG', 'AFGHANISTAN', 'Afghanistan', 4, 93),
 	(2, 'AL', NULL, NULL, 'ALB', 'ALBANIA', 'Albania', 8, 355),
@@ -83,7 +53,7 @@ INSERT INTO `nation` (`id`, `code`, `created_date`, `updated_date`, `code3`, `na
 	(50, 'CD', NULL, NULL, 'COD', 'CONGO, THE DEMOCRATIC REPUBLIC OF THE', 'Congo, the Democratic Republic of the', 180, 242),
 	(51, 'CK', NULL, NULL, 'COK', 'COOK ISLANDS', 'Cook Islands', 184, 682),
 	(52, 'CR', NULL, NULL, 'CRI', 'COSTA RICA', 'Costa Rica', 188, 506),
-	(53, 'CI', NULL, NULL, 'CIV', 'COTE D\'IVOIRE', 'Cote D\'Ivoire', 384, 225),
+	(53, 'CI', NULL, NULL, 'CIV', 'COTE D IVOIRE', 'Cote D Ivoire', 384, 225),
 	(54, 'HR', NULL, NULL, 'HRV', 'CROATIA', 'Croatia', 191, 385),
 	(55, 'CU', NULL, NULL, 'CUB', 'CUBA', 'Cuba', 192, 53),
 	(56, 'CY', NULL, NULL, 'CYP', 'CYPRUS', 'Cyprus', 196, 357),
@@ -142,11 +112,11 @@ INSERT INTO `nation` (`id`, `code`, `created_date`, `updated_date`, `code3`, `na
 	(109, 'KZ', NULL, NULL, 'KAZ', 'KAZAKHSTAN', 'Kazakhstan', 398, 7),
 	(110, 'KE', NULL, NULL, 'KEN', 'KENYA', 'Kenya', 404, 254),
 	(111, 'KI', NULL, NULL, 'KIR', 'KIRIBATI', 'Kiribati', 296, 686),
-	(112, 'KP', NULL, NULL, 'PRK', 'KOREA, DEMOCRATIC PEOPLE\'S REPUBLIC OF', 'Korea, Democratic People\'s Republic of', 408, 850),
+	(112, 'KP', NULL, NULL, 'PRK', 'KOREA, DEMOCRATIC PEOPLE S REPUBLIC OF', 'Korea, Democratic People s Republic of', 408, 850),
 	(113, 'KR', NULL, NULL, 'KOR', 'KOREA, REPUBLIC OF', 'Korea, Republic of', 410, 82),
 	(114, 'KW', NULL, NULL, 'KWT', 'KUWAIT', 'Kuwait', 414, 965),
 	(115, 'KG', NULL, NULL, 'KGZ', 'KYRGYZSTAN', 'Kyrgyzstan', 417, 996),
-	(116, 'LA', NULL, NULL, 'LAO', 'LAO PEOPLE\'S DEMOCRATIC REPUBLIC', 'Lao People\'s Democratic Republic', 418, 856),
+	(116, 'LA', NULL, NULL, 'LAO', 'LAO PEOPLE S DEMOCRATIC REPUBLIC', 'Lao People s Democratic Republic', 418, 856),
 	(117, 'LV', NULL, NULL, 'LVA', 'LATVIA', 'Latvia', 428, 371),
 	(118, 'LB', NULL, NULL, 'LBN', 'LEBANON', 'Lebanon', 422, 961),
 	(119, 'LS', NULL, NULL, 'LSO', 'LESOTHO', 'Lesotho', 426, 266),
@@ -270,8 +240,3 @@ INSERT INTO `nation` (`id`, `code`, `created_date`, `updated_date`, `code3`, `na
 	(237, 'YE', NULL, NULL, 'YEM', 'YEMEN', 'Yemen', 887, 967),
 	(238, 'ZM', NULL, NULL, 'ZMB', 'ZAMBIA', 'Zambia', 894, 260),
 	(239, 'ZW', NULL, NULL, 'ZWE', 'ZIMBABWE', 'Zimbabwe', 716, 263);
-/*!40000 ALTER TABLE `nation` ENABLE KEYS */;
-
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

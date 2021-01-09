@@ -49,7 +49,7 @@
           </div>
           <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="maxSize"
                           [rotate]="true" [ellipses]="false" [boundaryLinks]="true"
-                          [pageSize]="pageSize"></ngb-pagination>
+                          [pageSize]="pageSize" (pageChange)="pageChange()"></ngb-pagination>
         </div>
       </div>
     </div>

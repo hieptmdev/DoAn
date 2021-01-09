@@ -15,6 +15,7 @@ public class ClassDetailDto extends BaseDto{
     private Double scoreExam;
     private Double finalScore;
     private String studentsCourseName;
+    private boolean checked = false;
 
     public ClassDetailDto() { }
 
@@ -93,5 +94,13 @@ public class ClassDetailDto extends BaseDto{
 
     public void setStudentsCourseName(String studentsCourseName) {
         this.studentsCourseName = studentsCourseName;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

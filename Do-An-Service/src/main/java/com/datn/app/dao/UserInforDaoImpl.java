@@ -55,7 +55,7 @@ public class UserInforDaoImpl extends BaseDao<UserInfor> implements CrudUserInfo
     public Page<UserInfor> searchTeacher(Pageable pageable, String code, String name, Long departmentId, Long unitId) {
         Map<String, Object> params = new HashMap<>();
         StringBuffer sql = new StringBuffer();
-        sql.append("SELECT ui FROM UserInfor ui WHERE 1=1 AND ui.role.id=6");
+        sql.append("SELECT ui FROM UserInfor ui WHERE 1=1 AND ui.role.id IN (4, 5, 6)");
         if (code != null && !code.equals("")){
             sql.append(" AND LOWER(ui.code) LIKE CONCAT('%',:code,'%')");
             params.put("code", code);

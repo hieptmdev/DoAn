@@ -40,6 +40,14 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     private Resource schemaScript;
     @Value("classpath:data.sql")
     private Resource dataScript;
+    @Value("classpath:nation.sql")
+    private Resource nationScript;
+    @Value("classpath:local_vn.sql")
+    private Resource localVNScript;
+    @Value("classpath:permission_data.sql")
+    private Resource permissionScript;
+    @Value("classpath:user_data.sql")
+    private Resource userDataScript;
     @Autowired
     private DataSource dataSource;
     @Autowired
@@ -97,6 +105,10 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
         final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(schemaScript);
         populator.addScript(dataScript);
+        //populator.addScript(nationScript);
+        //populator.addScript(localVNScript);
+        //populator.addScript(permissionScript);
+        //populator.addScript(userDataScript);
         return populator;
     }
 }

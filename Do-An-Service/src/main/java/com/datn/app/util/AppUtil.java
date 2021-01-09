@@ -67,4 +67,12 @@ public class AppUtil {
         if (score >= 8.5)   a = 4;
         return a;
     }
+
+    public static String generateCSCode(String subjectCode) {
+        Random rand = new Random();
+        int num = rand.nextInt(10);
+        StringBuilder sb = new StringBuilder();
+        sb.append(subjectCode).append(".N0").append(num);
+        return sb.toString();
+    }
 }

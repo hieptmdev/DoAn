@@ -1,4 +1,3 @@
-/* client_secret column is set as the encrypted value of "secret" - the password for the clients  */
 DELETE FROM oauth_client_details;
 INSERT INTO oauth_client_details
 	(client_id, resource_ids, client_secret, scope, authorized_grant_types,

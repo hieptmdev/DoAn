@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-sample" #formSearchTeacher="ngForm" autocomplete="off">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.teacher.code'|transloco}}</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="teacherCode" ngModel/>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.full_name'|transloco}}</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="teacherName" ngModel/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.form.unit'|transloco}}</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="teacherUnit" data-size="10" ngModel (change)="unitChange(formSearchTeacher.value.teacherUnit)">
+                    <option>{{'label.choose.unit'|transloco}}</option>
+                    <option *ngFor="let u of units" [value]="u.id">{{u.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label font-label">{{'label.form.course'|transloco}}</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="teacherDepartment" ngModel>
+                    <option>{{'label.choose.department'|transloco}}</option>
+                    <option *ngFor="let d of departments" [value]="d.id">{{d.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: center;">
+            <button class="btn btn-sm btn-primary" (click)="search(formSearchTeacher)">{{'button.search'|transloco}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

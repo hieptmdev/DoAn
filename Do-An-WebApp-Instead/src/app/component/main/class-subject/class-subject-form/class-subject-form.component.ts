@@ -18,8 +18,7 @@ import {formatDate} from '@angular/common';
 })
 export class ClassSubjectFormComponent implements OnInit {
   classSubject: ClassSubject = new ClassSubject();
-  classSubjectCode: any;
-  classDetails: any;
+  classSubjectId: any;
   isSaveOrUpdate = false;
   subjects: any;
   courses: any;
@@ -32,6 +31,11 @@ export class ClassSubjectFormComponent implements OnInit {
   maxSize = 5;
   pageSize = 10;
   collectionSize: any;
+  checkedAll = false;
+  actionData: any;
+  countChecked = 0;
+  selectClassSubjectId: any;
+  classSubjects: any;
 
   constructor(private modalService: NgbModal,
               private subjectService: SubjectService,
@@ -50,29 +54,43 @@ export class ClassSubjectFormComponent implements OnInit {
     this.route.paramMap.subscribe(param => {
       if (param.get('id') == null){
         this.isSaveOrUpdate = true;
-        this.classSubjectCode = null;
+        this.classSubjectId = null;
       }else {
         this.importSubject();
         this.importTeacher();
         this.importDepartment();
-        this.classSubjectCode = param.get('id');
-        this.getClassSubjectByCode(this.classSubjectCode);
+        this.classSubjectId = param.get('id');
+        this.getClassSubjectById(this.classSubjectId);
       }
     });
   }
 
   saveOrUpdate(): void {
-
+    this.classSubjectService.saveOrUpdate(this.classSubject)
+      .subscribe(data => {
+        this.modalService.dismissAll();
+        if (data.body) {
+          this.router.navigate(['home/class-subject']).then(() => {
+            this.toastr.success('Thực hiện thêm/sửa thành công!', 'Notification', {timeOut: 3000});
+          });
+        }else {
+          this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
+        }
+        this.modalService.dismissAll();
+      }, error => {
+        this.modalService.dismissAll();
+        this.errorHandle(error);
+      });
   }
 
-  getClassSubjectByCode(id): void{
+  getClassSubjectById(id): void{
     this.classSubjectService.findById(id)
       .subscribe(data => {
         this.classSubject = data.body;
-        // this.classDetails = data.body.classDetails;
         this.classSubject.startDate = formatDate(this.classSubject.startDate, 'yyyy-MM-dd', 'vi');
         this.classSubject.endDate = formatDate(this.classSubject.endDate, 'yyyy-MM-dd', 'vi');
         this.collectionSize = this.classSubject.classDetails.length;
+        this.importClassSubjects();
       }, error => this.errorHandle(error));
   }
 
@@ -111,6 +129,13 @@ export class ClassSubjectFormComponent implements OnInit {
       }, error => this.errorHandle(error));
   }
 
+  importClassSubjects(): void{
+    this.classSubjectService.findAllClassSameSubject(this.classSubject.id, this.classSubject.subjectsId, this.classSubject.courseId)
+      .subscribe(data => {
+        this.classSubjects = data.body;
+      }, error => this.errorHandle(error));
+  }
+
   unitChange(): void{
     this.departmentService.findAllByUnit(this.selectedUnit)
       .subscribe(data => {
@@ -130,13 +155,6 @@ export class ClassSubjectFormComponent implements OnInit {
       }, error => this.errorHandle(error));
   }
 
-  openModalSave(modal: TemplateRef<any>): void {
-    this.modalService.open(modal, {
-      centered: true,
-      backdrop: 'static'
-    });
-  }
-
   public errorHandle(error): void{
     if (error.status === 401){
       this.router.navigate(['login']).then(null);
@@ -152,7 +170,7 @@ export class ClassSubjectFormComponent implements OnInit {
   }
 
   cancel(): void {
-
+    location.reload();
   }
 
   openModal(modal, cd?: any): void {
@@ -160,5 +178,119 @@ export class ClassSubjectFormComponent implements OnInit {
       centered: true,
       backdrop: 'static'
     });
+    if (cd){
+      this.actionData = cd;
+    }
+  }
+
+  checkAll($event: Event): void {
+    // @ts-ignore
+    this.checkedAll = $event.currentTarget.checked;
+    if (this.checkedAll){
+      this.classSubject.classDetails.forEach(cd => cd.checked = true);
+      this.countChecked = this.classSubject.classDetails.length;
+    }else {
+      this.classSubject.classDetails.forEach(cd => cd.checked = false);
+      this.countChecked = 0;
+    }
+  }
+
+  checkedOne($event: Event, classDetail: any): void {
+    // @ts-ignore
+    if ($event.currentTarget.checked){
+      classDetail.checked = true;
+      this.countChecked += 1;
+      if (!this.checkedAll && this.countChecked === this.classSubject.classDetails.length){
+        this.checkedAll = true;
+      }
+    }else {
+      classDetail.checked = false;
+      this.countChecked -= 1;
+      if (this.checkedAll) {
+        this.checkedAll = false;
+      }
+    }
+  }
+
+  delete(): void {
+    if (this.actionData){
+      this.classSubjectService.deleteClassDetailById(this.actionData.id)
+        .subscribe(data => {
+          if (data.status === 404) {
+            this.toastr.warning('Dữ liệu không tồn tại', 'Notification', {timeOut: 3000});
+          }
+          if (data.status === 200) {
+            this.toastr.success('Thực hiện xóa thành công', 'Notification', {timeOut: 3000});
+            this.getClassSubjectById(this.classSubjectId);
+          }
+          this.countChecked = 0;
+          this.actionData = null;
+          this.modalService.dismissAll();
+        }, error => {
+          this.errorHandle(error);
+          this.countChecked = 0;
+          this.actionData = null;
+          this.modalService.dismissAll();
+        });
+    }else {
+      this.classSubjectService.deleteMultiClassDetail(this.classSubject)
+        .subscribe(data => {
+          if (data.status === 404) {
+            this.toastr.warning('Dữ liệu không tồn tại', 'Notification', {timeOut: 3000});
+          }
+          if (data.status === 200) {
+            this.toastr.success('Thực hiện xóa thành công', 'Notification', {timeOut: 3000});
+            this.getClassSubjectById(this.classSubjectId);
+          }
+          this.countChecked = 0;
+          this.modalService.dismissAll();
+        }, error => {
+          this.errorHandle(error);
+          this.countChecked = 0;
+          this.actionData = null;
+          this.modalService.dismissAll();
+        });
+    }
+  }
+
+  transfer(): void{
+    if (this.actionData){
+      this.classSubjectService.transferById(this.actionData.id, this.selectClassSubjectId)
+        .subscribe(data => {
+          if (data.status === 404) {
+            this.toastr.warning('Dữ liệu không tồn tại', 'Notification', {timeOut: 3000});
+          }
+          if (data.status === 200) {
+            this.toastr.success('Thực hiện thao tác thành công', 'Notification', {timeOut: 3000});
+            this.getClassSubjectById(this.classSubjectId);
+          }
+          this.countChecked = 0;
+          this.actionData = null;
+          this.modalService.dismissAll();
+        }, error => {
+          this.errorHandle(error);
+          this.countChecked = 0;
+          this.actionData = null;
+          this.modalService.dismissAll();
+        });
+    }else {
+      this.classSubjectService.transfer(this.classSubject, this.selectClassSubjectId)
+        .subscribe(data => {
+          if (data.status === 404) {
+            this.toastr.warning('Dữ liệu không tồn tại', 'Notification', {timeOut: 3000});
+          }
+          if (data.status === 200) {
+            this.toastr.success('Thực hiện thao tác thành công', 'Notification', {timeOut: 3000});
+            this.getClassSubjectById(this.classSubjectId);
+          }
+          this.countChecked = 0;
+          this.modalService.dismissAll();
+        }, error => {
+          this.countChecked = 0;
+          this.errorHandle(error);
+          this.actionData = null;
+          this.modalService.dismissAll();
+        });
+    }
   }
 }

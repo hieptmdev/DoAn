@@ -7,6 +7,8 @@ public class SubjectsDto extends BaseDto{
     private String name;
     private int credits; //số tín chỉ
     private Long departmentId;
+    private String departmentName;
+    private String departmentUnitName;
 
     public SubjectsDto() {}
 
@@ -37,5 +39,21 @@ public class SubjectsDto extends BaseDto{
 
     public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getDepartmentUnitName() {
+        return departmentUnitName;
+    }
+
+    public void setDepartmentUnitName(String departmentUnitName) {
+        this.departmentUnitName = departmentUnitName;
     }
 }

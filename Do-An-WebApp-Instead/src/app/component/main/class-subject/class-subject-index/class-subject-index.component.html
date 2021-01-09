@@ -33,8 +33,9 @@
                   <button class="btn btn-sm btn-primary dropdown-toggle" type="button" [id]="'ddBtn'+cs.id"
                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{'button.action'|transloco}}</button>
                   <div class="dropdown-menu" aria-labelledby="{{'ddBtn'+cs.id}}">
-                    <a class="dropdown-item btn btn-sm" (click)="detail(cs.id)">{{'button.detail'|transloco}}</a>
-                    <a class="dropdown-item btn btn-sm" (click)="openModal(deleteModal, cs)" *ngIf="cs.status==2">{{'button.delete'|transloco}}</a>
+                    <button class="dropdown-item btn btn-sm" (click)="detail(cs.id)">{{'button.detail'|transloco}}</button>
+                    <button class="dropdown-item btn btn-sm">{{'button.import'|transloco}}</button>
+                    <button class="dropdown-item btn btn-sm" (click)="openModal(deleteModal, cs)" *ngIf="cs.status==2">{{'button.delete'|transloco}}</button>
                   </div>
                 </div>
               </td>
@@ -46,7 +47,7 @@
           </div>
           <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="maxSize"
                           [rotate]="true" [ellipses]="false" [boundaryLinks]="true"
-                          [pageSize]="pageSize"></ngb-pagination>
+                          [pageSize]="pageSize" (pageChange)="pageChange()"></ngb-pagination>
         </div>
       </div>
     </div>

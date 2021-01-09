@@ -1,31 +1,4 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               10.5.5-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win64
--- HeidiSQL Version:             11.0.0.5919
--- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
--- Dumping structure for table do-an-db.province
-DROP TABLE IF EXISTS `province`;
-CREATE TABLE IF NOT EXISTS `province` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code` varchar(255) DEFAULT NULL,
-  `created_date` datetime(6) DEFAULT NULL,
-  `updated_date` datetime(6) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_6k05k4x3elbtlqxrmsuere05q` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table các tỉnh/thành phố Việt Nam';
-
--- Dumping data for table do-an-db.province: ~63 rows (approximately)
 DELETE FROM `province`;
-/*!40000 ALTER TABLE `province` DISABLE KEYS */;
 INSERT INTO `province` (`id`, `code`, `created_date`, `updated_date`, `name`) VALUES
 	(1, 'SG', NULL, NULL, 'Hồ Chí Minh'),
 	(2, 'HN', NULL, NULL, 'Hà Nội'),
@@ -90,27 +63,8 @@ INSERT INTO `province` (`id`, `code`, `created_date`, `updated_date`, `name`) VA
 	(61, 'HG', NULL, NULL, 'Hà Giang'),
 	(62, 'BK', NULL, NULL, 'Bắc Kạn'),
 	(63, 'CB', NULL, NULL, 'Cao Bằng');
-/*!40000 ALTER TABLE `province` ENABLE KEYS */;
 
--- Dumping structure for table do-an-db.district
-DROP TABLE IF EXISTS `district`;
-CREATE TABLE IF NOT EXISTS `district` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code` varchar(255) DEFAULT NULL,
-  `created_date` datetime(6) DEFAULT NULL,
-  `updated_date` datetime(6) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `prefix` varchar(255) DEFAULT NULL,
-  `province_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_7ava2vvsdlafw7ca6y5j2a6q8` (`code`),
-  KEY `FK276utu38g5lgqeth6pwfm3rw2` (`province_id`),
-  CONSTRAINT `FK276utu38g5lgqeth6pwfm3rw2` FOREIGN KEY (`province_id`) REFERENCES `province` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table các quận/huyện/thành phố  Việt Nam';
-
--- Dumping data for table do-an-db.district: ~709 rows (approximately)
 DELETE FROM `district`;
-/*!40000 ALTER TABLE `district` DISABLE KEYS */;
 INSERT INTO `district` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefix`, `province_id`) VALUES
 	(1, NULL, NULL, NULL, 'Bình Chánh', 'Huyện', 1),
 	(2, NULL, NULL, NULL, 'Bình Tân', 'Quận', 1),
@@ -262,8 +216,8 @@ INSERT INTO `district` (`id`, `code`, `created_date`, `updated_date`, `name`, `p
 	(148, NULL, NULL, NULL, 'Buôn Hồ', 'Thị xã', 11),
 	(149, NULL, NULL, NULL, 'Buôn Ma Thuột', 'Thành phố', 11),
 	(150, NULL, NULL, NULL, 'Cư Kuin', 'Huyện', 11),
-	(151, NULL, NULL, NULL, 'Cư M\'gar', 'Huyện', 11),
-	(152, NULL, NULL, NULL, 'Ea H\'Leo', 'Huyện', 11),
+	(151, NULL, NULL, NULL, 'Cư M gar', 'Huyện', 11),
+	(152, NULL, NULL, NULL, 'Ea H Leo', 'Huyện', 11),
 	(153, NULL, NULL, NULL, 'Ea Kar', 'Huyện', 11),
 	(154, NULL, NULL, NULL, 'Ea Súp', 'Huyện', 11),
 	(155, NULL, NULL, NULL, 'Krông Ana', 'Huyện', 11),
@@ -272,7 +226,7 @@ INSERT INTO `district` (`id`, `code`, `created_date`, `updated_date`, `name`, `p
 	(158, NULL, NULL, NULL, 'Krông Năng', 'Huyện', 11),
 	(159, NULL, NULL, NULL, 'Krông Pắc', 'Huyện', 11),
 	(160, NULL, NULL, NULL, 'Lăk', 'Huyện', 11),
-	(161, NULL, NULL, NULL, 'M\'Đrăk', 'Huyện', 11),
+	(161, NULL, NULL, NULL, 'M Đrăk', 'Huyện', 11),
 	(162, NULL, NULL, NULL, ' Thới Lai', 'Huyện', 12),
 	(163, NULL, NULL, NULL, 'Bình Thủy', 'Quận', 12),
 	(164, NULL, NULL, NULL, 'Cái Răng', 'Quận', 12),
@@ -582,7 +536,7 @@ INSERT INTO `district` (`id`, `code`, `created_date`, `updated_date`, `name`, `p
 	(468, NULL, NULL, NULL, 'Cư Jút', 'Huyện', 38),
 	(469, NULL, NULL, NULL, 'Dăk GLong', 'Huyện', 38),
 	(470, NULL, NULL, NULL, 'Dăk Mil', 'Huyện', 38),
-	(471, NULL, NULL, NULL, 'Dăk R\'Lấp', 'Huyện', 38),
+	(471, NULL, NULL, NULL, 'Dăk R Lấp', 'Huyện', 38),
 	(472, NULL, NULL, NULL, 'Dăk Song', 'Huyện', 38),
 	(473, NULL, NULL, NULL, 'Gia Nghĩa', 'Thị xã', 38),
 	(474, NULL, NULL, NULL, 'Krông Nô', 'Huyện', 38),
@@ -685,7 +639,7 @@ INSERT INTO `district` (`id`, `code`, `created_date`, `updated_date`, `name`, `p
 	(571, NULL, NULL, NULL, 'Đăk Glei', 'Huyện', 49),
 	(572, NULL, NULL, NULL, 'Đăk Hà', 'Huyện', 49),
 	(573, NULL, NULL, NULL, 'Đăk Tô', 'Huyện', 49),
-	(574, NULL, NULL, NULL, 'Ia H\'Drai', 'Huyện', 49),
+	(574, NULL, NULL, NULL, 'Ia H Drai', 'Huyện', 49),
 	(575, NULL, NULL, NULL, 'Kon Plông', 'Huyện', 49),
 	(576, NULL, NULL, NULL, 'Kon Rẫy', 'Huyện', 49),
 	(577, NULL, NULL, NULL, 'KonTum', 'Thành phố', 49),
@@ -821,30 +775,8 @@ INSERT INTO `district` (`id`, `code`, `created_date`, `updated_date`, `name`, `p
 	(707, NULL, NULL, NULL, 'Thông Nông', 'Huyện', 63),
 	(708, NULL, NULL, NULL, 'Trà Lĩnh', 'Huyện', 63),
 	(709, NULL, NULL, NULL, 'Trùng Khánh', 'Huyện', 63);
-/*!40000 ALTER TABLE `district` ENABLE KEYS */;
 
--- Dumping structure for table do-an-db.ward
-DROP TABLE IF EXISTS `ward`;
-CREATE TABLE IF NOT EXISTS `ward` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code` varchar(255) DEFAULT NULL,
-  `created_date` datetime(6) DEFAULT NULL,
-  `updated_date` datetime(6) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `prefix` varchar(255) DEFAULT NULL,
-  `district_id` bigint(20) DEFAULT NULL,
-  `province_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_j1cxnlf7eryyc0l0h20ks4psr` (`code`),
-  KEY `FKslko72wj5nauqvsgefqkvwpsb` (`district_id`),
-  KEY `FK9eetr1usw9r684sbag6hb8bbh` (`province_id`),
-  CONSTRAINT `FK9eetr1usw9r684sbag6hb8bbh` FOREIGN KEY (`province_id`) REFERENCES `province` (`id`),
-  CONSTRAINT `FKslko72wj5nauqvsgefqkvwpsb` FOREIGN KEY (`district_id`) REFERENCES `district` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table các phường/xã Việt Nam';
-
--- Dumping data for table do-an-db.ward: ~10,331 rows (approximately)
 DELETE FROM `ward`;
-/*!40000 ALTER TABLE `ward` DISABLE KEYS */;
 INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefix`, `district_id`, `province_id`) VALUES
 	(1, NULL, NULL, NULL, 'An Phú Tây', 'Xã', 1, 1),
 	(2, NULL, NULL, NULL, 'Bình Chánh', 'Xã', 1, 1),
@@ -2856,11 +2788,11 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2008, NULL, NULL, NULL, 'A Vương', 'Xã', 136, 9),
 	(2009, NULL, NULL, NULL, 'A Xan', 'Xã', 136, 9),
 	(2010, NULL, NULL, NULL, 'Bha Lê', 'Xã', 136, 9),
-	(2011, NULL, NULL, NULL, 'Ch\'ơm', 'Xã', 136, 9),
+	(2011, NULL, NULL, NULL, 'Ch ơm', 'Xã', 136, 9),
 	(2012, NULL, NULL, NULL, 'Dang', 'Xã', 136, 9),
 	(2013, NULL, NULL, NULL, 'Ga Ri', 'Xã', 136, 9),
 	(2014, NULL, NULL, NULL, 'Lăng', 'Xã', 136, 9),
-	(2015, NULL, NULL, NULL, 'Tr\'hy', 'Xã', 136, 9),
+	(2015, NULL, NULL, NULL, 'Tr hy', 'Xã', 136, 9),
 	(2016, NULL, NULL, NULL, 'Bình An', 'Xã', 137, 9),
 	(2017, NULL, NULL, NULL, 'Bình Chánh', 'Xã', 137, 9),
 	(2018, NULL, NULL, NULL, 'Bình Đào', 'Xã', 137, 9),
@@ -3030,17 +2962,17 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2182, NULL, NULL, NULL, 'Ea Ning', 'Xã', 150, 11),
 	(2183, NULL, NULL, NULL, 'Ea Tiêu', 'Xã', 150, 11),
 	(2184, NULL, NULL, NULL, 'Hòa Hiệp', 'Xã', 150, 11),
-	(2185, NULL, NULL, NULL, 'Cư Dliê M\'nông', 'Xã', 151, 11),
-	(2186, NULL, NULL, NULL, 'Cư M\'gar', 'Xã', 151, 11),
+	(2185, NULL, NULL, NULL, 'Cư Dliê M nông', 'Xã', 151, 11),
+	(2186, NULL, NULL, NULL, 'Cư M gar', 'Xã', 151, 11),
 	(2187, NULL, NULL, NULL, 'Cư Suê', 'Xã', 151, 11),
 	(2188, NULL, NULL, NULL, 'Cuor Đăng', 'Xã', 151, 11),
-	(2189, NULL, NULL, NULL, 'Ea D\'rơng', 'Xã', 151, 11),
-	(2190, NULL, NULL, NULL, 'Ea H\'đing', 'Xã', 151, 11),
+	(2189, NULL, NULL, NULL, 'Ea D rơng', 'Xã', 151, 11),
+	(2190, NULL, NULL, NULL, 'Ea H đing', 'Xã', 151, 11),
 	(2191, NULL, NULL, NULL, 'Ea Kiết', 'Xã', 151, 11),
 	(2192, NULL, NULL, NULL, 'Ea Kpam', 'Xã', 151, 11),
 	(2193, NULL, NULL, NULL, 'Ea Kuếh', 'Xã', 151, 11),
-	(2194, NULL, NULL, NULL, 'Ea M\'dróh', 'Xã', 151, 11),
-	(2195, NULL, NULL, NULL, 'Ea M\'nang', 'Xã', 151, 11),
+	(2194, NULL, NULL, NULL, 'Ea M dróh', 'Xã', 151, 11),
+	(2195, NULL, NULL, NULL, 'Ea M nang', 'Xã', 151, 11),
 	(2196, NULL, NULL, NULL, 'Ea Pốk', 'Thị trấn', 151, 11),
 	(2197, NULL, NULL, NULL, 'Ea Tar', 'Xã', 151, 11),
 	(2198, NULL, NULL, NULL, 'Ea Tul', 'Xã', 151, 11),
@@ -3052,7 +2984,7 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2204, NULL, NULL, NULL, 'Dlê Yang', 'Xã', 152, 11),
 	(2205, NULL, NULL, NULL, 'Ea Drăng', 'Thị trấn', 152, 11),
 	(2206, NULL, NULL, NULL, 'Ea Hiao', 'Xã', 152, 11),
-	(2207, NULL, NULL, NULL, 'Ea H\'leo', 'Xã', 152, 11),
+	(2207, NULL, NULL, NULL, 'Ea H leo', 'Xã', 152, 11),
 	(2208, NULL, NULL, NULL, 'Ea Khăl', 'Xã', 152, 11),
 	(2209, NULL, NULL, NULL, 'Ea Nam', 'Xã', 152, 11),
 	(2210, NULL, NULL, NULL, 'Ea Ral', 'Xã', 152, 11),
@@ -3076,7 +3008,7 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2228, NULL, NULL, NULL, 'Ea Tíh', 'Xã', 153, 11),
 	(2229, NULL, NULL, NULL, 'Xuân Phú', 'Xã', 153, 11),
 	(2230, NULL, NULL, NULL, 'Cư Kbang', 'Xã', 154, 11),
-	(2231, NULL, NULL, NULL, 'Cư M\'lan', 'Xã', 154, 11),
+	(2231, NULL, NULL, NULL, 'Cư M lan', 'Xã', 154, 11),
 	(2232, NULL, NULL, NULL, 'Ea Bung', 'Xã', 154, 11),
 	(2233, NULL, NULL, NULL, 'Ea Lê', 'Xã', 154, 11),
 	(2234, NULL, NULL, NULL, 'Ea Rốk', 'Xã', 154, 11),
@@ -3149,24 +3081,24 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2301, NULL, NULL, NULL, 'Đắk Liêng', 'Xã', 160, 11),
 	(2302, NULL, NULL, NULL, 'Đắk Nuê', 'Xã', 160, 11),
 	(2303, NULL, NULL, NULL, 'Đắk Phơi', 'Xã', 160, 11),
-	(2304, NULL, NULL, NULL, 'Ea R\'bin', 'Xã', 160, 11),
+	(2304, NULL, NULL, NULL, 'Ea R bin', 'Xã', 160, 11),
 	(2305, NULL, NULL, NULL, 'Krông Nô', 'Xã', 160, 11),
 	(2306, NULL, NULL, NULL, 'Liên Sơn', 'Thị trấn', 160, 11),
 	(2307, NULL, NULL, NULL, 'Nam Ka', 'Xã', 160, 11),
 	(2308, NULL, NULL, NULL, 'Yang Tao', 'Xã', 160, 11),
 	(2309, NULL, NULL, NULL, 'Cư Króa', 'Xã', 161, 11),
-	(2310, NULL, NULL, NULL, 'Cư M\'ta', 'Xã', 161, 11),
+	(2310, NULL, NULL, NULL, 'Cư M ta', 'Xã', 161, 11),
 	(2311, NULL, NULL, NULL, 'Cư Prao', 'Xã', 161, 11),
 	(2312, NULL, NULL, NULL, 'Cư San', 'Xã', 161, 11),
-	(2313, NULL, NULL, NULL, 'Ea H\'mlay', 'Xã', 161, 11),
+	(2313, NULL, NULL, NULL, 'Ea H mlay', 'Xã', 161, 11),
 	(2314, NULL, NULL, NULL, 'Ea Lai', 'Xã', 161, 11),
-	(2315, NULL, NULL, NULL, 'Ea M\' Doal', 'Xã', 161, 11),
+	(2315, NULL, NULL, NULL, 'Ea M Doal', 'Xã', 161, 11),
 	(2316, NULL, NULL, NULL, 'Ea Pil', 'Xã', 161, 11),
 	(2317, NULL, NULL, NULL, 'Ea Riêng', 'Xã', 161, 11),
 	(2318, NULL, NULL, NULL, 'Ea Trang', 'Xã', 161, 11),
 	(2319, NULL, NULL, NULL, 'Krông Á', 'Xã', 161, 11),
 	(2320, NULL, NULL, NULL, 'Krông Jing', 'Xã', 161, 11),
-	(2321, NULL, NULL, NULL, 'M\'Drắk', 'Thị trấn', 161, 11),
+	(2321, NULL, NULL, NULL, 'M Drắk', 'Thị trấn', 161, 11),
 	(2322, NULL, NULL, NULL, 'Định Môn', 'Xã', 162, 12),
 	(2323, NULL, NULL, NULL, 'Đông Bình', 'Xã', 162, 12),
 	(2324, NULL, NULL, NULL, 'Đông Thuận', 'Xã', 162, 12),
@@ -3384,7 +3316,7 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2536, NULL, NULL, NULL, 'Phước Thể', 'Xã', 180, 13),
 	(2537, NULL, NULL, NULL, 'Vĩnh Hảo', 'Xã', 180, 13),
 	(2538, NULL, NULL, NULL, 'Vĩnh Tân', 'Xã', 180, 13),
-	(2539, NULL, NULL, NULL, 'B\'Lá', 'Xã', 181, 14),
+	(2539, NULL, NULL, NULL, 'B Lá', 'Xã', 181, 14),
 	(2540, NULL, NULL, NULL, 'Lộc An', 'Xã', 181, 14),
 	(2541, NULL, NULL, NULL, 'Lộc Bắc', 'Xã', 181, 14),
 	(2542, NULL, NULL, NULL, 'Lộc Bảo', 'Xã', 181, 14),
@@ -3401,7 +3333,7 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2553, NULL, NULL, NULL, 'Tân Lạc', 'Xã', 181, 14),
 	(2554, NULL, NULL, NULL, '1', 'Phường', 182, 14),
 	(2555, NULL, NULL, NULL, '2', 'Phường', 182, 14),
-	(2556, NULL, NULL, NULL, 'B\'Lao', 'Phường', 182, 14),
+	(2556, NULL, NULL, NULL, 'B Lao', 'Phường', 182, 14),
 	(2557, NULL, NULL, NULL, 'Đại Lào', 'Xã', 182, 14),
 	(2558, NULL, NULL, NULL, 'Đam Bri', 'Xã', 182, 14),
 	(2559, NULL, NULL, NULL, 'Lộc Châu', 'Xã', 182, 14),
@@ -3422,8 +3354,8 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2574, NULL, NULL, NULL, 'Quảng Ngãi', 'Xã', 183, 14),
 	(2575, NULL, NULL, NULL, 'Tiên Hoàng', 'Xã', 183, 14),
 	(2576, NULL, NULL, NULL, 'Tư Nghĩa', 'Xã', 183, 14),
-	(2577, NULL, NULL, NULL, 'Đạ M\'Ri', 'Thị trấn', 184, 14),
-	(2578, NULL, NULL, NULL, 'Đạ M\'Ri', 'Xã', 184, 14),
+	(2577, NULL, NULL, NULL, 'Đạ M Ri', 'Thị trấn', 184, 14),
+	(2578, NULL, NULL, NULL, 'Đạ M Ri', 'Xã', 184, 14),
 	(2579, NULL, NULL, NULL, 'Đạ Oai', 'Xã', 184, 14),
 	(2580, NULL, NULL, NULL, 'Đạ Ploa', 'Xã', 184, 14),
 	(2581, NULL, NULL, NULL, 'Đạ Tồn', 'Xã', 184, 14),
@@ -3461,7 +3393,7 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2613, NULL, NULL, NULL, 'Triệu Hải', 'Xã', 186, 14),
 	(2614, NULL, NULL, NULL, 'Đạ K’Nàng', 'Xã', 187, 14),
 	(2615, NULL, NULL, NULL, 'Đạ Long', 'Xã', 187, 14),
-	(2616, NULL, NULL, NULL, 'Đạ M\'Rông', 'Xã', 187, 14),
+	(2616, NULL, NULL, NULL, 'Đạ M Rông', 'Xã', 187, 14),
 	(2617, NULL, NULL, NULL, 'Đạ Rsal', 'Xã', 187, 14),
 	(2618, NULL, NULL, NULL, 'Đạ Tông', 'Xã', 187, 14),
 	(2619, NULL, NULL, NULL, 'Liêng S’Roin', 'Xã', 187, 14),
@@ -3487,7 +3419,7 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2639, NULL, NULL, NULL, 'Tân Nghĩa', 'Xã', 188, 14),
 	(2640, NULL, NULL, NULL, 'Tân Thượng', 'Xã', 188, 14),
 	(2641, NULL, NULL, NULL, 'Đạ Ròn', 'Xã', 189, 14),
-	(2642, NULL, NULL, NULL, 'D\'ran', 'Thị trấn', 189, 14),
+	(2642, NULL, NULL, NULL, 'D ran', 'Thị trấn', 189, 14),
 	(2643, NULL, NULL, NULL, 'Ka Đô', 'Xã', 189, 14),
 	(2644, NULL, NULL, NULL, 'Ka Đơn', 'Xã', 189, 14),
 	(2645, NULL, NULL, NULL, 'Lạc Lâm', 'Xã', 189, 14),
@@ -3505,7 +3437,7 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(2657, NULL, NULL, NULL, 'Liên Nghĩa', 'Thị trấn', 190, 14),
 	(2658, NULL, NULL, NULL, 'Ninh Gia', 'Xã', 190, 14),
 	(2659, NULL, NULL, NULL, 'Ninh Loan', 'Xã', 190, 14),
-	(2660, NULL, NULL, NULL, 'N\'Thol Hạ', 'Xã', 190, 14),
+	(2660, NULL, NULL, NULL, 'N Thol Hạ', 'Xã', 190, 14),
 	(2661, NULL, NULL, NULL, 'Phú Hội', 'Xã', 190, 14),
 	(2662, NULL, NULL, NULL, 'Tà Hine', 'Xã', 190, 14),
 	(2663, NULL, NULL, NULL, 'Tà Năng', 'Xã', 190, 14),
@@ -5627,14 +5559,14 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(4779, NULL, NULL, NULL, 'Đăk Krong', 'Xã', 305, 22),
 	(4780, NULL, NULL, NULL, 'Đăk Sơ Mei', 'Xã', 305, 22),
 	(4781, NULL, NULL, NULL, 'GLar', 'Xã', 305, 22),
-	(4782, NULL, NULL, NULL, 'H\' Neng', 'Xã', 305, 22),
+	(4782, NULL, NULL, NULL, 'H  Neng', 'Xã', 305, 22),
 	(4783, NULL, NULL, NULL, 'Hà Bầu', 'Xã', 305, 22),
 	(4784, NULL, NULL, NULL, 'Hà Đông', 'Xã', 305, 22),
 	(4785, NULL, NULL, NULL, 'Hải Yang', 'Xã', 305, 22),
 	(4786, NULL, NULL, NULL, 'HNol', 'Xã', 305, 22),
 	(4787, NULL, NULL, NULL, 'Ia Băng', 'Xã', 305, 22),
 	(4788, NULL, NULL, NULL, 'Ia Pết', 'Xã', 305, 22),
-	(4789, NULL, NULL, NULL, 'K\' Dang', 'Xã', 305, 22),
+	(4789, NULL, NULL, NULL, 'K  Dang', 'Xã', 305, 22),
 	(4790, NULL, NULL, NULL, 'Kon Gang', 'Xã', 305, 22),
 	(4791, NULL, NULL, NULL, 'Nam Yang', 'Xã', 305, 22),
 	(4792, NULL, NULL, NULL, 'Tân Bình', 'Xã', 305, 22),
@@ -8436,13 +8368,13 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(7588, NULL, NULL, NULL, 'Đăk Đrông', 'Xã', 468, 38),
 	(7589, NULL, NULL, NULL, 'Đăk Wil', 'Xã', 468, 38),
 	(7590, NULL, NULL, NULL, 'Ea Pô', 'Xã', 468, 38),
-	(7591, NULL, NULL, NULL, 'Ea T\'ling', 'Thị trấn', 468, 38),
+	(7591, NULL, NULL, NULL, 'Ea T ling', 'Thị trấn', 468, 38),
 	(7592, NULL, NULL, NULL, 'Nam Dong', 'Xã', 468, 38),
 	(7593, NULL, NULL, NULL, 'Tâm Thắng', 'Xã', 468, 38),
 	(7594, NULL, NULL, NULL, 'Trúc Sơn', 'Xã', 468, 38),
 	(7595, NULL, NULL, NULL, 'Đắk Ha', 'Xã', 469, 38),
 	(7596, NULL, NULL, NULL, 'Đắk PLao', 'Xã', 469, 38),
-	(7597, NULL, NULL, NULL, 'Đắk R\'Măng', 'Xã', 469, 38),
+	(7597, NULL, NULL, NULL, 'Đắk R Măng', 'Xã', 469, 38),
 	(7598, NULL, NULL, NULL, 'Đắk Som', 'Xã', 469, 38),
 	(7599, NULL, NULL, NULL, 'Quảng Hòa', 'Xã', 469, 38),
 	(7600, NULL, NULL, NULL, 'Quảng Khê', 'Thị trấn', 469, 38),
@@ -8450,8 +8382,8 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(7602, NULL, NULL, NULL, 'Đắk Gằn', 'Xã', 470, 38),
 	(7603, NULL, NULL, NULL, 'Đắk Lao', 'Xã', 470, 38),
 	(7604, NULL, NULL, NULL, 'Đắk Mil', 'Thị trấn', 470, 38),
-	(7605, NULL, NULL, NULL, 'Đắk N\'Drót', 'Xã', 470, 38),
-	(7606, NULL, NULL, NULL, 'Đắk R\'La', 'Xã', 470, 38),
+	(7605, NULL, NULL, NULL, 'Đắk N Drót', 'Xã', 470, 38),
+	(7606, NULL, NULL, NULL, 'Đắk R La', 'Xã', 470, 38),
 	(7607, NULL, NULL, NULL, 'Đắk Sắk', 'Xã', 470, 38),
 	(7608, NULL, NULL, NULL, 'Đức Mạnh', 'Xã', 470, 38),
 	(7609, NULL, NULL, NULL, 'Đức Minh', 'Xã', 470, 38),
@@ -8470,10 +8402,10 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(7622, NULL, NULL, NULL, 'Quảng Tín', 'Xã', 471, 38),
 	(7623, NULL, NULL, NULL, 'Đắk Hoà', 'Xã', 472, 38),
 	(7624, NULL, NULL, NULL, 'Đắk Môl', 'Xã', 472, 38),
-	(7625, NULL, NULL, NULL, 'Đắk N\'Drung', 'Xã', 472, 38),
+	(7625, NULL, NULL, NULL, 'Đắk N Drung', 'Xã', 472, 38),
 	(7626, NULL, NULL, NULL, 'Đức An', 'Thị trấn', 472, 38),
 	(7627, NULL, NULL, NULL, 'Nam Bình', 'Xã', 472, 38),
-	(7628, NULL, NULL, NULL, 'Nâm N\'Jang', 'Xã', 472, 38),
+	(7628, NULL, NULL, NULL, 'Nâm N Jang', 'Xã', 472, 38),
 	(7629, NULL, NULL, NULL, 'Thuận Hà', 'Xã', 472, 38),
 	(7630, NULL, NULL, NULL, 'Thuận Hạnh', 'Xã', 472, 38),
 	(7631, NULL, NULL, NULL, 'Trường Xuân', 'Xã', 472, 38),
@@ -8492,14 +8424,14 @@ INSERT INTO `ward` (`id`, `code`, `created_date`, `updated_date`, `name`, `prefi
 	(7644, NULL, NULL, NULL, 'Đăk Sôr', 'Xã', 474, 38),
 	(7645, NULL, NULL, NULL, 'Đức Xuyên', 'Xã', 474, 38),
 	(7646, NULL, NULL, NULL, 'Nam Đà', 'Xã', 474, 38),
-	(7647, NULL, NULL, NULL, 'Nâm N\'Đir', 'Xã', 474, 38),
+	(7647, NULL, NULL, NULL, 'Nâm N Đir', 'Xã', 474, 38),
 	(7648, NULL, NULL, NULL, 'Nâm Nung', 'Xã', 474, 38),
 	(7649, NULL, NULL, NULL, 'Nam Xuân', 'Xã', 474, 38),
 	(7650, NULL, NULL, NULL, 'Quảng Phú', 'Xã', 474, 38),
 	(7651, NULL, NULL, NULL, 'Tân Thành', 'Xã', 474, 38),
 	(7652, NULL, NULL, NULL, 'Đắk Búk So', 'Thị trấn', 475, 38),
 	(7653, NULL, NULL, NULL, 'Đắk Ngo', 'Xã', 475, 38),
-	(7654, NULL, NULL, NULL, 'Đắk R\'Tíh', 'Xã', 475, 38),
+	(7654, NULL, NULL, NULL, 'Đắk R Tíh', 'Xã', 475, 38),
 	(7655, NULL, NULL, NULL, 'Quảng Tâm', 'Xã', 475, 38),
 	(7656, NULL, NULL, NULL, 'Quảng Tân', 'Xã', 475, 38),
 	(7657, NULL, NULL, NULL, 'Quảng Trực', 'Xã', 475, 38),

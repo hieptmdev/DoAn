@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,15 @@ public class BaseDao<T extends BaseEnt> implements CrudBaseDao<T> {
             entity = entityManager.merge(entity);
         }
         return entity;
+    }
+
+    @Override
+    public <S extends T> List<S> saveAll(List<S> entities) {
+        List<S> entityList = new ArrayList<>();
+        entities.stream().forEach(e -> {
+            entityList.add(save(e));
+        });
+        return entityList;
     }
 
     @Override

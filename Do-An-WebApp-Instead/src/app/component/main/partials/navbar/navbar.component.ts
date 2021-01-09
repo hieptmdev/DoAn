@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
           this.toastr.error('Tài khoản không tòn tại', 'Notification', {timeOut: 3000});
         }
         if (data.status === 403){
-          this.toastr.error('Tài khoản không có quyền truy cập', 'Notification', {timeOut: 3000});
+          this.toastr.warning('Tài khoản không có quyền truy cập', 'Notification', {timeOut: 3000});
         }
         if (data.status === 200) {
           this.router.navigate(['home/users']).then(null);

@@ -1,5 +1,6 @@
 package com.datn.app.controller;
 
+import com.datn.app.dto.ClassDto;
 import com.datn.app.service.ClassService;
 import com.datn.app.util.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,38 @@ public class ClassController {
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable Long id, HttpServletRequest request){
         return new ResponseEntity(classService.findById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/delete-class-detail")
+    public ResponseEntity deleteClassDetail(@RequestBody ClassDto dto, HttpServletRequest request){
+        return new ResponseEntity(classService.deleteClassDetails(dto, request), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/class-detail/{id}")
+    public ResponseEntity deleteClassDetail(@PathVariable Long id, HttpServletRequest request){
+        return new ResponseEntity(classService.deleteClassDetails(id, request), HttpStatus.OK);
+    }
+
+    @GetMapping("/find-all-class-same-subject")
+    public ResponseEntity findAllClassSameSubject(@RequestParam String classSubjectId,
+                                                  @RequestParam String subjectId,
+                                                  @RequestParam String courseId,
+                                                  HttpServletRequest request){
+        return new ResponseEntity(classService.findAllClassSameSubject(classSubjectId, subjectId, courseId), HttpStatus.OK);
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity transferClassDetails(@RequestBody ClassDto dto, @RequestParam String classSubjectId, HttpServletRequest request){
+        return new ResponseEntity(classService.transfer(dto, classSubjectId, request), HttpStatus.OK);
+    }
+
+    @PutMapping("/transfer")
+    public ResponseEntity transferClassDetails(@RequestParam String classDetailId, @RequestParam String classSubjectId, HttpServletRequest request){
+        return new ResponseEntity(classService.transfer(classDetailId, classSubjectId, request), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity saveOrUpdate(@RequestBody ClassDto dto, HttpServletRequest request){
+        return new ResponseEntity(classService.saveOrUpdate(dto, request), HttpStatus.OK);
     }
 }

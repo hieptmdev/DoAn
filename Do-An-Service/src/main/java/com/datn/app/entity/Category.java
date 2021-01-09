@@ -10,8 +10,7 @@ import javax.persistence.*;
 public class Category extends BaseEnt{
     @Column(nullable = false)
     private String name;
-    @ManyToOne
-    private Category categoryParent;
+    private Long categoryParentId;
     private String url;
     private String description;
     private String icon;
@@ -32,12 +31,12 @@ public class Category extends BaseEnt{
         this.name = name;
     }
 
-    public Category getCategoryParent() {
-        return categoryParent;
+    public Long getCategoryParentId() {
+        return categoryParentId;
     }
 
-    public void setCategoryParent(Category categoryParent) {
-        this.categoryParent = categoryParent;
+    public void setCategoryParentId(Long categoryParentId) {
+        this.categoryParentId = categoryParentId;
     }
 
     public String getUrl() {

@@ -30,4 +30,5 @@ export class User{
   wardName: string;
   accountNonLocked: boolean;
   departmentId: number;
+  departmentName: string;
 }

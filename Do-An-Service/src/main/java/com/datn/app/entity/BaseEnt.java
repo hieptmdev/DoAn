@@ -10,7 +10,6 @@ public abstract class BaseEnt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
     private String code;
     private Date createdDate;
     private Date updatedDate;

@@ -36,9 +36,13 @@ export class UserFormComponent implements OnInit {
     this.userService.saveOrUpdate(this.user)
       .subscribe(data => {
         this.modalService.dismissAll();
-        this.router.navigate(['home/users']).then(() => {
-          this.toastr.success('Thực hiện thêm/sửa thành công!', 'Notification', {timeOut: 3000});
-        });
+        if (data.body) {
+          this.router.navigate(['home/students']).then(() => {
+            this.toastr.success('Thực hiện thêm/sửa thành công!', 'Notification', {timeOut: 3000});
+          });
+        }else {
+          this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
+        }
       }, error => this.errorHandle(error));
   }
 

@@ -9,8 +9,11 @@ spring:
     username: root
     password: 15011996
     driver-class-name: org.mariadb.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3307/do-an-db?serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=yes\
       &characterEncoding=UTF-8&reWriteBatchedInserts=true&createDatabaseIfNotExist=true
+#    url: jdbc:mysql://localhost:3306/do_an_db?serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=yes\
+#      &characterEncoding=UTF-8&reWriteBatchedInserts=true&createDatabaseIfNotExist=true
 #hibernate config
   jpa:
     generate-ddl: true
@@ -20,6 +23,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MariaDB53Dialect
+#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         generate_statistics: true
         session:
           events:

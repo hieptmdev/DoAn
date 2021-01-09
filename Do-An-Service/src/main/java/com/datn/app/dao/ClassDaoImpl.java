@@ -7,7 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -19,7 +21,7 @@ public class ClassDaoImpl extends BaseDao<Class> implements CrudClassDao {
 
     @Override
     public Class saveEntity(Class entity) {
-        return null;
+        return save(entity);
     }
 
     @Override
@@ -52,7 +54,17 @@ public class ClassDaoImpl extends BaseDao<Class> implements CrudClassDao {
             sql.append(" AND c.subjects.id=:subjectId");
             params.put("subjectId", subjectId);
         }
-        sql.append(" ORDER BY c.name ASC , c.course.number DESC");
+        sql.append(" ORDER BY c.name ASC , c.course.number DESC, c.status ASC");
         return paginator(pageable, sql.toString(), "c", params);
+    }
+
+    @Override
+    public List<Class> findAllClassSameSubject(long classSubjectId, long subjectId, long courseId) {
+        String sql = "SELECT c FROM Class c WHERE c.id!=:classSubjectId AND c.subjects.id=:subjectId AND c.course.id=:courseId";
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("classSubjectId", classSubjectId);
+        query.setParameter("subjectId", subjectId);
+        query.setParameter("courseId", courseId);
+        return query.getResultList();
     }
 }

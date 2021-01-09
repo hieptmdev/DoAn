@@ -77,6 +77,16 @@
   "label.status.finish": "Kết thúc",
   "label.choose.teacher": "Chọn giảng viên",
   "label.calendar": "Lịch học",
+  "label.teacher.code": "Mã giảng viên",
+  "label.unit.code": "Mã đơn vị",
+  "label.unit.name": "Tên đơn vị",
+  "label.course.code": "Mã khóa",
+  "label.course.name": "Tên khóa",
+  "label.department.code": "Mã bộ môn",
+  "label.subject.name": "Tên môn học",
+  "label.subject.code": "Mã môn",
+  "label.course.begin_date": "Thời gian bắt đầu",
+  "label.course.end_date": "Thời gian kết thúc",
 
   "button.add": "Thêm mới",
   "button.edit": "Sửa",
@@ -99,6 +109,7 @@
   "button.open": "Mở khóa",
   "button.transfer_class": "Chuyển lớp",
   "button.add_student": "Thêm SV",
+  "button.import": "Nhập file",
 
   "table.number": "STT",
   "table.action": "Thao tác",
@@ -106,6 +117,7 @@
   "table.dob": "Ngày sinh",
   "table.phone": "Số ĐT",
   "table.email": "Email",
+  "table.code": "Mã",
   "table.student.code": "Mã SV",
   "table.student.dob": "Ngày sinh",
   "table.student.course": "Khóa học",
@@ -130,6 +142,15 @@
   "table.class.teach": "Giảng viên",
   "table.date.begin": "Ngày bắt đầu",
   "table.date.end": "Ngày kết thúc",
+  "table.teacher.code": "Mã GV",
+  "table.description": "Mô tả",
+  "table.manage_user": "Quản lý",
+  "table.department.name": "Tên bộ môn",
+  "table.title.course": "Danh sách khóa học",
+  "table.title.subject": "Danh sách học phần",
+  "table.title.department": "Danh sách bộ môn",
+  "table.title.unit": "Danh sách khoa/phòng ban",
+  "table.title.teacher": "Danh sách giảng viên",
 
   "footer.title_1": "Trường Đại học Giao Thông Vận tải",
   "footer.title_2": "Trần Minh Hiệp - 160704493 - CNTT1.K57",
@@ -140,8 +161,9 @@
 
   "success.delete": "Xóa dũ liệu thành công",
 
-  "message.delete": "Bạn có muốn thực hiện thao tác xóa ?",
-  "message.save": "Bạn có muốn thực hiện thao tác lưu dũ liệu ?",
-  "message.lock_user": "Bạn có muốn khóa tài khoản này ?",
-  "message.open_user": "Bạn có muốn mở khóa tài khoản này ?"
+  "message.delete": "Bạn muốn thực hiện thao tác xóa ?",
+  "message.save": "Bạn muốn thực hiện thao tác lưu dũ liệu ?",
+  "message.lock_user": "Bạn muốn khóa tài khoản này ?",
+  "message.open_user": "Bạn muốn mở khóa tài khoản này ?",
+  "message.transfer": "Chuyển sinh viên sang lớp học phần đã chọn ? "
 }

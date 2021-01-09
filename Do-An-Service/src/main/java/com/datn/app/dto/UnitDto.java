@@ -8,8 +8,6 @@ public class UnitDto extends BaseDto{
     private Date dateFounding;
     private Long userManagerId;
     private String userManagerName;
-    private Long userDeputyManagerId;
-    private String userDeputyManagerName;
     private String description;
 
     public UnitDto() { }
@@ -47,22 +45,6 @@ public class UnitDto extends BaseDto{
 
     public void setUserManagerName(String userManagerName) {
         this.userManagerName = userManagerName;
-    }
-
-    public Long getUserDeputyManagerId() {
-        return userDeputyManagerId;
-    }
-
-    public void setUserDeputyManagerId(Long userDeputyManagerId) {
-        this.userDeputyManagerId = userDeputyManagerId;
-    }
-
-    public String getUserDeputyManagerName() {
-        return userDeputyManagerName;
-    }
-
-    public void setUserDeputyManagerName(String userDeputyManagerName) {
-        this.userDeputyManagerName = userDeputyManagerName;
     }
 
     public String getDescription() {

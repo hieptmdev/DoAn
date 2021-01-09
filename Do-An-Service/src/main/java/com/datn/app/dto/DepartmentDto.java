@@ -9,7 +9,9 @@ public class DepartmentDto extends BaseDto{
     private String name;
     private Date dateFounding;
     private Long unitId;
+    private String unitName;
     private Long userManagerId;
+    private String userManagerName;
     private String description;
 
     public DepartmentDto() {}
@@ -57,5 +59,21 @@ public class DepartmentDto extends BaseDto{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
+    public String getUserManagerName() {
+        return userManagerName;
+    }
+
+    public void setUserManagerName(String userManagerName) {
+        this.userManagerName = userManagerName;
     }
 }

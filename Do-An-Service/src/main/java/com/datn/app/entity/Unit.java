@@ -16,8 +16,6 @@ public class Unit extends BaseEnt{
     private Date dateFounding;
     @OneToOne
     private User userManager;
-    @OneToOne
-    private User userDeputyManager;
     private String description;
     @OneToMany(mappedBy = "unit")
     private List<Department> departments;
@@ -51,14 +49,6 @@ public class Unit extends BaseEnt{
 
     public void setUserManager(User userManager) {
         this.userManager = userManager;
-    }
-
-    public User getUserDeputyManager() {
-        return userDeputyManager;
-    }
-
-    public void setUserDeputyManager(User userDeputyManager) {
-        this.userDeputyManager = userDeputyManager;
     }
 
     public String getDescription() {

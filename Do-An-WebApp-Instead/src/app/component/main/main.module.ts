@@ -14,6 +14,8 @@ import { FooterComponent } from './partials/footer/footer.component';
 import {MainComponent} from './main.component';
 import {TranslocoModule} from '@ngneat/transloco';
 import { DeleteModalComponent } from './modal/delete-modal/delete-modal.component';
+import { TeachComponent } from './teach/teach.component';
+import { StructureComponent } from './structure/structure.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import { DeleteModalComponent } from './modal/delete-modal/delete-modal.componen
       NavbarComponent,
       SidebarComponent,
       FooterComponent,
-      DeleteModalComponent
+      DeleteModalComponent,
+      TeachComponent,
+      StructureComponent
     ],
     exports: [],
     imports: [

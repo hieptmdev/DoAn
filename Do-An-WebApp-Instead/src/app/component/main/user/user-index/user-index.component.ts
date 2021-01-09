@@ -101,4 +101,8 @@ export class UserIndexComponent implements OnInit {
       this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
     }
   }
+
+  pageChange(): void{
+    this.search(this.dataSearch);
+  }
 }

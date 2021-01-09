@@ -58,9 +58,13 @@ export class StudentFormComponent implements OnInit {
     this.studentService.saveOrUpdate(this.student)
       .subscribe(data => {
         this.modalService.dismissAll();
-        this.router.navigate(['home/students']).then(() => {
+        if (data.body) {
+          this.router.navigate(['home/students']).then(() => {
             this.toastr.success('Thực hiện thêm/sửa thành công!', 'Notification', {timeOut: 3000});
           });
+        }else {
+          this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
+        }
       }, error => {
         this.errorHandle(error);
       });
