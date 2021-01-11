@@ -18,6 +18,7 @@ export class UserFormComponent implements OnInit {
   units: any;
   roles: any;
   departments: any;
+  isSaveOrUpdate = true;
 
   constructor(private modalService: NgbModal,
               private userService: UserService,
@@ -90,5 +91,9 @@ export class UserFormComponent implements OnInit {
     } else {
       this.toastr.error('Có lỗi xảy ra!', 'Notification', {timeOut: 3000});
     }
+  }
+
+  cancel(): void {
+    location.reload();
   }
 }

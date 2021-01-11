@@ -41,7 +41,11 @@ export class LoginComponent implements OnInit {
         if (error.status === 500){
           this.router.navigate(['error/500']).then(null);
         }
-        this.errMsg = error.error.error_description;
+        if (error.error.error_description === 'Bad credentials'){
+          this.errMsg = 'Username or password invalid';
+        }else {
+          this.errMsg = error.error.error_description;
+        }
       });
   }
 }

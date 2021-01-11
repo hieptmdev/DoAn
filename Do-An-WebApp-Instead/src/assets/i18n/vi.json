@@ -87,6 +87,7 @@
   "label.subject.code": "Mã môn",
   "label.course.begin_date": "Thời gian bắt đầu",
   "label.course.end_date": "Thời gian kết thúc",
+  "label.welcome": "Chào mừng",
 
   "button.add": "Thêm mới",
   "button.edit": "Sửa",
@@ -165,5 +166,7 @@
   "message.save": "Bạn muốn thực hiện thao tác lưu dũ liệu ?",
   "message.lock_user": "Bạn muốn khóa tài khoản này ?",
   "message.open_user": "Bạn muốn mở khóa tài khoản này ?",
-  "message.transfer": "Chuyển sinh viên sang lớp học phần đã chọn ? "
+  "message.transfer": "Chuyển sinh viên sang lớp học phần đã chọn ? ",
+
+  "waring.required": "Trường này không được để trống"
 }

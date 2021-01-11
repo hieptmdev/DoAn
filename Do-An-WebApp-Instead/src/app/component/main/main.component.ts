@@ -37,8 +37,8 @@ export class MainComponent implements OnInit {
   }
 
   public onActivate($event: any): void{
-    this.userService.getUserByUsername(this.storageService.getLoginInfo().username).subscribe(
-      data => {
+    this.userService.getUserByUsername(this.jwtHelperService.decodeToken(this.storageService.getAccessToken()).user_name)
+      .subscribe(data => {
         $event.currentUser = data.body;
       }, error => {
         this.errorHandle(error);

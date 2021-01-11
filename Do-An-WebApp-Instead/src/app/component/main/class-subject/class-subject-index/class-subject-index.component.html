@@ -34,8 +34,8 @@
                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{'button.action'|transloco}}</button>
                   <div class="dropdown-menu" aria-labelledby="{{'ddBtn'+cs.id}}">
                     <button class="dropdown-item btn btn-sm" (click)="detail(cs.id)">{{'button.detail'|transloco}}</button>
-                    <button class="dropdown-item btn btn-sm">{{'button.import'|transloco}}</button>
-                    <button class="dropdown-item btn btn-sm" (click)="openModal(deleteModal, cs)" *ngIf="cs.status==2">{{'button.delete'|transloco}}</button>
+                    <button class="dropdown-item btn btn-sm" *ngIf="cs.status!=2">{{'button.import'|transloco}}</button>
+                    <button class="dropdown-item btn btn-sm" (click)="openModal(deleteModal, cs)" *ngIf="cs.status==0">{{'button.delete'|transloco}}</button>
                   </div>
                 </div>
               </td>
